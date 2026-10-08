@@ -19,7 +19,7 @@ TOOLS = [
          + DATABASE_SCHEMA + ATTRIBUTE_DESCRIPTIONS,
          {"sql": {"type": "string", "description": "The complete SELECT query."}}),
     tool("prepare_order", "Prepare a draft for the chosen wine and quantity. "
-         "The customer must type /confirm to export it.",
+         "The customer must click Confirm order or type /confirm to export it.",
          {"wine_id": {"type": "string"},
           "quantity": {"type": "integer", "minimum": 1}}),
 ]

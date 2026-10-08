@@ -1,7 +1,7 @@
 # Wine retail assistant
 
 A small course prototype: React UI, Python/Flask, the OpenAI client and SQLite.
-Each file has one job. The catalog contains four real wine names with demo shop data;
+Each file has one job. The catalog contains 200 imported wines with provenance-aware flavour notes;
 orders are exported locally and are not sent to a real shop.
 
 ## Run
@@ -39,8 +39,8 @@ support chat tool calls.
 Assistant replies appear as text fragments arrive. SQL tool arguments are collected
 until the stream finishes, then executed. The complete reply is saved in chat memory.
 
-Try: “Show available wines under €20”, “Tell me about DEMO-001”, then
-“Prepare two bottles of DEMO-001”. Review the exact draft and click **Confirm order**
+Try: “Show Spanish reds under €15”, “Tell me about barcelino-tinto-2019-159331692”,
+then “Prepare two bottles of barcelino-tinto-2019-159331692”. Review the exact draft and click **Confirm order**
 or **Cancel order**. In the terminal, type `/confirm` instead.
 Use `/cancel` to discard it and `/quit` to exit. Any other chat message discards a
 pending draft so a changed request cannot accidentally confirm the old order.
@@ -61,7 +61,9 @@ pending draft so a changed request cannot accidentally confirm the old order.
 | `tools.py` | Two tool definitions and function dispatch |
 | `catalog.py` | Execute model-written SELECT queries; look up order items |
 | `orders.py` | Order drafts, stock/price checks and duplicate prevention |
-| `database.py` | SQLite setup and initial demo data loading |
+| `database.py` | SQLite schema migration and imported catalog loading |
+| `import_finewine.py` | Reproducible snapshot export from teammate SQLite and vocabulary |
+| `refresh_demo_catalog.py` | Back up SQLite and replace catalog metadata, preserving historical orders |
 | `memory.py` | Last six complete turns and pending order state |
 
 Money is stored as integer cents. Each wine ID represents one sellable vintage.
@@ -79,32 +81,46 @@ ORDER BY price_cents LIMIT 5;
 uses the rows to answer the customer. SQLite errors return to the model for one
 correction attempt. Queries use a read-only connection and must start with SELECT.
 
-## Add the teammate's data
+## Imported teammate catalog
 
-`ATTRIBUTE_DESCRIPTIONS` in `prompts.py` documents the populated JSON fields:
-brand, type, country, region, grapes, sweetness, fruitiness, body, tasting notes,
-pairings, rating and bottle size. The same description appears in the system
-prompt and SQL tool. Scalars use `json_extract`; array membership uses `json_each`.
-Fruitiness is independent of sweetness. Missing preferences impose no filter.
-Update these descriptions when the teammate supplies the final catalog.
+Source: [hecaiadvanced26/finewine](https://github.com/hecaiadvanced26/finewine),
+commit `5df3f4d3262a38f189b85cb3696c6e30c2eafd22`. `data/catalog.json` is a
+reproducible snapshot of the source's `wine_shop.sqlite` and `flavour_vocabulary.json`:
+200 wines, 483 flavour records (133 stated, 350 inferred), and 88 vocabulary terms.
+The repository omits the original `wines.json`; import uses its supplied SQLite
+instead. Source code is not executed. Existing source IDs and unknown vintages
+are preserved. Country codes `de` and `fr` normalize to Germany and France;
+original values remain in the JSON attributes.
 
-Names/origins/grapes are based on producer references:
-[Torres Sangre de Toro](https://www.torres.es/en/wines/torres-essentials/sangre-de-toro-original),
-[Riscal Verdejo](https://www.marquesderiscal.com/marques-de-riscal-verdejo),
-[Riscal Reserva](https://www.marquesderiscal.com/marques-de-riscal-reserva),
-[Torres Viña Sol](https://www.torres.es/en/wines/torres-essentials/vina-sol-original).
-Prices, stock, vintage assignments and ratings are illustrative, not verified live
-retail data. Taste/body/sweetness classifications and food tags are demo shop
-annotations, not producer-certified vintage profiles. Ratings are synthetic demo
-shop scores, not claims about critic scores or customer reviews.
+`wines` retains integer cents and stock for existing order code and adds explicit
+producer, origin, regional style, type, bottle size, taster rating, community rating
+and review columns. `flavours` stores each note with `stated` or `guess` provenance;
+`flavour_vocabulary` supplies English/French labels, families and groups.
+`prompts.py` describes these tables in both the system prompt and SQL tool.
+Flavour search defaults to stated notes. Style guesses require customer agreement
+and are explicitly labeled. Taster and community scores are separate imported
+ratings, not independently verified reviews. Prices, stock and bottle sizes are
+synthetic, seeded shop inventory, not real retail availability.
 
-Replace `data/demo_wines.json` with the agreed catalog before first initialization.
-It loads only when the wine table is empty; changing the JSON does not overwrite an
-existing database. A catalog import/update script can be added once its format is known.
-Update the prompt's demo wording when real data is loaded.
-To update the four existing demo items, run `.venv/bin/python refresh_demo_catalog.py`.
-This backs up SQLite and changes names/prices/vintages/attributes, preserving current
-stock, wine IDs and historical orders. It does not run automatically at startup.
+Grapes, dryness/sweetness, body, organic certification and food pairings are absent.
+The assistant asks before ignoring these constraints; it must not infer them from
+names, regions or fruit notes. Fruit notes describe aroma, not sweetness.
+
+To import a later teammate revision:
+
+```bash
+git clone https://github.com/hecaiadvanced26/finewine.git /tmp/finewine
+.venv/bin/python import_finewine.py /tmp/finewine
+.venv/bin/python refresh_demo_catalog.py
+```
+
+Fresh databases seed from `data/catalog.json`. Existing databases need the refresh
+command. It saves a SQLite backup before schema migration, replaces the four old
+DEMO IDs with source IDs, updates metadata, and preserves remaining stock for
+retained IDs. Historical order payloads remain unchanged, including references to
+removed wines. Existing pending drafts for removed/changed items must be prepared
+again. Repeated startup does not refill inventory or overwrite catalog metadata.
+`data/demo_wines.json` is an unused legacy fixture.
 
 ## Orders and memory
 
@@ -139,15 +155,15 @@ from the Vercel project dashboard. Environment secrets remain outside Git.
 
 ## Manual checks
 
-Offline UI and status tests (no API calls or database writes):
+Offline catalog, order, API and status tests (no model calls; writes use temporary databases):
 
 ```bash
 .venv/bin/python -m unittest -v test_catalog test_server test_status
 ```
 
 Check a budget search, unknown wine ID, unsupported taste preference, insufficient
-stock, cancellation and an order confirmation. In a fresh catalog, DEMO-004 is out
-of stock and must not appear in search. Inspect the exported JSON after confirmation.
+stock, cancellation and an order confirmation. In a fresh catalog, `20er-schulz-zweigelt-hagelsberg-nv-142492088` is out
+of stock and must not appear in recommendations. Inspect the exported JSON after confirmation.
 
 API/tool references: [OpenAI function calling](https://developers.openai.com/api/docs/guides/function-calling)
 and [Python SQLite](https://docs.python.org/3/library/sqlite3.html).

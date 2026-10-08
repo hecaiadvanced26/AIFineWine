@@ -8,5 +8,6 @@ data/*.db-*
 data/orders/
 .vercel/
 public/
+.lean-ctx/
 .env.*
 !.env.example

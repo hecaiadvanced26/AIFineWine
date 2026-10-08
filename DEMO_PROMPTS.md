@@ -1,53 +1,48 @@
 # Demo prompts
 
-Run `./start.sh` and open http://localhost:8000. Real wine names, illustrative shop
-prices, stock and ratings. No real payment, email or shop delivery integration.
+Run `./start.sh` locally or open the Vercel demo. Catalog: 200 imported wines;
+prices, inventory and bottle sizes are fictional. No real payment or delivery.
+For an existing local database, first run `python refresh_demo_catalog.py`.
 
 ## Main flow
 
-1. “I want a fruity wine, not sweet, from Spain, to pair with chicken. Under €15.”
-   Expected: Torres Sangre de Toro Original (€9.95) and Marqués de Riscal Verdejo
-   (€12.95), subject to current stock. Fruity does not mean sweet.
-2. “Only red, and I need two bottles.”
-   Expected: Torres Sangre de Toro Original, provided at least two bottles remain.
-3. “Prepare two bottles of DEMO-001.”
-   Expected: draft totaling €19.90. No stock change until confirmation.
-4. Click **Confirm order**.
-   Expected: professional “Order confirmed” banner with name, quantity, total,
-   vintage and expandable reference. Local export only; stock decreases by two.
+1. “Show red wines from Spain under €15. I need two bottles.”
+   Expected: tool-backed available wines. Initial seed includes Barceliño Tinto
+   (2019, €11.50, two bottles) and Félix Solís Los Molinos Gran Reserva (€7.50).
+2. “Tell me about barcelino-tinto-2019-159331692, including flavour provenance.”
+   Expected: imported metadata; any style guesses labeled inferred.
+3. “Prepare two bottles of barcelino-tinto-2019-159331692.”
+   Expected: €23.00 draft; stock unchanged before confirmation.
+4. Click **Confirm order** or use `/confirm` in the terminal.
+   Expected: local demo export; stock decreases once. Repeating the same order ID
+   does not deduct stock again. Use **Cancel** for rehearsals.
 
-Use **Cancel** for rehearsals without changing stock. Terminal equivalents:
-`./start.sh --cli`, `/confirm`, `/cancel`.
+## Provenance and missing-field checks
 
-## Other prompts
-
-- “Show white wines from Rueda.” — Verdejo, if available.
-- “A full-bodied Rioja red for lamb.” — Riscal Reserva (€22.95), if available.
-- “Which wines have a shop rating of at least 4.2?” — Explain demo-score provenance.
-- “Show wines under €5.” — No matches; never invent a wine.
-- “What is the price and current stock of DEMO-002?” — Tool-backed factual lookup.
-- “Prepare 99 bottles of DEMO-001.” — Insufficient-stock guard.
-- “Prepare one bottle of DEMO-004.” — Out-of-stock guard.
-- “Is it certified vegan?” — Not recorded; no guessing.
-
-## Seed catalog
-
-| ID | Wine | Type | Demo price | Vintage | Initial stock |
-|---|---|---|---|---|---|
-| DEMO-001 | Torres Sangre de Toro Original | Red | €9.95 | 2023 | 8 |
-| DEMO-002 | Marqués de Riscal Verdejo | White | €12.95 | 2024 | 5 |
-| DEMO-003 | Marqués de Riscal Reserva | Red | €22.95 | 2021 | 3 |
-| DEMO-004 | Torres Viña Sol Original | White | €8.95 | 2024 | 0 |
-
-Existing orders may have reduced stock. Refreshing catalog metadata keeps remaining
-stock and old orders; it does not refill inventory.
+- “Red wines with stated blackberry notes under €20.” — Match stated notes only;
+  initial seed includes 8 Bagatella Zinfandel.
+- “Include style-based flavour guesses too.” — May include inferred notes,
+  clearly labeled as guesses.
+- “Fruity, dry wine for chicken.” — Explain dryness and pairings are not recorded;
+  ask before ignoring unsupported constraints. Fruitiness is aroma, not sweetness.
+- “Compare taster ratings with community ratings.” — Separate score columns;
+  missing values remain unknown. Never call these verified shop ratings.
+- “What vintage is a wine whose vintage is NULL?” — Unknown/non-vintage;
+  never infer a year from its ID or name.
+- “Show wines under €5.” — Query first; no invented match.
+- “Prepare 99 bottles of barcelino-tinto-2019-159331692.” — Stock guard.
+- “Prepare one bottle of 20er-schulz-zweigelt-hagelsberg-nv-142492088.” —
+  Out-of-stock guard in fresh seed.
+- “Certified organic wines?” — Certification not recorded, even if a name says Bio.
 
 ## Explain to the teacher
 
-The model sees the schema and attribute meanings, writes a SELECT query, then
-calls the SQL tool. SQLite returns rows; the model uses those as answer context.
-`json_extract` filters scalar facts; `json_each` checks food/grape arrays.
-The last six turns support follow-ups. No separate Pydantic preference state or
-extraction pass is needed. Exact wine ID and quantity are required only for orders.
-Confirmation is application-side, never a model tool. Prices/vintage/stock are
-checked again, and order IDs prevent duplicate stock deductions.
+The model writes a SELECT from the schema shared by system prompt and SQL tool.
+Explicit wine columns support origin/type/budget/rating filters; `EXISTS` against
+`flavours` checks notes without duplicate wines. Vocabulary families group fruit
+aromas and citrus notes. `provenance='stated'` separates tasting notes from guesses.
+
+Source revision and inventory caveats are bundled in `data/catalog.json`.
+SQLite migrations back up old data and preserve order history and retained stock.
+Confirmation is application-side, not a model tool. Orders recheck price, vintage
+and stock. Vercel storage remains temporary; drafts may expire between instances.

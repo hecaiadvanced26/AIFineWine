@@ -1,14 +1,13 @@
-"""Update the four demo items, keeping remaining stock and all existing orders."""
-import json
+"""Import the bundled catalog with a backup, keeping stock for retained IDs and orders."""
 import sqlite3
 from datetime import datetime, timezone
 
-from database import DATA_DIR, connect, initialize
+from database import DATA_DIR, apply_catalog, connect, initialize, load_catalog
 
 
 def refresh_catalog():
-    initialize()
-    rows = json.loads((DATA_DIR / "demo_wines.json").read_text())
+    snapshot = load_catalog()
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
     backup_path = DATA_DIR / ("wines-before-refresh-" +
                              datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%f") + ".db")
     db = connect()
@@ -18,11 +17,13 @@ def refresh_catalog():
             db.backup(backup)
         finally:
             backup.close()
+    finally:
+        db.close()
+    initialize()
+    db = connect()
+    try:
         with db:
-            for row in rows:
-                db.execute("""UPDATE wines SET name=?, price_cents=?, vintage=?, attributes=?
-                    WHERE wine_id=?""", (row["name"], row["price_cents"], row["vintage"],
-                    json.dumps(row["attributes"]), row["wine_id"]))
+            apply_catalog(db, snapshot)
     finally:
         db.close()
     return backup_path

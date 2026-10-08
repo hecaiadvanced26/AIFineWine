@@ -16,7 +16,12 @@ def get_wine_details(wine_id):
     db = connect(read_only=True)
     try:
         row = db.execute("SELECT * FROM wines WHERE wine_id = ?", (wine_id,)).fetchone()
-        return wine_record(row) if row else {"error": "Unknown wine ID."}
+        if row is None:
+            return {"error": "Unknown wine ID."}
+        wine = wine_record(row)
+        wine["flavours"] = [dict(flavour) for flavour in db.execute(
+            "SELECT tag,provenance FROM flavours WHERE wine_id=? ORDER BY provenance,tag", (wine_id,))]
+        return wine
     finally:
         db.close()
 
