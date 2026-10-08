@@ -45,8 +45,8 @@ support chat tool calls.
 Assistant replies appear as text fragments arrive. SQL tool arguments are collected
 until the stream finishes, then executed. The complete reply is saved in chat memory.
 
-Try: “Show Spanish reds under €15”, “Tell me about barcelino-tinto-2019-159331692”,
-then “Prepare two bottles of barcelino-tinto-2019-159331692”. Review the exact draft and click **Confirm order**
+Try: “Show Spanish reds under €15”, “Tell me about W-015”,
+then “Prepare two bottles of W-015”. Review the exact draft and click **Confirm order**
 or **Cancel order**. In the terminal, type `/confirm` instead.
 Use `/cancel` to discard it and `/quit` to exit. Any other chat message discards a
 pending draft so a changed request cannot accidentally confirm the old order.
@@ -257,7 +257,7 @@ Offline catalog, order, API and status tests (no model calls; writes use tempora
 ```
 
 Check a budget search, unknown wine ID, unsupported taste preference, insufficient
-stock, cancellation and an order confirmation. In a fresh catalog, `20er-schulz-zweigelt-hagelsberg-nv-142492088` is out
+stock, cancellation and an order confirmation. In a fresh catalog, `W-003` is out
 of stock and must not appear in recommendations. Inspect the exported JSON after confirmation.
 
 API/tool references: [OpenAI function calling](https://developers.openai.com/api/docs/guides/function-calling)

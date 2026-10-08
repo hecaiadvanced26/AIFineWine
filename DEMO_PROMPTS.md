@@ -9,9 +9,9 @@ For an existing local database, first run `python refresh_demo_catalog.py`.
 1. “Show red wines from Spain under €15. I need two bottles.”
    Expected: tool-backed available wines. Initial seed includes Barceliño Tinto
    (2019, €11.50, two bottles) and Félix Solís Los Molinos Gran Reserva (€7.50).
-2. “Tell me about barcelino-tinto-2019-159331692, including flavour provenance.”
+2. “Tell me about W-015, including flavour provenance.”
    Expected: imported metadata; any style guesses labeled inferred.
-3. “Prepare two bottles of barcelino-tinto-2019-159331692.”
+3. “Prepare two bottles of W-015.”
    Expected: €23.00 draft; stock unchanged before confirmation.
 4. Click **Confirm order** or use `/confirm` in the terminal.
    Expected: local demo export; stock decreases once. Repeating the same order ID
@@ -30,8 +30,8 @@ For an existing local database, first run `python refresh_demo_catalog.py`.
 - “What vintage is a wine whose vintage is NULL?” — Unknown/non-vintage;
   never infer a year from its ID or name.
 - “Show wines under €5.” — Query first; no invented match.
-- “Prepare 99 bottles of barcelino-tinto-2019-159331692.” — Stock guard.
-- “Prepare one bottle of 20er-schulz-zweigelt-hagelsberg-nv-142492088.” —
+- “Prepare 99 bottles of W-015.” — Stock guard.
+- “Prepare one bottle of W-003.” —
   Out-of-stock guard in fresh seed.
 - “Certified organic wines?” — Certification not recorded, even if a name says Bio.
 

@@ -11,7 +11,7 @@ import orders
 import refresh_demo_catalog
 from catalog import get_wine_details, run_query
 
-WINE_ID = 'barcelino-tinto-2019-159331692'
+WINE_ID = 'W-015'
 
 
 class CatalogTests(unittest.TestCase):
@@ -77,8 +77,8 @@ class CatalogTests(unittest.TestCase):
             (SELECT 1 FROM flavours f WHERE f.wine_id=w.wine_id
              AND f.tag='blackberry' AND f.provenance='stated') ORDER BY wine_id LIMIT 5""")
         self.assertEqual(result['status'], 'ok')
-        self.assertIn({'wine_id': '8-bagatella-zinfandel-2020-167550000'}, result['rows'])
-        details = get_wine_details('20er-schulz-junger-2022-173717954')
+        self.assertIn({'wine_id': 'W-004'}, result['rows'])
+        details = get_wine_details('W-001')
         self.assertTrue(details['flavours'])
         self.assertTrue(all(flavour['provenance'] == 'guess' for flavour in details['flavours']))
         self.assertNotIn('sweetness', details['attributes'])
@@ -119,6 +119,18 @@ class CatalogTests(unittest.TestCase):
         self.assertIn('error', orders.submit_order(draft))
         self.assertEqual(get_wine_details(WINE_ID)['stock'], 2)
         self.assertEqual(db.execute('SELECT COUNT(*) FROM orders').fetchone()[0], 0)
+
+
+
+class ShortIdTests(unittest.TestCase):
+    def test_ids_are_short_unique_and_keep_source_id(self):
+        import re
+        snapshot = json.loads((database.SOURCE_DATA_DIR / 'catalog.json').read_text(encoding='utf-8'))
+        ids = [w['wine_id'] for w in snapshot['wines']]
+        self.assertEqual(len(ids), 200)
+        self.assertEqual(len(set(ids)), 200)
+        self.assertTrue(all(re.fullmatch(r'W-\d{3}', i) for i in ids))
+        self.assertTrue(all(w['attributes'].get('source_id') for w in snapshot['wines']))
 
 
 if __name__ == '__main__':
