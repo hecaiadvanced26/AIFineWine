@@ -67,6 +67,10 @@ pending draft so a changed request cannot accidentally confirm the old order.
 | `catalog.py` | Execute model-written SELECT queries; look up order items |
 | `orders.py` | Order drafts, stock/price checks and duplicate prevention |
 | `database.py` | SQLite schema migration and imported catalog loading |
+| `usage_log.py`, `cost_report.py` | Per-call token, cost and latency log (no message text) and its report with monthly projection |
+| `eval_run.py`, `eval_questions.json`, `llm_client.py` | Measured-results runner: questions with expected outcomes, repeated runs, pass rate, latency, cost |
+| `guard.py`, `redteam_run.py` | Input/output guardrails and the live attack script |
+| `HOW_TO_RUN.md`, `TEAM_TASKS.md`, `FAILURES.md` | Run guide, team task sheet for the evaluation, honest failure log |
 | `make_hec_catalog.py`, `hec_catalog_data.py` | Deterministic generator and validator of the fictional 250-wine catalogue (`data/catalog.json`, `data/catalog_overview.csv`) |
 | `import_finewine.py` | LEGACY: snapshot export from the old teammate SQLite; not used for the current catalogue |
 | `refresh_demo_catalog.py` | Back up SQLite and replace catalog metadata, preserving historical orders |

@@ -1,4 +1,6 @@
 """Offline API checks. No real model calls or order writes."""
+import os as _os
+_os.environ.setdefault("USAGE_LOG", "0")  # tests must not write data/usage_log.jsonl
 import json
 import os
 import tempfile

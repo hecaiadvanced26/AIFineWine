@@ -1,4 +1,6 @@
 """Guardrail tests: attacks on the chat, the SQL tool, orders and the reply. All offline."""
+import os as _os
+_os.environ.setdefault("USAGE_LOG", "0")  # tests must not write data/usage_log.jsonl
 import json
 import os
 import tempfile

@@ -1,4 +1,5 @@
 """Keep complete recent turns and one application-owned order draft."""
+import secrets
 
 
 class Memory:
@@ -6,6 +7,8 @@ class Memory:
         self.keep_turns = keep_turns
         self.messages = []
         self.pending_order = None
+        self.conversation_id = secrets.token_hex(4)  # groups usage log lines; carries no personal data
+        self.turn_number = 0
         self.reset_cards()
 
     def reset_cards(self):
@@ -15,6 +18,7 @@ class Memory:
         self.choices = None
 
     def start_turn(self, text):
+        self.turn_number += 1
         self.messages.append({"role": "user", "content": text})
         starts = [i for i, message in enumerate(self.messages)
                   if message["role"] == "user"]

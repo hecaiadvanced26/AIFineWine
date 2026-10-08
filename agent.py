@@ -1,16 +1,21 @@
 """A small model → tools → model loop."""
 import json
+import os
+import time
 
 from httpx import HTTPError
 from openai import APIError
 
 import guard
+import usage_log
 from prompts import SYSTEM_PROMPT, STAFF_EMAIL
 from streaming import collect_response
 from tools import TOOLS, dispatch
 
 MAX_STEPS = 4
 MAX_TOOL_CALLS = 6
+# Reasoning models count thinking tokens inside this limit, so keep it generous. Override with MAX_OUTPUT_TOKENS.
+MAX_OUTPUT_TOKENS = int(os.getenv("MAX_OUTPUT_TOKENS", "2000"))
 
 
 def chat(client, model, memory, text, on_text=None, on_status=None):
@@ -21,15 +26,21 @@ def chat(client, model, memory, text, on_text=None, on_status=None):
     calls_used = 0
     invalid_calls = 0
     for step in range(MAX_STEPS):
+        stats, started = {}, time.perf_counter()
         try:
             if on_status:
                 on_status("Contacting model…")
             with client.chat.completions.create(
-                model=model, max_tokens=700, messages=[{"role": "system", "content": SYSTEM_PROMPT}]
-                + memory.messages, tools=TOOLS, stream=True,
+                model=model, max_tokens=MAX_OUTPUT_TOKENS, messages=[{"role": "system", "content": SYSTEM_PROMPT}]
+                + memory.messages, tools=TOOLS, stream=True, stream_options={"include_usage": True},
                 tool_choice="none" if step == MAX_STEPS - 1 else "auto") as stream:
-                message = collect_response(stream, on_text, on_status)
-        except (APIError, HTTPError, ValueError):
+                message = collect_response(stream, on_text, on_status, stats)
+            usage_log.record(memory.conversation_id, memory.turn_number, step + 1, model, stats,
+                             time.perf_counter() - started,
+                             [call["function"]["name"] for call in message.get("tool_calls", [])])
+        except (APIError, HTTPError, ValueError) as error:
+            usage_log.record(memory.conversation_id, memory.turn_number, step + 1, model, stats,
+                             time.perf_counter() - started, error=type(error).__name__)
             memory.pending_order = None
             memory.reset_cards()
             reply = "Model reply failed or was interrupted. Please try again."
