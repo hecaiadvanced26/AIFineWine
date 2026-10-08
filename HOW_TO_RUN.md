@@ -76,7 +76,7 @@ Read every reply. `REVIEW` means a rule was visibly broken; `PASS` does not prov
 
 ## 7. Measured results (see TEAM_TASKS.md)
 ```
-python eval_run.py --check                       # validate the questions, free
+python eval_run.py --check                       # validate eval_questions.json + .csv, free
 python eval_run.py --runs 1 --label test         # one pass: note time and cost
 python eval_run.py --runs 3 --label modelA --out results_modelA.jsonl
 python eval_run.py --summarize results_modelA.jsonl results_modelB.jsonl

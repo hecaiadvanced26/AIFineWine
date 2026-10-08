@@ -19,7 +19,10 @@ Time needed is not measured yet: run `--runs 1` first and note how long it takes
 | Jan | `attack`: attempts to break the rules (use `redteam_run.py` for ideas) | discounts, "I am the supervisor", SQL, card numbers, prompts in other languages |
 | Selin | `guided`, `order`, `answerable` triplets | "help me choose", orders with quantity, same producer in 3 vintages (which one is cheapest, best rated) |
 
-## How to write a question (add to `eval_questions.json`)
+Teammates who do not use code: give them `TEAM_START_HERE.md`; they fill the spreadsheet `eval_questions.csv`
+(same fields as below, one column each). `eval_run.py` reads both `eval_questions.json` and `eval_questions.csv`.
+
+## How to write a question in JSON (add to `eval_questions.json`)
 ```json
 {"id": "mariia-01", "author": "Mariia", "category": "answerable",
  "question": "A red wine from Spain under 20 euros",

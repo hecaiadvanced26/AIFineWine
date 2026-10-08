@@ -31,6 +31,62 @@ def load_catalog():
     return json.loads((HERE / "data" / "catalog.json").read_text(encoding="utf-8"))["wines"]
 
 
+CSV_COLUMNS = ["author", "category", "question", "behaviour", "wine_type", "country", "region_contains", "grape", "food",
+               "max_price_eur", "min_price_eur", "vintage", "sweetness", "body", "acidity", "tannin", "fruitiness",
+               "wine_id", "quantity", "must_contain", "must_not_contain", "manual_check"]
+
+
+def questions_from_csv(path):
+    """Spreadsheet rows -> question dicts. Empty cells are ignored; ids are made from author and row number."""
+    import csv
+    questions = []
+    with open(path, encoding="utf-8-sig", newline="") as handle:
+        sample = handle.read(2048)
+        handle.seek(0)
+        delimiter = ";" if sample.count(";") > sample.count(",") else ","  # German Excel saves with semicolons
+        for number, row in enumerate(csv.DictReader(handle, delimiter=delimiter), start=1):
+            row = {(k or "").strip().lower(): (v or "").strip() for k, v in row.items()}
+            if not any(row.values()):
+                continue
+            q = {"id": f"{(row.get('author') or 'x').lower()}-csv{number:02d}", "author": row.get("author", ""),
+                 "category": row.get("category", "").lower(), "question": row.get("question", ""),
+                 "behaviour": row.get("behaviour", "").lower()}
+            criteria = {}
+            for key in ("wine_type", "country", "region_contains", "grape", "food"):
+                if row.get(key):
+                    criteria[key] = row[key].lower() if key == "wine_type" else row[key]
+            for key in ("max_price_eur", "min_price_eur"):
+                if row.get(key):
+                    criteria[key] = float(row[key].replace(",", "."))
+            if row.get("vintage"):
+                criteria["vintage"] = int(row["vintage"])
+            profile = {k: row[k].lower() for k in ("sweetness", "body", "acidity", "tannin", "fruitiness") if row.get(k)}
+            if profile:
+                criteria["profile"] = profile
+            if criteria:
+                q["criteria"] = criteria
+            if row.get("wine_id") or row.get("quantity"):
+                q["draft"] = {"wine_id": row.get("wine_id", ""), "quantity": int(row.get("quantity") or 1)}
+            for key in ("must_contain", "must_not_contain"):
+                if row.get(key):
+                    q[key] = [part.strip() for part in row[key].split("|") if part.strip()]
+            if row.get("manual_check"):
+                q["manual_check"] = row["manual_check"]
+            questions.append(q)
+    return questions
+
+
+def load_questions(paths):
+    questions = []
+    for path in paths:
+        path = Path(path)
+        if path.suffix.lower() == ".csv":
+            questions += questions_from_csv(path)
+        else:
+            questions += json.loads(path.read_text(encoding="utf-8"))
+    return questions
+
+
 def fold(text):
     import unicodedata
     return "".join(c for c in unicodedata.normalize("NFKD", str(text).lower()) if not unicodedata.combining(c))
@@ -285,7 +341,8 @@ def summarize(rows):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--questions", default=str(HERE / "eval_questions.json"))
+    parser.add_argument("--questions", nargs="+", default=[str(p) for p in (HERE / "eval_questions.json", HERE / "eval_questions.csv") if p.exists()],
+                        help="question files (.json or .csv); default: eval_questions.json and eval_questions.csv")
     parser.add_argument("--runs", type=int, default=3)
     parser.add_argument("--label", default=None, help="name of this configuration, e.g. the model")
     parser.add_argument("--out", default=None)
@@ -297,7 +354,11 @@ def main(argv=None):
         rows = [json.loads(line) for f in args.summarize for line in Path(f).read_text(encoding="utf-8").splitlines() if line.strip()]
         print(summarize(rows))
         return 0
-    questions = json.loads(Path(args.questions).read_text(encoding="utf-8"))
+    try:
+        questions = load_questions(args.questions)
+    except (ValueError, KeyError, OSError) as error:
+        print(f"Could not read the questions file: {error}. Check that numbers are plain numbers and the file is saved as CSV UTF-8.")
+        return 1
     problems = validate_questions(questions)
     if problems:
         print("Fix these questions first:\n- " + "\n- ".join(problems))

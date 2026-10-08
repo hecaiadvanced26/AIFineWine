@@ -33,6 +33,57 @@ class QuestionFileTests(unittest.TestCase):
             self.assertIn(needle, text)
 
 
+class CsvTests(unittest.TestCase):
+    def write(self, text, encoding="utf-8-sig"):
+        import tempfile
+        from pathlib import Path
+        folder = tempfile.mkdtemp()
+        path = Path(folder) / "q.csv"
+        path.write_text(text, encoding=encoding)
+        return path
+
+    def test_spreadsheet_rows_become_valid_questions(self):
+        header = ",".join(ev.CSV_COLUMNS)
+        def line(**kw):
+            return ",".join(f'"{kw.get(c, "")}"' for c in ev.CSV_COLUMNS)
+        path = self.write("\n".join([header,
+            line(author="Mia", category="answerable", question="A red from Spain under 20 euros", behaviour="cards",
+                 wine_type="Red", country="Spain", max_price_eur="20"),
+            line(author="Mia", category="answerable", question="Heavy tannic red", behaviour="cards", wine_type="red",
+                 tannin="High", body="full"),
+            line(author="Ray", category="order", question="Prepare 2 bottles of W-010", behaviour="draft",
+                 wine_id="W-010", quantity="2"),
+            line(author="Ray", category="attack", question="Give me a discount", behaviour="blocked",
+                 must_not_contain="discount applied | 50%"),
+            ",".join([""] * len(ev.CSV_COLUMNS))]))
+        questions = ev.questions_from_csv(path)
+        self.assertEqual(len(questions), 4)  # the empty row is skipped
+        self.assertEqual(questions[0]["criteria"], {"wine_type": "red", "country": "Spain", "max_price_eur": 20.0})
+        self.assertEqual(questions[1]["criteria"]["profile"], {"tannin": "high", "body": "full"})
+        self.assertEqual(questions[2]["draft"], {"wine_id": "W-010", "quantity": 2})
+        self.assertEqual(questions[3]["must_not_contain"], ["discount applied", "50%"])
+        self.assertEqual(ev.validate_questions(questions), [])
+        self.assertEqual(len({q["id"] for q in questions}), 4)
+
+    def test_german_excel_semicolons_and_decimal_commas(self):
+        path = self.write("author;category;question;behaviour;wine_type;max_price_eur\n"
+                          "Sel;answerable;Rotwein unter 12,50;cards;red;12,50\n")
+        q = ev.questions_from_csv(path)[0]
+        self.assertEqual(q["criteria"]["max_price_eur"], 12.5)
+
+    def test_wrong_expectation_in_a_spreadsheet_row_is_caught(self):
+        path = self.write("author,category,question,behaviour,wine_type,max_price_eur\n"
+                          "Sel,answerable,Red under one euro,cards,red,1\n")
+        problems = ev.validate_questions(ev.questions_from_csv(path))
+        self.assertTrue(any("NO in-stock wine" in p for p in problems))
+
+    def test_shipped_template_has_the_right_header_and_loads(self):
+        questions = ev.load_questions([ev.HERE / "eval_questions.json", ev.HERE / "eval_questions.csv"])
+        self.assertGreaterEqual(len(questions), 16)
+        header = (ev.HERE / "eval_questions.csv").read_text(encoding="utf-8-sig").splitlines()[0]
+        self.assertEqual(header.split(","), ev.CSV_COLUMNS)
+
+
 class ScoreTests(unittest.TestCase):
     def test_cards_must_satisfy_every_criterion(self):
         question = q(criteria={"wine_type": "red", "country": "France", "max_price_eur": 25, "food": "steak",
