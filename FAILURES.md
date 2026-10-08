@@ -16,7 +16,7 @@ tests with a stand-in model; nothing here has yet been confirmed with the real m
 | 9 | Invented names had repeated words, wrong French elision | us, review | Name lists combined blindly | Word lists and elision fixed | Checked by review of the CSV |
 | 10 | Bottle label text could overflow with long names | us, render check | Fixed font size and width | Word wrap that also breaks at hyphens; producer line left out when it is already in the name, else cut at a word | Wrapping checked in code, not re-rendered |
 | 11 | Attack input check flagged "I'm a manager at a restaurant" | us, own test | Pattern too broad | Pattern requires "the/your" or "of this shop" | Offline |
-| 12 | My 700-token reply cap could cut off reasoning models mid-answer | us, code review (not seen in use) | Reasoning tokens count inside the cap | Default 2000, adjustable with `MAX_OUTPUT_TOKENS` | Not tested with a real model |
+| 12 | My 700-token reply cap could cut off reasoning models mid-answer | us, code review (not seen in use) | Reasoning tokens count inside the cap | Default 2500, adjustable with `MAX_OUTPUT_TOKENS` | Not tested with a real model |
 | 13 | A test asserted wine cards and chips together, which the new rule forbids | us, test run | Old rule | Test changed to match the rule | Offline |
 | 14 | Runaway SQL query hung the test run when its limit was switched off | us, mutation check | No query limit | Step limit in the SQL tool | Verified: the test hangs without it |
 | 15 | React front end and the real model could not be run in our build environment | us | No internet for npm and pip there | Front-end changes checked by syntax only; model replaced by a stand-in in tests | **Open risk**: first real run is on your machine |

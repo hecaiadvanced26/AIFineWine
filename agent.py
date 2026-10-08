@@ -15,7 +15,7 @@ from tools import TOOLS, dispatch
 MAX_STEPS = 4
 MAX_TOOL_CALLS = 6
 # Reasoning models count thinking tokens inside this limit, so keep it generous. Override with MAX_OUTPUT_TOKENS.
-MAX_OUTPUT_TOKENS = int(os.getenv("MAX_OUTPUT_TOKENS", "2000"))
+MAX_OUTPUT_TOKENS = int(os.getenv("MAX_OUTPUT_TOKENS", "2500"))
 
 
 def chat(client, model, memory, text, on_text=None, on_status=None):

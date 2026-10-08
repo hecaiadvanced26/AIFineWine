@@ -73,7 +73,7 @@ class AgentLoggingTests(unittest.TestCase):
         kwargs = client.chat.completions.create.call_args.kwargs
         self.assertEqual(kwargs["stream_options"], {"include_usage": True})
         self.assertEqual(kwargs["max_tokens"], agent.MAX_OUTPUT_TOKENS)
-        self.assertGreaterEqual(agent.MAX_OUTPUT_TOKENS, 2000)  # reasoning models need room
+        self.assertGreaterEqual(agent.MAX_OUTPUT_TOKENS, 2500)  # reasoning models need room
 
     def test_failed_call_is_logged_as_error(self):
         def fake(*args, **kwargs):

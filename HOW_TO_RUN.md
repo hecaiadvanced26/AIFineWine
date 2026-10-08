@@ -89,4 +89,4 @@ The runner uses its own temporary database, so orders and stock in your local ap
   line for that call has `"error"`.
 - Port 8000 busy: close the other server first.
 - The page shows the old wines: delete `data/wines.db`.
-- Replies stop early with a very short answer: raise `MAX_OUTPUT_TOKENS` (default 2000) in the settings.
+- Replies stop early with a very short answer: raise `MAX_OUTPUT_TOKENS` (default 2500) in the settings.
