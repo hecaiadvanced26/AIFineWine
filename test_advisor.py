@@ -51,6 +51,14 @@ class AdvisorTests(DbCase):
         with self.assertRaises(ValueError):
             self.rec(foods=['unicorn'])
 
+    def test_only_one_quick_reply_question_per_turn(self):
+        memory = Memory()
+        first = tools.dispatch('offer_choices', json.dumps({'options': ['Red', 'White'], 'step': 1, 'total': 3}), memory)
+        self.assertEqual(first['status'], 'shown')
+        second = tools.dispatch('offer_choices', json.dumps({'options': ['Up to 10', 'Over 10'], 'step': 2, 'total': 3}), memory)
+        self.assertEqual(second['status'], 'blocked')
+        self.assertEqual(memory.choices['step'], 1)
+
     def test_dessert_is_not_a_colour(self):
         with self.assertRaises(ValueError):
             self.rec(wine_type='dessert', sweetness='sweet')

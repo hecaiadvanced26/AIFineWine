@@ -77,6 +77,9 @@ def _one_output_per_turn(name, memory):
     """A turn shows EITHER a question with chips OR one set of results, never a mix."""
     if name == "recommend_wines" and memory.choices:
         return "You already asked the customer a question this turn. Wait for the answer; show no wines now."
+    if name == "offer_choices" and memory.choices:
+        return ("You already asked the customer a question this turn. Ask only that one question; "
+                "the next one comes after the customer answers.")
     if name == "offer_choices" and (memory.recommendations or memory.comparison):
         return ("Results are already shown this turn. Do not ask a guided question; end with the short answer. "
                 "Do not say the catalogue or any tool is unavailable: it is working.")
