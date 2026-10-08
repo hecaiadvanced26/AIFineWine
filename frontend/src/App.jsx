@@ -112,8 +112,7 @@ export default function App() {
       <p className="demo-note">COURSE DEMO BY GROUP 3<br />Fictional wines · Real regions &amp; grapes<br />Mariia, Rayen, Jan, Selin</p>
     </aside>
     <main className="chat-shell">
-      <header className="topbar"><div><img className="logo" src="/logo.png" alt="cave." width="108" height="34" />
-        <p>Let’s find your next bottle.</p></div><div className="topbar-actions">
+      <header className="topbar"><div className="topbar-actions">
           <a className="contact-btn" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Question to the cave. team')}`}>
             <span aria-hidden="true">Contact cave.</span></a>
           <a className="tag tag-link" href="/cave_wine_list.pdf" target="_blank" rel="noopener noreferrer">Wine list (PDF)</a></div></header>
