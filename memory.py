@@ -6,6 +6,13 @@ class Memory:
         self.keep_turns = keep_turns
         self.messages = []
         self.pending_order = None
+        self.reset_cards()
+
+    def reset_cards(self):
+        """Per-turn UI payloads set by tools: cards, comparison, quick replies."""
+        self.recommendations = None
+        self.comparison = None
+        self.choices = None
 
     def start_turn(self, text):
         self.messages.append({"role": "user", "content": text})

@@ -3,8 +3,9 @@ import Markdown from 'react-markdown';
 import { post, streamChat } from './api.js';
 import OrderCard from './OrderCard.jsx';
 import OrderConfirmation from './OrderConfirmation.jsx';
+import { Comparison, QuickReplies, Recommendations } from './Advisor.jsx';
 
-const suggestions = ['A red wine from Spain', 'White wines with stated citrus notes', 'Show wines under €20'];
+const suggestions = ['Help me choose a wine', 'A red wine under €12', 'Find a cheaper alternative to a wine I like'];
 
 function Glass() {
   return <svg viewBox="0 0 80 100" fill="none" aria-hidden="true">
@@ -30,8 +31,8 @@ export default function App() {
   }, []);
   useEffect(() => { end.current?.scrollIntoView({ block: 'end' }); }, [messages, draft]);
 
-  function replaceReply(content) {
-    setMessages(previous => [...previous.slice(0, -1), { role: 'assistant', content }]);
+  function replaceReply(content, extras = {}) {
+    setMessages(previous => [...previous.slice(0, -1), { role: 'assistant', content, ...extras }]);
   }
 
   async function send(text) {
@@ -50,7 +51,9 @@ export default function App() {
         } else if (event.type === 'text') {
           reply += event.text; replaceReply(reply);
         } else if (event.type === 'done') {
-          replaceReply(event.reply); setDraft(event.draft);
+          replaceReply(event.reply, { recommendations: event.recommendations,
+            comparison: event.comparison, choices: event.choices });
+          setDraft(event.draft);
         }
       });
     } catch (failure) {
@@ -107,11 +110,16 @@ export default function App() {
         </section>}
         {messages.map((message, index) => message.confirmation
           ? <OrderConfirmation key={index} order={message.confirmation} />
-          : <article key={index} className={`message ${message.role}`}>
+          : <React.Fragment key={index}><article className={`message ${message.role}`}>
           <div className="avatar" aria-hidden="true">{message.role === 'user' ? 'Y' : 'c'}</div>
           <div className="message-body"><span className="speaker">{message.role === 'user' ? 'You' : 'Cave'}</span>
             {message.content ? <Markdown>{message.content}</Markdown> : <p className="waiting">Working on your request…</p>}
-          </div></article>)}
+          </div></article>
+          <Recommendations data={message.recommendations} onAsk={send} disabled={busy} />
+          <Comparison data={message.comparison} onAsk={send} disabled={busy} />
+          {index === messages.length - 1 && !busy &&
+            <QuickReplies data={message.choices} onPick={send} disabled={busy} />}
+          </React.Fragment>)}
         <OrderCard draft={draft} busy={busy} onAction={orderAction} /><div ref={end} />
       </div>
       <div className="composer-area">

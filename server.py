@@ -78,7 +78,9 @@ def chat_route():
             reply = chat(client, os.environ["OPENAI_MODEL"], state["memory"], text.strip(),
                          on_text=lambda value: emit("text", text=value),
                          on_status=lambda value: emit("status", text=value))
-            emit("done", reply=reply, draft=state["memory"].pending_order)
+            memory = state["memory"]
+            emit("done", reply=reply, draft=memory.pending_order, recommendations=memory.recommendations,
+                 comparison=memory.comparison, choices=memory.choices)
         except Exception:
             # Do not leak provider details or leave a draft after an unexpected failure.
             app.logger.exception("Chat request failed")

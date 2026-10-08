@@ -1,7 +1,9 @@
-"""Two tools: execute a SQL query or prepare an order."""
+"""Tools: SQL lookup, guided recommendations, cheaper alternatives, quick replies, order draft."""
 import json
 import sqlite3
 
+from advisor import (FAMILIES, TYPES, find_cheaper_alternatives, offer_choices,
+                     recommend_wines)
 from catalog import run_query
 from orders import prepare_order
 from prompts import ATTRIBUTE_DESCRIPTIONS, DATABASE_SCHEMA
@@ -23,7 +25,31 @@ TOOLS = [
          {"wine_id": {"type": "string"},
           "quantity": {"type": "integer", "minimum": 1}}),
 ]
-FUNCTIONS = {"run_query": run_query, "prepare_order": prepare_order}
+TOOLS += [
+    tool("recommend_wines",
+         "Rank in-stock wines for a customer profile. Colour and budget are strict filters; aromas "
+         "and country only rank. Returns at most 3 wines with the wishes they meet. Use this for "
+         "'help me choose' requests instead of writing SQL.",
+         {"wine_type": {"type": "string", "enum": list(TYPES)},
+          "budget_min_eur": {"type": ["number", "null"]},
+          "budget_max_eur": {"type": ["number", "null"]},
+          "aroma_families": {"type": "array", "items": {"type": "string", "enum": list(FAMILIES)}},
+          "aromas": {"type": "array", "items": {"type": "string"},
+                     "description": "Specific aroma tags from the catalog list; usually empty."},
+          "country": {"type": ["string", "null"]},
+          "include_style_guesses": {"type": "boolean",
+                                    "description": "False unless the customer agreed to guessed aromas."}}),
+    tool("find_cheaper_alternatives",
+         "For one wine ID, find up to 2 cheaper in-stock wines of the same colour that share aroma tags.",
+         {"wine_id": {"type": "string"}}),
+    tool("offer_choices",
+         "Show 2-6 tappable answers under your next question. Use for guided advice questions.",
+         {"options": {"type": "array", "items": {"type": "string"}, "minItems": 2, "maxItems": 6},
+          "step": {"type": "integer", "minimum": 1}, "total": {"type": "integer", "minimum": 1}}),
+]
+FUNCTIONS = {"run_query": run_query, "prepare_order": prepare_order,
+             "recommend_wines": recommend_wines, "find_cheaper_alternatives": find_cheaper_alternatives,
+             "offer_choices": offer_choices}
 
 
 def reject_constant(value):
@@ -42,4 +68,10 @@ def dispatch(name, arguments, memory):
         return {"status": "query_error", "error": str(error)}
     if name == "prepare_order" and "error" not in result:
         memory.pending_order = result
+    elif name == "recommend_wines" and result.get("wines"):
+        memory.recommendations = {"wishes": result["wishes"], "wines": result["wines"]}
+    elif name == "find_cheaper_alternatives" and result.get("alternatives"):
+        memory.comparison = {"chosen": result["chosen"], "alternatives": result["alternatives"]}
+    elif name == "offer_choices" and result.get("status") == "shown":
+        memory.choices = {key: result[key] for key in ("options", "step", "total")}
     return result

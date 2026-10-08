@@ -15,6 +15,7 @@ MAX_TOOL_CALLS = 6
 def chat(client, model, memory, text, on_text=None, on_status=None):
     # A changed request requires a new draft and confirmation.
     memory.pending_order = None
+    memory.reset_cards()
     memory.start_turn(text)
     calls_used = 0
     invalid_calls = 0
@@ -29,6 +30,7 @@ def chat(client, model, memory, text, on_text=None, on_status=None):
                 message = collect_response(stream, on_text, on_status)
         except (APIError, HTTPError, ValueError):
             memory.pending_order = None
+            memory.reset_cards()
             reply = "Model reply failed or was interrupted. Please try again."
             memory.add_reply(reply)
             if on_text:
@@ -54,7 +56,10 @@ def chat(client, model, memory, text, on_text=None, on_status=None):
             else:
                 if on_status:
                     on_status({"run_query": "Looking up catalog data…",
-                               "prepare_order": "Checking stock and preparing order…"}
+                               "prepare_order": "Checking stock and preparing order…",
+                               "recommend_wines": "Matching wines to your wishes…",
+                               "find_cheaper_alternatives": "Looking for cheaper alternatives…",
+                               "offer_choices": "Preparing quick answers…"}
                               .get(call["function"]["name"], "Checking tool request…"))
                 result = dispatch(call["function"]["name"], call["function"]["arguments"], memory)
                 if on_status and (result.get("error") or result.get("status") in
@@ -65,6 +70,7 @@ def chat(client, model, memory, text, on_text=None, on_status=None):
             memory.messages.append({"role": "tool", "tool_call_id": call["id"],
                                     "content": json.dumps(result)})
     memory.pending_order = None
+    memory.reset_cards()
     reply = "I could not complete this request within the tool budget. Please clarify."
     memory.add_reply(reply)
     if on_text:

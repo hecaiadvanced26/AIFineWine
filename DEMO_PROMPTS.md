@@ -46,3 +46,19 @@ Source revision and inventory caveats are bundled in `data/catalog.json`.
 SQLite migrations back up old data and preserve order history and retained stock.
 Confirmation is application-side, not a model tool. Orders recheck price, vintage
 and stock. Vercel storage remains temporary; drafts may expire between instances.
+
+## Guided advice (new)
+
+Not yet run against a real model; check each step on the live site and note what differs.
+
+1. “Help me choose a wine.” Expected: the assistant asks ONE question (colour) and shows chips
+   with “Question 1 of 4”. Tap **Red**, then a budget chip such as **€8–12**, then an aroma chip
+   such as **Red berries & cherry**.
+2. Expected: up to 3 wine cards (price, ratings, “Fits n of m of your wishes”, aromas split into
+   “the taster wrote” and “typical for this style, not tasted”), plus one plain-language sentence
+   per wine. Aroma matches use taster-written notes only unless you agree to style guesses.
+3. Click **Cheaper alternative** on a card. Expected: your wine next to up to 2 cheaper wines of the
+   same colour that share aroma tags, with the price difference. The assistant must NOT say they taste the same.
+4. “It's for a barbecue and I like it dry.” Expected: the assistant says occasion, food and sweetness
+   are not recorded and continues with colour, budget and aromas.
+5. Click **Choose this wine**. Expected: the usual order draft, then **Confirm order**.

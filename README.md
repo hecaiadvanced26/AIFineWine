@@ -262,3 +262,14 @@ of stock and must not appear in recommendations. Inspect the exported JSON after
 
 API/tool references: [OpenAI function calling](https://developers.openai.com/api/docs/guides/function-calling)
 and [Python SQLite](https://docs.python.org/3/library/sqlite3.html).
+
+
+## Guided advice
+
+`advisor.py` adds three tools next to `run_query` and `prepare_order`: `recommend_wines` (colour and
+budget filter, aromas and country rank, at most 3 wines), `find_cheaper_alternatives` (same colour,
+cheaper, shared aroma tags) and `offer_choices` (quick-reply chips with a step counter). The model
+proposes a profile; the code filters, ranks and returns only catalog facts. The page shows the
+results as cards (`frontend/src/Advisor.jsx`). The catalog does not record occasion, food
+pairing, sweetness, body or acidity, so these cannot be matched; the prompt tells the model to say so.
+Tests: `python -m unittest test_advisor`.
