@@ -102,25 +102,25 @@ export default function App() {
 
   return <div className="app-shell">
     <aside className="sidebar">
-      <a href="/" className="brand" aria-label="HEC Cave home">HEC Cave<span>WINE, WITHOUT THE GUESSWORK</span></a>
+      <a href="/" className="brand" aria-label="HEC Cave home">HEC Cave<span>WINE, LIKE AN EXPERT</span></a>
       <button className="new-chat" onClick={reset} disabled={busy}>＋ New conversation</button>
       <div className="sidebar-note"><span className="eyebrow">A LITTLE GUIDANCE</span>
-        <h2>A good bottle.<br />A simple conversation.</h2>
-        <p>Tell us your taste, preferred origin or budget. We’ll find a match in the shop’s catalog.</p>
-        <ul><li>Catalog-backed answers</li><li>Live availability checks</li><li>You confirm every order</li></ul>
+        <h2>Your perfect bottle.<br />A simple conversation.</h2>
+        <p>Tell us your taste, preferred origin or budget. We’ll find a match in our caves catalog.</p>
+        <ul><li>Expert ratings</li><li>Live availability checks</li><li>1-click purchase</li><li>Find better alternatives</li></ul>
       </div>
-      <p className="demo-note">COURSE DEMO by Group 3<br />Real wine names · Illustrative shop data<br />Rayen Gallas<br />Jan Laufing<br />Mariia Tsaturyan<br />Selin Zafer</p>
+      <p className="demo-note">COURSE DEMO BY GROUP 3<br />Real wines · Illustrative shop data<br />Rayen G., Jan L.<br />Mariia T., Selin Z.</p>
     </aside>
     <main className="chat-shell">
-      <header className="topbar"><div><span className="eyebrow">YOUR WINE ASSISTANT DAVE FROM HEC CAVE</span>
+      <header className="topbar"><div><span className="eyebrow">DAVE</span>
         <p>Let’s find your next bottle.</p></div><div className="topbar-actions">
           <a className="contact-btn" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Question for the HEC Cave team')}`}>
-            <span aria-hidden="true">✉</span> Customer contact</a>
+            <span aria-hidden="true">Contact</span> Customer contact</a>
           <span className="tag">Demo catalog</span></div></header>
       <div className="conversation">
         {!messages.length && <section className="welcome"><div className="glass"><Glass /></div>
           <span className="eyebrow"></span><h1>Your wine, found.</h1>
-          <p>A bottle for tonight, a vintage you love, or something within budget.<br />Start with what matters to you.<br />I am here to help you find exaclty what you are looking for. White wine for Risotto?<br />Red wine for your grandpa? We've got you covered.</p>
+          <p>Start with what matters to you.</p>
           <div className="suggestions">{suggestions.map(text => <button key={text}
             disabled={busy} onClick={() => send(text)}>{text} <span>↗</span></button>)}</div>
         </section>}
@@ -129,7 +129,7 @@ export default function App() {
           : <React.Fragment key={index}><article className={`message ${message.role}`}>
           <div className="avatar" aria-hidden="true">{message.role === 'user' ? 'Y' : 'D'}</div>
           <div className="message-body"><span className="speaker">{message.role === 'user' ? 'You' : 'Dave'}</span>
-            {message.content ? <Markdown>{message.content}</Markdown> : <p className="waiting">Working on your request…</p>}
+            {message.content ? <Markdown>{message.content}</Markdown> : <p className="waiting">I am working on your request…</p>}
           </div></article>
           <Recommendations data={message.recommendations} onAsk={send} disabled={busy} />
           <Comparison data={message.comparison} onAsk={send} disabled={busy} />
@@ -154,7 +154,7 @@ export default function App() {
             } }} />
           <button className="send" aria-label="Send message" disabled={busy || !input.trim()}>↑</button>
         </form>
-        <p className="composer-note">Imported wines & ratings. Flavour notes distinguish stated and inferred. Bottle pictures are illustrations. Demo prices & inventory; no payments taken.</p>
+        <p className="composer-note">Wines & ratings from Vivino. Bottle pictures are illustrations. Demo prices & inventory; no payments taken.</p>
       </div>
     </main>
   </div>;
