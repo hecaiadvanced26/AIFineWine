@@ -164,19 +164,10 @@ class FaviconTests(unittest.TestCase):
         self.assertIn('href="/favicon.svg"', (root / 'index.html').read_text(encoding='utf-8'))
 
 
-class LogoTests(unittest.TestCase):
-    def test_header_shows_the_logo_image_not_placeholder_text(self):
-        root = Path(server.__file__).parent / 'frontend'
-        app = (root / 'src' / 'App.jsx').read_text(encoding='utf-8')
-        self.assertNotIn('LOGO HERE', app)
-        self.assertIn('src="/logo.png"', app)
-        self.assertTrue((root / 'public' / 'logo.png').read_bytes().startswith(b'\x89PNG'))
-
-    def test_route_serves_png(self):
-        client = server.app.test_client()
-        with tempfile.TemporaryDirectory() as folder:
-            with patch.object(server, 'FRONTEND', Path(folder)):
-                self.assertEqual(client.get('/logo.png').status_code, 404)
-                (Path(folder) / 'logo.png').write_bytes(b'\x89PNG test')
-                response = client.get('/logo.png')
-                self.assertEqual((response.status_code, response.mimetype), (200, 'image/png'))
+class HeaderTests(unittest.TestCase):
+    def test_header_has_no_placeholder_or_logo_text_and_keeps_the_buttons(self):
+        app = (Path(server.__file__).parent / 'frontend' / 'src' / 'App.jsx').read_text(encoding='utf-8')
+        for gone in ('LOGO HERE', 'find your next bottle', 'logo.png'):
+            self.assertNotIn(gone, app)
+        self.assertIn('Contact cave.', app)
+        self.assertIn('href="/cave_wine_list.pdf"', app)
