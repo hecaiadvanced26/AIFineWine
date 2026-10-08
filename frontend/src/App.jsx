@@ -5,8 +5,8 @@ import OrderCard from './OrderCard.jsx';
 import OrderConfirmation from './OrderConfirmation.jsx';
 import { Comparison, QuickReplies, Recommendations } from './Advisor.jsx';
 
-const CONTACT_EMAIL = 'cave@hec.edu'; // fictional demo address; keep in sync with prompts.py
-const suggestions = ['Help me choose a wine', 'A red wine under €12', 'Find a cheaper alternative to a wine I like'];
+const CONTACT_EMAIL = 'jan.laufing@hec.edu'; 
+const suggestions = ['Which wine for eating Risotto', 'A red wine under €12 from France', 'Find a cheaper alternative to a wine I like'];
 
 function Glass() {
   return <svg viewBox="0 0 80 100" fill="none" aria-hidden="true">
@@ -26,7 +26,7 @@ export default function App() {
   const end = useRef(null);
   const running = useRef(true);
   useEffect(() => {
-    post('/api/reset').then(() => setStatus('You are connected to Dave from HEC Cave. Please let me know how to help you'))
+    post('/api/reset').then(() => setStatus('You are connected to cave. Please let me know how to help you'))
       .catch(failure => { setError(failure.message); setStatus('Connection failed'); })
       .finally(() => { running.current = false; setBusy(false); });
   }, []);
@@ -102,20 +102,20 @@ export default function App() {
 
   return <div className="app-shell">
     <aside className="sidebar">
-      <a href="/" className="brand" aria-label="HEC Cave home">HEC Cave<span>WINE, LIKE AN EXPERT</span></a>
+      <a href="/" className="brand" aria-label="cave. home">cave.<span>WINE, LIKE AN EXPERT</span></a>
       <button className="new-chat" onClick={reset} disabled={busy}>＋ New conversation</button>
       <div className="sidebar-note"><span className="eyebrow">A LITTLE GUIDANCE</span>
         <h2>Your perfect bottle.<br />A simple conversation.</h2>
         <p>Tell us your taste, preferred origin or budget. We’ll find a match in our caves catalog.</p>
         <ul><li>Expert ratings</li><li>Live availability checks</li><li>1-click purchase</li><li>Find better alternatives</li></ul>
       </div>
-      <p className="demo-note">COURSE DEMO BY GROUP 3<br />Real wines · Illustrative shop data<br />Rayen G., Jan L.<br />Mariia T., Selin Z.</p>
+      <p className="demo-note">COURSE DEMO BY GROUP 3<br />Real wines · Illustrative shop data<br />Mariia, Rayen, Jan, Selin</p>
     </aside>
     <main className="chat-shell">
-      <header className="topbar"><div><span className="eyebrow">DAVE</span>
+      <header className="topbar"><div><span className="eyebrow">LOGO HERE</span>
         <p>Let’s find your next bottle.</p></div><div className="topbar-actions">
-          <a className="contact-btn" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Question for the HEC Cave team')}`}>
-            <span aria-hidden="true">Contact</span> Customer contact</a>
+          <a className="contact-btn" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Question to the cave. team')}`}>
+            <span aria-hidden="true">Contact cave.</span></a>
           <span className="tag">Demo catalog</span></div></header>
       <div className="conversation">
         {!messages.length && <section className="welcome"><div className="glass"><Glass /></div>
@@ -128,7 +128,7 @@ export default function App() {
           ? <OrderConfirmation key={index} order={message.confirmation} />
           : <React.Fragment key={index}><article className={`message ${message.role}`}>
           <div className="avatar" aria-hidden="true">{message.role === 'user' ? 'Y' : 'D'}</div>
-          <div className="message-body"><span className="speaker">{message.role === 'user' ? 'You' : 'Dave'}</span>
+          <div className="message-body"><span className="speaker">{message.role === 'user' ? 'You' : 'cave.'}</span>
             {message.content ? <Markdown>{message.content}</Markdown> : <p className="waiting">I am working on your request…</p>}
           </div></article>
           <Recommendations data={message.recommendations} onAsk={send} disabled={busy} />
