@@ -116,7 +116,7 @@ export default function App() {
         <p>Let’s find your next bottle.</p></div><div className="topbar-actions">
           <a className="contact-btn" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Question to the cave. team')}`}>
             <span aria-hidden="true">Contact cave.</span></a>
-          <span className="tag">Demo catalog</span></div></header>
+          <a className="tag tag-link" href="/cave_wine_list.pdf" target="_blank" rel="noopener noreferrer">Wine list (PDF)</a></div></header>
       <div className="conversation">
         {!messages.length && <section className="welcome"><div className="glass"><Glass /></div>
           <span className="eyebrow"></span><h1>Your wine, found.</h1>
