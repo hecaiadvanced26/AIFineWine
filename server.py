@@ -70,6 +70,12 @@ def same_origin():
         return jsonify(error="Cross-origin requests are not allowed."), 403
 
 
+@app.get("/cave_wine_list.pdf")
+def wine_list_route():
+    """Full wine list for customers. On Vercel the file is served from public/; this route covers local runs."""
+    return send_from_directory(FRONTEND, "cave_wine_list.pdf", mimetype="application/pdf", max_age=300)
+
+
 @app.get("/")
 def index():
     conversation()  # Set the session cookie before the first streamed response.

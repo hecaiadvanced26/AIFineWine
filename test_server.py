@@ -121,5 +121,22 @@ class ServerTests(unittest.TestCase):
             state['lock'].release()
 
 
+class WineListTests(unittest.TestCase):
+    def test_route_serves_pdf_and_404_when_missing(self):
+        client = server.app.test_client()
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(server, 'FRONTEND', Path(folder)):
+                self.assertEqual(client.get('/cave_wine_list.pdf').status_code, 404)
+                (Path(folder) / 'cave_wine_list.pdf').write_bytes(b'%PDF-1.4 test')
+                response = client.get('/cave_wine_list.pdf')
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.mimetype, 'application/pdf')
+
+    def test_page_links_to_the_shipped_pdf(self):
+        root = Path(server.__file__).parent / 'frontend'
+        self.assertIn('href="/cave_wine_list.pdf"', (root / 'src' / 'App.jsx').read_text(encoding='utf-8'))
+        self.assertTrue((root / 'public' / 'cave_wine_list.pdf').read_bytes().startswith(b'%PDF'))
+
+
 if __name__ == '__main__':
     unittest.main()
