@@ -76,6 +76,12 @@ def favicon_route():
     return send_from_directory(FRONTEND, "favicon.svg", mimetype="image/svg+xml", max_age=3600)
 
 
+@app.get("/logo.png")
+def logo_route():
+    """Header logo. On Vercel it is served from public/; this route covers local runs."""
+    return send_from_directory(FRONTEND, "logo.png", mimetype="image/png", max_age=3600)
+
+
 @app.get("/favicon.ico")
 def favicon_ico_route():
     """Browsers ask for /favicon.ico by habit; point them at the SVG."""
