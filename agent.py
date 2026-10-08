@@ -4,7 +4,8 @@ import json
 from httpx import HTTPError
 from openai import APIError
 
-from prompts import SYSTEM_PROMPT
+import guard
+from prompts import SYSTEM_PROMPT, STAFF_EMAIL
 from streaming import collect_response
 from tools import TOOLS, dispatch
 
@@ -24,7 +25,7 @@ def chat(client, model, memory, text, on_text=None, on_status=None):
             if on_status:
                 on_status("Contacting model…")
             with client.chat.completions.create(
-                model=model, messages=[{"role": "system", "content": SYSTEM_PROMPT}]
+                model=model, max_tokens=700, messages=[{"role": "system", "content": SYSTEM_PROMPT}]
                 + memory.messages, tools=TOOLS, stream=True,
                 tool_choice="none" if step == MAX_STEPS - 1 else "auto") as stream:
                 message = collect_response(stream, on_text, on_status)
@@ -40,6 +41,12 @@ def chat(client, model, memory, text, on_text=None, on_status=None):
             return reply
         if not message.get("tool_calls"):
             reply = message["content"] or "I could not produce an answer. Please clarify."
+            problem = guard.reply_problem(reply, allowed_emails=(STAFF_EMAIL,))
+            if problem:  # never show or remember a reply that breaks a rule; cards of this turn stay out too
+                memory.reset_cards()
+                reply = guard.SAFE_REPLY
+                if on_status:
+                    on_status("Reply withheld by safety check.")
             memory.add_reply(reply)
             if not message["content"] and on_text:
                 on_text(reply)

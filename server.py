@@ -3,6 +3,8 @@ import json
 import os
 import secrets
 import sqlite3
+import time
+from collections import defaultdict, deque
 from pathlib import Path
 from queue import Queue
 from threading import Lock, Thread
@@ -10,12 +12,14 @@ from threading import Lock, Thread
 from flask import Flask, Response, jsonify, request, session, send_from_directory
 from openai import OpenAI
 
+import guard
 from agent import chat
 from database import initialize
 from catalog import get_wine_details
 from make_wine_images import bottle_svg
 from memory import Memory
 from orders import prepare_order, submit_order
+from prompts import STAFF_EMAIL
 
 FRONTEND = Path(__file__).parent / "frontend" / "dist"
 app = Flask(__name__, static_folder=str(FRONTEND / "assets"), static_url_path="/assets")
@@ -26,6 +30,26 @@ conversations = {}  # Local demo only: memory is cleared when the server restart
 
 if os.getenv("VERCEL"):
     initialize()
+
+
+RATE_LIMIT, RATE_WINDOW, SESSION_TURN_LIMIT = 15, 60, 80
+hits = defaultdict(deque)  # per client; in-memory, so per server instance only (Vercel: per cold instance)
+
+
+def rate_limited():
+    """Sliding window per client address; the platform sets X-Forwarded-For on Vercel."""
+    client = (request.headers.get("X-Forwarded-For", "") or request.remote_addr or "?").split(",")[0].strip()
+    now = time.monotonic()
+    window = hits[client]
+    while window and now - window[0] > RATE_WINDOW:
+        window.popleft()
+    if len(window) >= RATE_LIMIT:
+        return True
+    window.append(now)
+    if len(hits) > 5000:  # keep the table small
+        for key in [k for k, v in hits.items() if not v or now - v[-1] > RATE_WINDOW][:2500]:
+            hits.pop(key, None)
+    return False
 
 
 @app.get("/api/health")
@@ -77,10 +101,32 @@ def chat_route():
         return jsonify(error="Enter a message of 1–4,000 characters."), 400
     if not os.getenv("OPENAI_API_KEY") or not os.getenv("OPENAI_MODEL"):
         return jsonify(error="API settings missing. Check .env and restart."), 503
+    if rate_limited():
+        app.logger.warning("Rate limit hit")
+        return jsonify(error="Too many messages. Please wait a minute."), 429
     state = conversation()
+    state["turns"] = state.get("turns", 0) + 1
+    if state["turns"] > SESSION_TURN_LIMIT:
+        return jsonify(error="This conversation is long. Start a new conversation."), 429
+    canned = guard.screen_input(text)
+    if canned:  # the model never sees it and memory never stores it
+        app.logger.warning("Input blocked by guard")
+        lines = [{"type": "text", "text": canned}, {"type": "done", "reply": canned, "draft": state["memory"].pending_order,
+                                                     "recommendations": None, "comparison": None, "choices": None}]
+        return Response("".join(json.dumps(line) + "\n" for line in lines), mimetype="application/x-ndjson",
+                        headers={"Cache-Control": "no-store"})
     if not state["lock"].acquire(blocking=False):
         return jsonify(error="Another request is running. Please wait."), 409
     events = Queue()
+    shown = {"text": "", "stopped": False}
+
+    def stream_text(value):
+        """Stop streaming as soon as the text so far breaks a rule; the final reply is checked again."""
+        shown["text"] += value
+        if shown["stopped"] or guard.reply_problem(shown["text"], (STAFF_EMAIL,)):
+            shown["stopped"] = True
+            return
+        emit("text", text=value)
 
     def emit(kind, **payload):
         events.put({"type": kind, **payload})
@@ -91,7 +137,7 @@ def chat_route():
                             base_url=os.getenv("OPENAI_BASE_URL") or None,
                             timeout=30, max_retries=1)
             reply = chat(client, os.environ["OPENAI_MODEL"], state["memory"], text.strip(),
-                         on_text=lambda value: emit("text", text=value),
+                         on_text=stream_text,
                          on_status=lambda value: emit("status", text=value))
             memory = state["memory"]
             emit("done", reply=reply, draft=memory.pending_order, recommendations=memory.recommendations,
@@ -156,6 +202,7 @@ def reset_route():
     state = conversation()
     with state["lock"]:
         state["memory"] = Memory()
+        state["turns"] = 0
     return jsonify(ok=True)
 
 

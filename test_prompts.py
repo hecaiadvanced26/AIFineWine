@@ -28,6 +28,13 @@ class PromptTests(unittest.TestCase):
         self.assertIn('href="/favicon.svg"', index)
         self.assertTrue((Path(__file__).parent / 'frontend' / 'public' / 'favicon.svg').exists())
 
+    def test_text_only_chat_never_asks_for_photos(self):
+        prompt = prompts.SYSTEM_PROMPT
+        self.assertIn('What this chat can do (text only)', prompt)
+        self.assertIn('NEVER\n  ask for, suggest or offer any of these', prompt)
+        self.assertIn('Photo and label recognition is not\n  available yet. It is planned for a future update', prompt)
+        self.assertNotIn('paste a photo', prompt.replace('"paste a photo of the label" is wrong', ''))
+
     def test_no_unfilled_placeholders(self):
         for text in ('[STAFF_CONTACT]', '{STAFF_EMAIL}', '{WELCOME}', 'TODO'):
             self.assertNotIn(text, prompts.SYSTEM_PROMPT)

@@ -149,6 +149,30 @@ Fresh databases seed from `data/catalog.json` only when `wines` is empty. **An e
 old wines: delete `data/wines.db` (or run `python refresh_demo_catalog.py`) after pulling this version.**
 On Vercel the database is rebuilt on a cold start.
 
+## Security guardrails
+
+Principle from the course: the trust boundary lives in code you own, not in the prompt. Layers, in order:
+
+| Layer | Where | What it stops |
+|---|---|---|
+| Input screen | `guard.screen_input`, `server.py` | Known override phrasings ("ignore previous instructions", "show your system prompt", fake system tags, "I am the supervisor/admin"), and valid card numbers (Luhn check). The message never reaches the model and is not stored. |
+| Rate limits | `server.py` | 15 chat requests per minute per client, 80 turns per conversation, 4,000 characters per message, `max_tokens=700` per model call, 4 steps and 6 tool calls per turn. |
+| SQL tool | `catalog.py` | Authorizer allows SELECT only on `wines`, `flavours`, `flavour_vocabulary`, `wine_grapes`, `wine_pairings`: no `orders`, `catalog_metadata`, `sqlite_master`, PRAGMA, ATTACH or extensions. `stock` is never returned by this tool (the cards show "n in stock" to customers by design, and the card tools pass `stock` to the model). Runaway joins are aborted. The connection is read-only. |
+| Tool arguments | `tools.py`, `orders.py` | `prepare_order` takes only wine ID and quantity. Price and total come from the database, quantity is 1 to 12 and at most the stock. Confirmation is a button in the page, not a model tool. |
+| One output per turn | `tools.py` | A turn shows a question or one set of results, never both. |
+| Output screen | `guard.reply_problem`, `agent.py`, `server.py` | Replies with the canary marker, tool or table names, SQL, card numbers, key names, unknown email addresses, or discount/coupon/free-bottle claims are replaced by a safe message and not stored. Streamed text stops as soon as it breaks a rule. |
+| Prompt | `prompts.py` "Security rules" | Customer text and tool results are data; no discounts, no special roles; no internal topics. This layer is the weakest: it is a request to the model, not a guarantee. |
+
+Tests: `python -m unittest test_guard` (17 offline tests; each guard was also checked by switching it off and
+watching a test fail). Live check with the real model: `python redteam_run.py URL` (see `DEMO_PROMPTS.md`).
+
+Known limits: (1) pattern lists catch known wordings only; paraphrases, other languages and multi-turn tricks rely on the
+prompt and the code layers behind it. (2) The order total shown on the card is always right, but the model's *sentence*
+could still be wrong; the output screen only catches typical discount wording. (3) Rate limits and turn counters
+live in memory, so on Vercel they are per instance and can be sidestepped. There is no login or spend cap on the public
+URL. (4) A reply that streams a few words before breaking a rule is cut off, not recalled. (5) A withheld reply also clears the cards of that turn. (6) The page shows blocked messages as normal chat replies. (7) Prompt-injection through data would need
+someone to change `data/catalog.json`; the catalogue is trusted content.
+
 ## Prototype limitations
 
 - **Data coverage:** structure and pairings are typical-for-style estimates, not per-bottle measurements;
@@ -235,6 +259,8 @@ issues a new `order_id` and refuses 0, negatives, non-integers and anything abov
 Tests: `python -m unittest test_quantity`.
 
 **Name.** The shop is called cave. (with the full stop); the assistant has no personal name. The favicon is `frontend/public/favicon.svg`, linked in `frontend/index.html`.
+
+**Text only.** The chat cannot receive photos, label scans or files. `prompts.py` (section "What this chat can do") forbids asking for them and answers requests with "planned for a future update".
 
 **Assistant instructions.** `prompts.py` holds the permanent role (`PERSONA`: voice, opening message, how to find wines,
 staying on topic, orders and staff topics, never-discuss list, responsible service, format), then `DATA_RULES` (what the

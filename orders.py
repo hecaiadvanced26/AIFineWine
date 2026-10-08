@@ -7,12 +7,17 @@ from catalog import get_wine_details
 from database import DATA_DIR, connect
 
 
+MAX_BOTTLES_PER_ORDER = 12  # bounds abuse; the model can never set price or discount
+
+
 def prepare_order(wine_id, quantity):
     wine = get_wine_details(wine_id)
     if "error" in wine:
         return wine
     if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 1:
         return {"error": "Quantity must be a positive integer."}
+    if quantity > MAX_BOTTLES_PER_ORDER:
+        return {"error": f"At most {MAX_BOTTLES_PER_ORDER} bottles per order."}
     if quantity > wine["stock"]:
         return {"error": "Not enough stock for this quantity."}
     return {"order_id": str(uuid4()), "status": "awaiting_confirmation",
