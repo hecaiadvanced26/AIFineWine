@@ -5,6 +5,7 @@ import json
 import os
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from unittest.mock import patch
 
@@ -142,3 +143,22 @@ class WineListTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class FaviconTests(unittest.TestCase):
+    def test_route_serves_svg_and_ico_redirects_to_it(self):
+        client = server.app.test_client()
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(server, 'FRONTEND', Path(folder)):
+                (Path(folder) / 'favicon.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')
+                response = client.get('/favicon.svg')
+                self.assertEqual((response.status_code, response.mimetype), (200, 'image/svg+xml'))
+        ico = client.get('/favicon.ico')
+        self.assertEqual((ico.status_code, ico.headers['Location']), (302, '/favicon.svg'))
+
+    def test_shipped_icon_is_small_valid_svg_and_linked_from_the_page(self):
+        root = Path(server.__file__).parent / 'frontend'
+        icon = (root / 'public' / 'favicon.svg').read_text(encoding='utf-8')
+        ET.fromstring(icon)
+        self.assertLess(len(icon), 2000)
+        self.assertIn('href="/favicon.svg"', (root / 'index.html').read_text(encoding='utf-8'))

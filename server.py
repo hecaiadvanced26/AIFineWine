@@ -9,7 +9,7 @@ from pathlib import Path
 from queue import Queue
 from threading import Lock, Thread
 
-from flask import Flask, Response, jsonify, request, session, send_from_directory
+from flask import Flask, Response, jsonify, redirect, request, session, send_from_directory
 from openai import OpenAI
 
 import guard
@@ -68,6 +68,18 @@ def same_origin():
     if request.method == "POST" and request.headers.get("Origin") not in (
             None, request.host_url.rstrip("/")):
         return jsonify(error="Cross-origin requests are not allowed."), 403
+
+
+@app.get("/favicon.svg")
+def favicon_route():
+    """Tab icon. On Vercel the file is normally served from public/; this route covers local runs and any gap."""
+    return send_from_directory(FRONTEND, "favicon.svg", mimetype="image/svg+xml", max_age=3600)
+
+
+@app.get("/favicon.ico")
+def favicon_ico_route():
+    """Browsers ask for /favicon.ico by habit; point them at the SVG."""
+    return redirect("/favicon.svg", code=302)
 
 
 @app.get("/cave_wine_list.pdf")
