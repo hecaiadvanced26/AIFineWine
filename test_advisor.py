@@ -105,7 +105,7 @@ class AdvisorTests(DbCase):
                 self.assertLess(alt['price_eur'], result['chosen']['price_eur'])
                 self.assertEqual(alt['wine_type'], result['chosen']['wine_type'])
                 self.assertGreater(alt['stock'], 0)
-                self.assertTrue(alt['shared_aromas'])
+                self.assertTrue(alt['shared_aromas'] or alt['shared_grapes'])
                 self.assertIsNone(alt['fit_score'])
                 self.assertAlmostEqual(alt['price_difference_eur'],
                                        result['chosen']['price_eur'] - alt['price_eur'], places=2)
@@ -146,7 +146,7 @@ class WineImageTests(DbCase):
             missing_vintage = db.execute('SELECT wine_id FROM wines WHERE vintage IS NULL LIMIT 1').fetchone()[0]
         finally:
             db.close()
-        self.assertEqual(len(ids), 200)
+        self.assertEqual(len(ids), 250)
         for wine_id in ids:
             response = self.client.get(f'/api/wine-image/{wine_id}.svg')
             self.assertEqual(response.status_code, 200)

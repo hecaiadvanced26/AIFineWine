@@ -1,0 +1,802 @@
+{
+ "W-001": {
+  "name": "Alder Bench Cellars",
+  "vintage": 2022,
+  "rating": 3.5,
+  "aromas": [
+   "butter",
+   "toast",
+   "lemon"
+  ],
+  "note": "A big, buttery Napa Chardonnay that coats the glass: toast and butter first, then a squeeze of lemon. Impressive, but at this price I wanted more freshness. Better with roast chicken than on its own."
+ },
+ "W-004": {
+  "name": "Alder Ranch Wines Ridge Selection",
+  "vintage": 2021,
+  "rating": 4.0,
+  "aromas": [
+   "pear",
+   "vanilla",
+   "oak"
+  ],
+  "note": "Lean and tidy: pear, a little vanilla from the oak, then a clean finish. I poured it with prawns at a barbecue and the bottle was gone before the grill was hot."
+ },
+ "W-005": {
+  "name": "Azienda Agricola Camposcuro",
+  "vintage": 2020,
+  "rating": 3.5,
+  "aromas": [
+   "cherry",
+   "almond"
+  ],
+  "note": "Cherry jam and almond skin, with a slightly raisiny sweetness in the middle. A cosy winter wine; I had it with a very average lasagne and it made the lasagne better."
+ },
+ "W-007": {
+  "name": "Azienda Agricola Poggiofiorito Campo Grande",
+  "vintage": 2019,
+  "rating": 3.5,
+  "aromas": [
+   "cherry",
+   "thyme",
+   "tomato"
+  ],
+  "note": "The 2019: dusty cherry, dried thyme and a tomato-leaf edge, tannins still a bit firm. Needs food, ideally pasta with a proper tomato sauce."
+ },
+ "W-008": {
+  "name": "Azienda Agricola Poggiofiorito Campo Grande",
+  "vintage": 2020,
+  "rating": 4.0,
+  "aromas": [
+   "cherry",
+   "plum"
+  ],
+  "note": "The 2020 is the friendlier sibling: ripe cherry, plum and softer tannins, and cheaper than the 2019. Surprisingly, I liked it more. Pizza night wine."
+ },
+ "W-010": {
+  "name": "Azienda Agricola Sassodorato",
+  "vintage": 2023,
+  "rating": 4.0,
+  "aromas": [
+   "smoke",
+   "lemon",
+   "flint"
+  ],
+  "note": "Smoky and salty, like licking a warm rock on a volcano island (I haven't, but I imagine this is it). A whiff of smoke, lemon peel and flint, bone dry with sharp acidity. Expensive, and only worth it with seafood."
+ },
+ "W-011": {
+  "name": "Azienda Agricola Villanuovo Colle Lungo",
+  "vintage": 2015,
+  "rating": 4.5,
+  "aromas": [
+   "chocolate",
+   "prune",
+   "cherry"
+  ],
+  "note": "Dark chocolate, prune and a bitter-cherry finish that goes on and on. Big but not clumsy. A wine for a long dinner and a slow conversation; I would not serve it with anything lighter than beef."
+ },
+ "W-013": {
+  "name": "Bluestem Ranch Wine Co.",
+  "vintage": 2023,
+  "rating": 3.5,
+  "aromas": [
+   "strawberry",
+   "rose"
+  ],
+  "note": "Pale salmon colour, strawberry and a hint of rose petal. Pretty, light and dangerously easy to drink on a balcony. A little pricey for a rosé."
+ },
+ "W-015": {
+  "name": "Bluestem Ridge Vineyards Single Vineyard",
+  "vintage": 2021,
+  "rating": 4.5,
+  "aromas": [
+   "cherry",
+   "clove",
+   "smoke"
+  ],
+  "note": "Silky and a bit mysterious: black cherry, a little clove, a wisp of smoke, then a long mineral finish. This is the Pinot I would pour for someone who says they don't like red wine."
+ },
+ "W-018": {
+  "name": "Bluestem Terrace Cellars Estate Selection",
+  "vintage": 2019,
+  "rating": 4.5,
+  "aromas": [
+   "blackcurrant",
+   "cedar",
+   "tobacco"
+  ],
+  "note": "Blackcurrant, cedar and a polished tobacco note; huge structure and tannins you could chew. Beautiful, but it is a €300 bottle and it knows it. Needs another five years."
+ },
+ "W-028": {
+  "name": "Bodega Valle Nueva Block 12",
+  "vintage": 2022,
+  "rating": 4.0,
+  "aromas": [
+   "plum",
+   "blackberry",
+   "vanilla"
+  ],
+  "note": "Plum and blackberry with a bit of vanilla, no complications, and under nine euros. My go-to weeknight red for steak or burgers."
+ },
+ "W-031": {
+  "name": "Bodega Vega Nueva",
+  "vintage": 2020,
+  "rating": 4.0,
+  "aromas": [
+   "raspberry",
+   "violet",
+   "pepper"
+  ],
+  "note": "Light-bodied and juicy: raspberry, a touch of violet and a snap of pepper at the end. Twenty minutes in the fridge and it was perfect with tapas."
+ },
+ "W-033": {
+  "name": "Bodegas Cumbre Nueva Tierra Alta",
+  "vintage": null,
+  "rating": 4.0,
+  "aromas": [
+   "apple",
+   "lemon",
+   "bread"
+  ],
+  "note": "Apple, lemon and fresh bread, bone dry, with bubbles that tickle. At under ten euros it is my new party default."
+ },
+ "W-036": {
+  "name": "Bodegas Valle Alta",
+  "vintage": 2018,
+  "rating": 4.5,
+  "aromas": [
+   "vanilla",
+   "cedar",
+   "cherry"
+  ],
+  "note": "Classic Rioja: vanilla and cedar over dried cherry, soft tannins after its years in barrel. Tastes the way my grandfather's cellar smelled."
+ },
+ "W-039": {
+  "name": "Cantina Collechiaro",
+  "vintage": null,
+  "rating": 3.5,
+  "aromas": [
+   "green apple",
+   "pear"
+  ],
+  "note": "Green apple, pear and a hint of sweetness, with soft, gentle bubbles. A lovely aperitif, though not for people who like their sparkling bone dry."
+ },
+ "W-042": {
+  "name": "Cantina Mondorato",
+  "vintage": null,
+  "rating": 4.5,
+  "aromas": [
+   "toast",
+   "peach"
+  ],
+  "note": "Toast and brioche, yellow peach and a creamy mousse. This is what I wish more Champagne tasted like at this price."
+ },
+ "W-046": {
+  "name": "Cantina Valsereno",
+  "vintage": 2021,
+  "rating": 3.5,
+  "aromas": [
+   "prune",
+   "blackberry",
+   "liquorice"
+  ],
+  "note": "Jammy! Prune, blackberry and a sweet liquorice finish. Big and warm, like a hug from a slightly overbearing uncle. Fine for a barbecue, too heavy for a hot evening."
+ },
+ "W-050": {
+  "name": "Cascina Fontebruno",
+  "vintage": 2024,
+  "rating": 3.5,
+  "aromas": [
+   "peach",
+   "orange blossom"
+  ],
+  "note": "Peach, orange blossom and grape juice with the tiniest fizz. Sweet and light; I had it with a fruit tart on a Sunday. Not a wine for serious people, and that is fine."
+ },
+ "W-052": {
+  "name": "Cascina Monscuro Bricco Rosso",
+  "vintage": 2019,
+  "rating": 4.5,
+  "aromas": [
+   "rose",
+   "tar",
+   "cherry"
+  ],
+  "note": "Rose petals, tar and cherry; the tannins grip hard, so decant it. Had it with mushroom risotto and it was one of those 'oh, now I get Nebbiolo' evenings."
+ },
+ "W-056": {
+  "name": "Château Belereau L'Ancienne",
+  "vintage": 2015,
+  "rating": 4.5,
+  "aromas": [
+   "dried apricot",
+   "orange peel"
+  ],
+  "note": "Dried apricot, orange peel and honey, with enough acidity to keep it from turning syrupy. Pour a small glass with blue cheese and then enjoy the silence."
+ },
+ "W-057": {
+  "name": "Château Beleval",
+  "vintage": 2019,
+  "rating": 4.0,
+  "aromas": [
+   "pepper",
+   "thyme",
+   "blackberry"
+  ],
+  "note": "Black pepper, thyme and blackberry with grippy, leathery tannins. Big Mourvèdre energy; I would give it three more years and a lamb shoulder."
+ },
+ "W-059": {
+  "name": "Château Fontancourt",
+  "vintage": 2018,
+  "rating": 4.0,
+  "aromas": [
+   "cedar",
+   "blackcurrant"
+  ],
+  "note": "Cedar and blackcurrant with a pencil-shaving dryness; austere right now, the kind of wine that makes you sit up straight. Good, not lovable."
+ },
+ "W-062": {
+  "name": "Château Lauvereau",
+  "vintage": 2019,
+  "rating": 3.5,
+  "aromas": [
+   "plum",
+   "chocolate"
+  ],
+  "note": "Plush plum and chocolate, rounder than the Médoc wines I tried that week. Low on acidity, easy to love and a bit forgettable."
+ },
+ "W-063": {
+  "name": "Château Lauveval Terroir d'Argile",
+  "vintage": 2020,
+  "rating": 4.5,
+  "aromas": [
+   "cut grass",
+   "grapefruit",
+   "honeysuckle"
+  ],
+  "note": "Cut grass and grapefruit from the Sauvignon, honeysuckle and a waxy note from the Sémillon. Sophisticated, a little oily in texture, worth the money."
+ },
+ "W-066": {
+  "name": "Château Montancourt Les Silex",
+  "vintage": 2017,
+  "rating": 4.5,
+  "aromas": [
+   "blackcurrant",
+   "violet",
+   "cedar"
+  ],
+  "note": "Blackcurrant, violet and a whisper of cedar; full-bodied but graceful. I would serve it blind against a Napa Cabernet and bet it wins."
+ },
+ "W-072": {
+  "name": "Château Rouvaval",
+  "vintage": 2019,
+  "rating": 4.0,
+  "aromas": [
+   "oak",
+   "tar",
+   "smoke"
+  ],
+  "note": "Chewy tannins and the oak is still loud: tar and smoke on top of dark fruit. Too young. I am keeping the second bottle until 2030 and will report back."
+ },
+ "W-074": {
+  "name": "Château Tarvault Les Silex",
+  "vintage": 2020,
+  "rating": 4.0,
+  "aromas": [
+   "pear",
+   "almond"
+  ],
+  "note": "Pear, almond and a slightly oily, off-dry texture. Rich but soft; I liked it with a creamy chicken dish."
+ },
+ "W-075": {
+  "name": "Château Valmardent Cuvée Prestige",
+  "vintage": 2025,
+  "rating": 4.0,
+  "aromas": [
+   "strawberry",
+   "thyme"
+  ],
+  "note": "Very pale pink, strawberry and a little thyme, crisp and dry. The bottle looks expensive; the wine is just very good."
+ },
+ "W-078": {
+  "name": "Château Vaucancourt Les Grands Champs",
+  "vintage": 2018,
+  "rating": 4.0,
+  "aromas": [
+   "blackcurrant",
+   "cedar"
+  ],
+  "note": "The 2018 is firm but friendly: blackcurrant and a pinch of cedar for under twenty euros. A very honest Bordeaux."
+ },
+ "W-082": {
+  "name": "Château Vermaval Clos du Moulin",
+  "vintage": 2024,
+  "rating": 4.0,
+  "aromas": [
+   "gooseberry",
+   "cut grass"
+  ],
+  "note": "Gooseberry, cut grass and wet stones, with razor-sharp acidity. Goat cheese, a green salad, done."
+ },
+ "W-087": {
+  "name": "Domaine Aubaie-Pernellac Terroir d'Argile",
+  "vintage": 2022,
+  "rating": 4.5,
+  "aromas": [
+   "lemon",
+   "butter"
+  ],
+  "note": "The 2022 has more weight than the 2023: lemon, a bit of butter and an oyster-shell salinity. Very Chablis. A bit pricey, but better balanced."
+ },
+ "W-088": {
+  "name": "Domaine Aubaie-Pernellac Terroir d'Argile",
+  "vintage": 2023,
+  "rating": 4.0,
+  "aromas": [
+   "green apple",
+   "lemon"
+  ],
+  "note": "The 2023 is leaner and sharper: green apple, lemon and a clean mineral edge. Cheaper, and I enjoyed it a little less on its own, but it is excellent with oysters."
+ },
+ "W-089": {
+  "name": "Domaine Boscobello Estate Selection",
+  "vintage": 2019,
+  "rating": 4.0,
+  "aromas": [
+   "cherry",
+   "tomato",
+   "tobacco"
+  ],
+  "note": "Sour cherry, dried tomato and tobacco, with tannins like a firm handshake. Greek and very unusual; I would pour it with lamb and say nothing until someone asks what it is."
+ },
+ "W-090": {
+  "name": "Domaine Brunancourt-Querault",
+  "vintage": 2021,
+  "rating": 4.0,
+  "aromas": [
+   "apple",
+   "pear",
+   "toast",
+   "oak"
+  ],
+  "note": "Apple, pear and toast from a little oak, with more weight than a plain Chablis. Beautiful, but at over a hundred euros I would drink the village wine and buy a second bottle."
+ },
+ "W-092": {
+  "name": "Domaine d'Ormeval Terroir d'Argile",
+  "vintage": 2022,
+  "rating": 3.5,
+  "aromas": [
+   "pepper",
+   "smoke",
+   "thyme"
+  ],
+  "note": "Pepper, smoke and thyme from the hills (so the label says; I mostly taste barbecue). For six and a half euros it is hard to beat, rustic and chewy."
+ },
+ "W-094": {
+  "name": "Domaine de Brunouze",
+  "vintage": 2021,
+  "rating": 4.0,
+  "aromas": [
+   "apple",
+   "honeysuckle"
+  ],
+  "note": "Apple and honeysuckle with a firm line of acidity, and none of the sugar I was expecting. Dry Vouvray is underrated; this one was beautiful with roast chicken."
+ },
+ "W-095": {
+  "name": "Domaine de Clerouvre",
+  "vintage": 2023,
+  "rating": 4.0,
+  "aromas": [
+   "lime",
+   "green apple",
+   "flint"
+  ],
+  "note": "Lime, green apple and a touch of flint, bone dry and very focused. Sushi and this: yes."
+ },
+ "W-104": {
+  "name": "Domaine de Malvereau Cuvée Charlotte",
+  "vintage": 2020,
+  "rating": 3.0,
+  "aromas": [
+   "bell pepper",
+   "cedar",
+   "tobacco"
+  ],
+  "note": "A slightly green bell pepper note on top, then cedar and tobacco; I wanted more fruit for €78. Elegant but dry-edged. I am leaving this one to my dad."
+ },
+ "W-107": {
+  "name": "Domaine de Rochouvre L'Ancienne",
+  "vintage": 2024,
+  "rating": 3.5,
+  "aromas": [
+   "cherry",
+   "raspberry"
+  ],
+  "note": "Pretty cherry and raspberry with mouthwatering acidity, a rosé that behaves like a white. Charming, but €53 for a rosé needs a justification I could not find."
+ },
+ "W-116": {
+  "name": "Domaine de Vermouvre Cuvée Tradition",
+  "vintage": null,
+  "rating": 4.0,
+  "aromas": [
+   "apple",
+   "almond"
+  ],
+  "note": "Apple, almond and a creamy mousse, dry but never harsh. Drank it with a cheese tart and felt like I was in Colmar."
+ },
+ "W-117": {
+  "name": "Domaine des Aubépines",
+  "vintage": 2022,
+  "rating": 4.0,
+  "aromas": [
+   "pear",
+   "hazelnut",
+   "orange blossom"
+  ],
+  "note": "Pear, hazelnut and orange blossom, round and a little waxy; a rare white you want slightly warmer than fridge temperature. Too expensive for a Tuesday."
+ },
+ "W-119": {
+  "name": "Domaine des Coteaux Dorés",
+  "vintage": 2019,
+  "rating": 4.5,
+  "aromas": [
+   "hazelnut",
+   "apple"
+  ],
+  "note": "Hazelnut and apple with a savoury, sherry-like note that I am told is a Jura thing. Not for everyone: I loved it and my partner did not. Try it with a hard cheese."
+ },
+ "W-121": {
+  "name": "Domaine des Genêts L'Ancienne",
+  "vintage": 2020,
+  "rating": 4.0,
+  "aromas": [
+   "almond",
+   "apple",
+   "honeysuckle"
+  ],
+  "note": "Almond, apple and honeysuckle, dry and dense with a bitter edge. It needed a second glass to make sense. Roast pork helped."
+ },
+ "W-122": {
+  "name": "Domaine des Grands Champs Les Silex",
+  "vintage": 2019,
+  "rating": 4.5,
+  "aromas": [
+   "raspberry",
+   "liquorice",
+   "pepper"
+  ],
+  "note": "The 2019: raspberry, liquorice and a warm finish with black pepper; powerful but smooth. A solid choice for the Sunday lamb."
+ },
+ "W-123": {
+  "name": "Domaine des Grands Champs Les Silex",
+  "vintage": 2020,
+  "rating": 4.0,
+  "aromas": [
+   "plum",
+   "smoke",
+   "liquorice"
+  ],
+  "note": "The 2020 has the same house style but is darker: plum, smoke and a thread of liquorice. More concentrated and tighter, and I preferred the 2019, which was easier to drink now."
+ },
+ "W-126": {
+  "name": "Domaine des Terrasses La Source",
+  "vintage": 2021,
+  "rating": 4.0,
+  "aromas": [
+   "banana",
+   "strawberry"
+  ],
+  "note": "Banana-and-strawberry juice in the best sense: very fresh, very soft, almost no tannin. Serve it slightly cool with charcuterie."
+ },
+ "W-127": {
+  "name": "Domaine Dorvault-Brunaval Les Terrasses",
+  "vintage": 2022,
+  "rating": 3.5,
+  "aromas": [
+   "peach",
+   "butter",
+   "toast"
+  ],
+  "note": "Peach, a little butter and toast; ripe, round and polished. Safe but good, especially with a creamy pasta."
+ },
+ "W-129": {
+  "name": "Domaine Estraval-Valmardent Cuvée Prestige",
+  "vintage": 2021,
+  "rating": 5.0,
+  "aromas": [
+   "raspberry",
+   "clove",
+   "violet"
+  ],
+  "note": "Raspberry, clove and violet, with the kind of silky texture you remember a week later. Expensive, and I would buy it again. The dinner-party wine that makes people go quiet."
+ },
+ "W-131": {
+  "name": "Domaine Fontellac-Vaucelle",
+  "vintage": 2021,
+  "rating": 4.0,
+  "aromas": [
+   "cherry",
+   "clove"
+  ],
+  "note": "Cherry and clove with a savoury, forest-floor note; tighter and more tannic than I expected from Pinot. Needs time. I opened it too early and I am still a bit annoyed with myself."
+ },
+ "W-136": {
+  "name": "Domaine Malvelle-Lancancourt Clos du Moulin",
+  "vintage": 2024,
+  "rating": 3.5,
+  "aromas": [
+   "apple",
+   "lemon",
+   "vanilla"
+  ],
+  "note": "Apple, lemon and a little vanilla; round, easy and uncomplicated. A good everyday Chardonnay for a roast chicken."
+ },
+ "W-139": {
+  "name": "Domaine Querereau-Valmeval Les Hauts Plans",
+  "vintage": 2021,
+  "rating": 3.5,
+  "aromas": [
+   "cherry",
+   "raspberry",
+   "smoke"
+  ],
+  "note": "Cherry and raspberry with a bit of smoke; more powerful than the 1er Crus I tried. Honest and structured, but 89 euros is a lot for a village wine."
+ },
+ "W-155": {
+  "name": "Fattoria Boscochiaro Vigna del Nonno",
+  "vintage": null,
+  "rating": 4.0,
+  "aromas": [
+   "apple",
+   "pear",
+   "toast"
+  ],
+  "note": "Apple, pear and toast, very dry and lean. A serious sparkling wine that needs shellfish; on its own a little austere."
+ },
+ "W-157": {
+  "name": "Fattoria Poggiobello Vigna Alta",
+  "vintage": 2024,
+  "rating": 3.5,
+  "aromas": [
+   "cherry",
+   "almond"
+  ],
+  "note": "Almost transparent pink, cherry and a whiff of almond; light, soft and summery. Great value, and I finished it before the pasta arrived."
+ },
+ "W-159": {
+  "name": "Finca Cumbre Alta Finca Vieja",
+  "vintage": 2021,
+  "rating": 3.5,
+  "aromas": [
+   "raspberry",
+   "strawberry",
+   "vanilla",
+   "pepper"
+  ],
+  "note": "Raspberry, strawberry and vanilla with a spicy pepper edge; fruity, friendly and a little simple. Tapas wine."
+ },
+ "W-169": {
+  "name": "Foxglove Ranch Vineyards",
+  "vintage": 2021,
+  "rating": 4.0,
+  "aromas": [
+   "cherry",
+   "raspberry",
+   "clove"
+  ],
+  "note": "Cherry, raspberry and clove; a little tannic for a Pinot but pleasant. Great with salmon or duck."
+ },
+ "W-172": {
+  "name": "Granite Run Vineyards Old Vine",
+  "vintage": 2021,
+  "rating": 3.0,
+  "aromas": [
+   "bell pepper",
+   "cedar",
+   "tobacco"
+  ],
+  "note": "Bell pepper and cedar over tobacco, which I did not expect from California at this price; very firm tannins. Interesting, not generous."
+ },
+ "W-177": {
+  "name": "Larkspur Fork Estate Ridge Selection",
+  "vintage": null,
+  "rating": 4.0,
+  "aromas": [
+   "peach",
+   "raspberry"
+  ],
+  "note": "Peach and a little raspberry, clean acidity, tiny bubbles. English fizz is no joke; I would serve it before a Champagne and nobody would guess."
+ },
+ "W-178": {
+  "name": "Larkspur Ridge Estate Single Vineyard",
+  "vintage": 2021,
+  "rating": 3.5,
+  "aromas": [
+   "plum",
+   "blackberry",
+   "smoke"
+  ],
+  "note": "Plum, blackberry and smoke, big tannins, bold. Barbecue wine, or wine for people who like their wine loud."
+ },
+ "W-181": {
+  "name": "Maison Dorvignac",
+  "vintage": 2017,
+  "rating": 4.5,
+  "aromas": [
+   "blackberry",
+   "pepper",
+   "violet"
+  ],
+  "note": "Blackberry, black pepper and violet. Powerful, tight and extremely young; after decanting it opens into something almost floral. Worth waiting for."
+ },
+ "W-183": {
+  "name": "Maison Estraval Terroir d'Argile",
+  "vintage": 2021,
+  "rating": 4.0,
+  "aromas": [
+   "cherry",
+   "raspberry",
+   "violet"
+  ],
+  "note": "Cherry, raspberry and a lick of violet; a bit more structure than the other Morgon I tried. Fresh and lovely with roast chicken."
+ },
+ "W-185": {
+  "name": "Maison Jourdeval Blanc de Blancs",
+  "vintage": null,
+  "rating": 4.0,
+  "aromas": [
+   "apple",
+   "butter",
+   "toast"
+  ],
+  "note": "Apple, butter and toast, with a very fine mousse; elegant, taut and long. Great with oysters, but expensive for a non-vintage."
+ },
+ "W-188": {
+  "name": "Maison Lauvonne Blanc de Blancs",
+  "vintage": null,
+  "rating": 4.5,
+  "aromas": [
+   "peach",
+   "pear",
+   "butter"
+  ],
+  "note": "Peach, pear and butter, rounder and softer than the Jourdeval. Less tension but more fun, and twenty euros cheaper."
+ },
+ "W-194": {
+  "name": "Maison Tarvouvre Cuvée Tradition",
+  "vintage": null,
+  "rating": 3.5,
+  "aromas": [
+   "apple",
+   "raspberry"
+  ],
+  "note": "Apple, raspberry and a chalky dryness; very crisp, rather severe. Good, but €98 for a non-vintage that wants food is a tough sell."
+ },
+ "W-196": {
+  "name": "Maison Vermereau Cuvée Tradition",
+  "vintage": 2014,
+  "rating": 4.5,
+  "aromas": [
+   "pear",
+   "peach",
+   "toast"
+  ],
+  "note": "Pear, peach and toast with a creamy, almost nutty depth; the 2014 shows what bottle age does for Champagne. A birthday wine."
+ },
+ "W-198": {
+  "name": "Meadow Bench Vineyard Hillside Block",
+  "vintage": 2021,
+  "rating": 4.0,
+  "aromas": [
+   "blackberry",
+   "pepper",
+   "liquorice"
+  ],
+  "note": "Blackberry, pepper and liquorice; thick, warm and generous, and the cheapest way to impress a steak lover."
+ },
+ "W-200": {
+  "name": "Poderi Boscodorato Colle Lungo",
+  "vintage": 2021,
+  "rating": 3.5,
+  "aromas": [
+   "plum",
+   "cherry",
+   "pepper"
+  ],
+  "note": "Plum and cherry with a rustic pepper snap. Pizza wine, nothing more, nothing less, for nine euros."
+ },
+ "W-204": {
+  "name": "Poderi Collescuro",
+  "vintage": 2019,
+  "rating": 4.0,
+  "aromas": [
+   "cedar",
+   "plum",
+   "pepper"
+  ],
+  "note": "Cedar, plum and pepper; polished, hugely expensive, and I could not tell it from a good Bordeaux blind. That is probably the point."
+ },
+ "W-207": {
+  "name": "Poderi Villanuovo",
+  "vintage": 2022,
+  "rating": 4.0,
+  "aromas": [
+   "lemon",
+   "almond",
+   "fennel"
+  ],
+  "note": "Lemon, almond and a hint of fennel; crisp and slightly bitter at the end in a pleasant way. My risotto wine, no questions."
+ },
+ "W-208": {
+  "name": "Quinta da Cabeço Sereno Lote 7",
+  "vintage": 2024,
+  "rating": 3.5,
+  "aromas": [
+   "lime",
+   "green apple"
+  ],
+  "note": "Lime, green apple and a faint spritz; super light and refreshing. Nice with sushi, forgettable on its own."
+ },
+ "W-220": {
+  "name": "Tenuta Monchiaro Campo Grande",
+  "vintage": 2018,
+  "rating": 4.5,
+  "aromas": [
+   "cherry",
+   "rose",
+   "tar"
+  ],
+  "note": "Cherry, rose and tar, with grippy tannins. A Barolo at 35 euros already sounds suspicious, but it works. Cook mushrooms with it."
+ },
+ "W-222": {
+  "name": "Tenuta Roccalungo",
+  "vintage": 2024,
+  "rating": 3.5,
+  "aromas": [
+   "lemon",
+   "green apple",
+   "almond"
+  ],
+  "note": "Lemon, green apple and an almond finish; clean, crisp, very easy. I would drink this with a risotto and not think twice."
+ },
+ "W-224": {
+  "name": "Tenuta Vallungo Vigna Alta",
+  "vintage": 2023,
+  "rating": 4.0,
+  "aromas": [
+   "grapefruit",
+   "lemon",
+   "fennel"
+  ],
+  "note": "Grapefruit, lemon and fennel with a salty note, as if bottled at the beach. Grilled fish, obviously."
+ },
+ "W-240": {
+  "name": "Weingut Hanghof",
+  "vintage": 2021,
+  "rating": 4.5,
+  "aromas": [
+   "peach",
+   "green apple"
+  ],
+  "note": "Peach, green apple and a gentle sweetness in a very light body. Wonderful with spicy food; the acidity cuts right through. A summer wine, even in winter."
+ },
+ "W-243": {
+  "name": "Weingut Moselhalde Steillage",
+  "vintage": 2022,
+  "rating": 4.0,
+  "aromas": [
+   "lime",
+   "lemon",
+   "flint"
+  ],
+  "note": "Lime and lemon with a flint edge and slightly sweet fruit; more intense than the Hanghof but also pricier. Excellent with curry."
+ },
+ "W-249": {
+  "name": "Weingut Sonnental Terrassen",
+  "vintage": 2022,
+  "rating": 4.0,
+  "aromas": [
+   "grapefruit",
+   "pepper"
+  ],
+  "note": "Grapefruit and white pepper, and the pepper is the signature. Nice with vegetables and pork, and good value."
+ }
+}

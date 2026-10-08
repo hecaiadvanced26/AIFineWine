@@ -109,7 +109,7 @@ export default function App() {
         <p>Tell us your taste, preferred origin or budget. We’ll find a match in our caves catalog.</p>
         <ul><li>Expert ratings</li><li>Live availability checks</li><li>1-click purchase</li><li>Find better alternatives</li></ul>
       </div>
-      <p className="demo-note">COURSE DEMO BY GROUP 3<br />Real wines · Illustrative shop data<br />Mariia, Rayen, Jan, Selin</p>
+      <p className="demo-note">COURSE DEMO BY GROUP 3<br />Fictional wines · Real regions &amp; grapes<br />Mariia, Rayen, Jan, Selin</p>
     </aside>
     <main className="chat-shell">
       <header className="topbar"><div><span className="eyebrow">LOGO HERE</span>
@@ -154,7 +154,7 @@ export default function App() {
             } }} />
           <button className="send" aria-label="Send message" disabled={busy || !input.trim()}>↑</button>
         </form>
-        <p className="composer-note">Wines & ratings from Vivino. Bottle pictures are illustrations. Demo prices & inventory; no payments taken.</p>
+        <p className="composer-note">Fictional demo catalogue: producers, prices, ratings and tasting notes are invented; regions and grapes are real. Bottle pictures are illustrations. No payments taken.</p>
       </div>
     </main>
   </div>;

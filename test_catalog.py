@@ -11,7 +11,15 @@ import orders
 import refresh_demo_catalog
 from catalog import get_wine_details, run_query
 
-WINE_ID = 'W-015'
+WINE_ID = 'W-010'  # stock 2 in the fictional catalogue
+
+
+_CATALOG = json.loads((database.SOURCE_DATA_DIR / 'catalog.json').read_text(encoding='utf-8'))['wines']
+CATALOG_NAMES = {w['wine_id']: w['name'] for w in _CATALOG}
+CATALOG_PRICES = {w['wine_id']: w['price_cents'] for w in _CATALOG}
+CATALOG_VINTAGES = {w['wine_id']: w['vintage'] for w in _CATALOG}
+UNNOTED_ID = next(w['wine_id'] for w in _CATALOG if w['stock'] > 0
+                  and not any(f['provenance'] == 'stated' for f in w['flavours']))
 
 
 class CatalogTests(unittest.TestCase):
@@ -31,12 +39,12 @@ class CatalogTests(unittest.TestCase):
         database.initialize()
         db = database.connect()
         self.addCleanup(db.close)
-        self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 200)
-        self.assertEqual(db.execute('SELECT COUNT(*) FROM flavours').fetchone()[0], 483)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 250)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM flavours').fetchone()[0], 1028)
         self.assertEqual(db.execute('SELECT COUNT(*) FROM flavour_vocabulary').fetchone()[0], 88)
         counts = {row[0]: row[1] for row in db.execute(
             'SELECT provenance,COUNT(*) FROM flavours GROUP BY provenance')}
-        self.assertEqual(counts, {'guess': 350, 'stated': 133})
+        self.assertEqual(counts, {'guess': 828, 'stated': 200})
         with db:
             db.execute('UPDATE wines SET stock=1 WHERE wine_id=?', (WINE_ID,))
         database.initialize()
@@ -57,7 +65,7 @@ class CatalogTests(unittest.TestCase):
             self.assertEqual(old.execute('SELECT wine_id FROM wines').fetchone()[0], 'DEMO-001')
         db = database.connect()
         self.addCleanup(db.close)
-        self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 200)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 250)
         self.assertEqual(json.loads(db.execute('SELECT payload FROM orders').fetchone()[0])['wine_id'], 'DEMO-001')
 
     def test_refresh_preserves_existing_stock(self):
@@ -69,7 +77,7 @@ class CatalogTests(unittest.TestCase):
         refresh_demo_catalog.refresh_catalog()
         row = db.execute('SELECT name,stock FROM wines WHERE wine_id=?', (WINE_ID,)).fetchone()
         self.assertEqual(row['stock'], 1)
-        self.assertEqual(row['name'], 'Barceliño Tinto')
+        self.assertEqual(row['name'], CATALOG_NAMES[WINE_ID])
 
     def test_stated_flavour_search_excludes_style_guesses(self):
         database.initialize()
@@ -77,18 +85,17 @@ class CatalogTests(unittest.TestCase):
             (SELECT 1 FROM flavours f WHERE f.wine_id=w.wine_id
              AND f.tag='blackberry' AND f.provenance='stated') ORDER BY wine_id LIMIT 5""")
         self.assertEqual(result['status'], 'ok')
-        self.assertIn({'wine_id': 'W-004'}, result['rows'])
-        details = get_wine_details('W-001')
+        self.assertIn({'wine_id': 'W-057'}, result['rows'])
+        details = get_wine_details(UNNOTED_ID)
         self.assertTrue(details['flavours'])
         self.assertTrue(all(flavour['provenance'] == 'guess' for flavour in details['flavours']))
-        self.assertNotIn('sweetness', details['attributes'])
         self.assertEqual(details['inventory_synthetic'], 1)
 
     def test_order_price_stock_and_duplicate_confirmation(self):
         database.initialize()
         draft = orders.prepare_order(WINE_ID, 2)
-        self.assertEqual(draft['total_cents'], 2300)
-        self.assertEqual(draft['vintage'], 2019)
+        self.assertEqual(draft['total_cents'], 2 * CATALOG_PRICES[WINE_ID])
+        self.assertEqual(draft['vintage'], CATALOG_VINTAGES[WINE_ID])
         first = orders.submit_order(draft)
         self.assertNotIn('error', first)
         self.assertEqual(orders.submit_order(draft)['order_id'], first['order_id'])
@@ -105,8 +112,8 @@ class CatalogTests(unittest.TestCase):
                 refresh_demo_catalog.refresh_catalog()
         db = database.connect()
         self.addCleanup(db.close)
-        self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 200)
-        self.assertEqual(db.execute('SELECT COUNT(*) FROM flavours').fetchone()[0], 483)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 250)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM flavours').fetchone()[0], 1028)
         self.assertEqual(db.execute('SELECT COUNT(*) FROM flavour_vocabulary').fetchone()[0], 88)
 
     def test_changed_price_requires_new_draft(self):
@@ -123,14 +130,13 @@ class CatalogTests(unittest.TestCase):
 
 
 class ShortIdTests(unittest.TestCase):
-    def test_ids_are_short_unique_and_keep_source_id(self):
+    def test_ids_are_short_and_unique(self):
         import re
         snapshot = json.loads((database.SOURCE_DATA_DIR / 'catalog.json').read_text(encoding='utf-8'))
         ids = [w['wine_id'] for w in snapshot['wines']]
-        self.assertEqual(len(ids), 200)
-        self.assertEqual(len(set(ids)), 200)
+        self.assertEqual(len(ids), 250)
+        self.assertEqual(len(set(ids)), 250)
         self.assertTrue(all(re.fullmatch(r'W-\d{3}', i) for i in ids))
-        self.assertTrue(all(w['attributes'].get('source_id') for w in snapshot['wines']))
 
 
 if __name__ == '__main__':

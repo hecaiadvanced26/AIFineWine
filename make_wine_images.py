@@ -8,6 +8,7 @@ Output: <out_dir>/<wine_id>.svg plus <out_dir>/placeholder.svg
 No dependencies. Illustrations only, not real product photos.
 """
 import json
+import re
 import sys
 from html import escape
 from pathlib import Path
@@ -36,13 +37,19 @@ def style_of(wine_type):
 
 
 def wrap(text, width=12, max_lines=4):
-    words, lines, cur = (text or "").split(), [], ""
-    for w in words:
-        if cur and len(cur) + 1 + len(w) > width:
+    """Word wrap; long hyphenated names may also break after the hyphen."""
+    tokens = []  # (text, glued_to_previous)
+    for word in (text or "").split():
+        parts = re.findall(r"[^-]+-?|-", word)
+        tokens += [(part, i > 0) for i, part in enumerate(parts)]
+    lines, cur = [], ""
+    for part, glued in tokens:
+        joiner = "" if glued else " "
+        if cur and len(cur) + len(joiner) + len(part) > width:
             lines.append(cur)
-            cur = w
+            cur = part
         else:
-            cur = f"{cur} {w}".strip()
+            cur = f"{cur}{joiner}{part}" if cur else part
     if cur:
         lines.append(cur)
     if len(lines) > max_lines:
@@ -60,7 +67,11 @@ def bottle_svg(name, winery, vintage, wine_type):
         + (' textLength="64" lengthAdjust="spacingAndGlyphs"' if len(l) * 5.6 > 64 else "")
         + f'>{escape(l)}</tspan>'
         for i, l in enumerate(name_lines))
-    sub = escape(f"{winery or ''}".strip()[:16])
+    producer = (winery or "").strip()
+    if not producer or producer.lower() in (name or "").lower():
+        sub = ""  # the producer is already the label title
+    else:
+        sub = escape(producer if len(producer) <= 22 else producer[:21].rsplit(" ", 1)[0] + "\u2026")
     year = escape(str(vintage)) if vintage else ""  # unknown or non-vintage: never claim "NV"
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" role="img" aria-label="Bottle illustration: {escape(name)}">
 <defs>

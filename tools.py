@@ -2,8 +2,8 @@
 import json
 import sqlite3
 
-from advisor import (FAMILIES, TYPES, find_cheaper_alternatives, offer_choices,
-                     recommend_wines)
+from advisor import (BODY, FAMILIES, LEVEL, SWEETNESS, TYPES, find_cheaper_alternatives,
+                     offer_choices, recommend_wines)
 from catalog import run_query
 from orders import prepare_order
 from prompts import ATTRIBUTE_DESCRIPTIONS, DATABASE_SCHEMA
@@ -27,9 +27,11 @@ TOOLS = [
 ]
 TOOLS += [
     tool("recommend_wines",
-         "Rank in-stock wines for a customer profile. Colour and budget are strict filters; aromas "
-         "and country only rank. Returns at most 3 wines with the wishes they meet. Use this for "
-         "'help me choose' requests instead of writing SQL.",
+         "Rank in-stock wines for a customer profile. Colour and budget are strict filters; everything "
+         "else (aromas, sweetness, body, acidity, tannin, fruitiness, grapes, foods, region, country) only "
+         "ranks. Returns at most 3 wines with the wishes they meet. Use this for 'help me choose' and "
+         "food-pairing requests instead of writing SQL. Pass null or [] for anything the customer did "
+         "not ask for.",
          {"wine_type": {"type": "string", "enum": list(TYPES)},
           "budget_min_eur": {"type": ["number", "null"]},
           "budget_max_eur": {"type": ["number", "null"]},
@@ -38,7 +40,21 @@ TOOLS += [
                      "description": "Specific aroma tags from the catalog list; usually empty."},
           "country": {"type": ["string", "null"]},
           "include_style_guesses": {"type": "boolean",
-                                    "description": "False unless the customer agreed to guessed aromas."}}),
+                                    "description": "False unless the customer agreed to guessed aromas."},
+          "sweetness": {"type": ["string", "null"], "enum": list(SWEETNESS) + [None]},
+          "body": {"type": ["string", "null"], "enum": list(BODY) + [None],
+                   "description": "light / medium / full (heavy = full)."},
+          "acidity": {"type": ["string", "null"], "enum": list(LEVEL) + [None],
+                      "description": "'sour', 'fresh' or 'crisp' = high."},
+          "tannin": {"type": ["string", "null"], "enum": list(LEVEL) + [None],
+                     "description": "Reds only; whites and rosés have no tannin value."},
+          "fruitiness": {"type": ["string", "null"], "enum": list(LEVEL) + [None]},
+          "grapes": {"type": "array", "items": {"type": "string"},
+                     "description": "Grape names such as Pinot Noir, Riesling, Syrah (Shiraz is accepted)."},
+          "foods": {"type": "array", "items": {"type": "string"},
+                    "description": "Food tags from the catalog list only, e.g. risotto, steak, oysters."},
+          "region": {"type": ["string", "null"],
+                     "description": "Region or appellation, e.g. Burgundy, Chablis, Rioja."}}),
     tool("find_cheaper_alternatives",
          "For one wine ID, find up to 2 cheaper in-stock wines of the same colour that share aroma tags.",
          {"wine_id": {"type": "string"}}),

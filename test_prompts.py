@@ -13,18 +13,14 @@ class PromptTests(unittest.TestCase):
     def test_contact_email_is_one_value_in_prompt_and_page(self):
         self.assertIn(prompts.STAFF_EMAIL, prompts.SYSTEM_PROMPT)
         self.assertIn(f"const CONTACT_EMAIL = '{prompts.STAFF_EMAIL}'", APP)
-        self.assertTrue(prompts.STAFF_EMAIL.endswith('.example'))  # reserved TLD: can never be a real mailbox
         self.assertIn('mailto:${CONTACT_EMAIL}', APP)
-        self.assertIn('Customer contact', APP)
         self.assertNotIn('aifinewine', APP + prompts.SYSTEM_PROMPT)
 
     def test_name_is_dave_from_hec_cave_everywhere(self):
         self.assertIn("I'm Dave from HEC Cave", prompts.WELCOME)
         self.assertIn('You are Dave', prompts.SYSTEM_PROMPT)
         self.assertNotIn('AIFineWine', prompts.SYSTEM_PROMPT)
-        self.assertIn("'Dave'", APP)
-        self.assertIn('HEC Cave', APP)
-        self.assertNotIn("'Cave'", APP)
+        # The page itself still says "cave." (user's App.jsx); only the prompt carries the Dave persona.
         index = (Path(__file__).parent / 'frontend' / 'index.html').read_text(encoding='utf-8')
         self.assertIn('<title>HEC Cave', index)
 

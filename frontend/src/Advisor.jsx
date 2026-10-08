@@ -5,7 +5,7 @@ const euros = new Intl.NumberFormat('en', { style: 'currency', currency: 'EUR' }
 const FAMILY = { 'Red-wine fruit': 'red fruit', 'White-wine fruit': 'citrus & orchard fruit',
   'Floral': 'flowers', 'Oak ageing': 'spice, vanilla & toast', 'Vegetal': 'herbs & green notes', 'Mineral': 'mineral notes' };
 const friendly = text => Object.entries(FAMILY).reduce((out, [key, value]) => out.replace(key, value),
-  text.replace('aroma family:', 'aroma:').replace('taster-stated', 'the taster wrote it')
+  text.replace('aroma family:', 'aroma:').replace('food:', 'pairs with:').replace('taster-stated', 'the taster wrote it')
     .replace('style guess', 'typical for the style, not tasted'));
 
 function Glass({ filled }) {
@@ -32,7 +32,8 @@ export function Stars({ value }) {
 
 function WineCard({ wine, onAsk, disabled, badge, plain }) {
   const [quantity, setQuantity] = useState(1);
-  const place = [wine.country, wine.region].filter(Boolean).join(' · ');
+  const place = [wine.region, wine.country].filter(Boolean).join(' · ');
+  const appellation = [wine.appellation, wine.classification].filter(Boolean).join(' ');
   return <article className="wine-card">
     {badge && <span className="wine-badge">{badge}</span>}
     <img className="wine-img" src={`/api/wine-image/${encodeURIComponent(wine.wine_id)}.svg`} loading="lazy"
@@ -40,9 +41,13 @@ function WineCard({ wine, onAsk, disabled, badge, plain }) {
     <h3>{wine.name}</h3>
     <div className="wine-meta">
       {wine.wine_type && <span>{wine.wine_type}</span>}
+      {appellation && <span>{appellation}</span>}
       {place && <span>{place}</span>}
       <span>{wine.vintage ? `Vintage ${wine.vintage}` : 'Vintage unknown'}</span>
     </div>
+    {wine.grapes?.length > 0 && <p className="wine-grapes"><strong>Grapes:</strong> {wine.grapes.join(', ')}</p>}
+    {wine.profile_labels?.length > 0 && <div className="wine-profile" aria-label="Style profile">
+      {wine.profile_labels.map(label => <span key={label}>{label}</span>)}</div>}
     {!plain && <FitGlasses score={wine.fit_score} />}
     <div className="wine-price">{euros.format(wine.price_eur)} <small>demo price · {wine.stock} in stock</small></div>
     {!plain && wine.wishes_total > 0 && <>
@@ -51,14 +56,16 @@ function WineCard({ wine, onAsk, disabled, badge, plain }) {
         {wine.matched.map(item => <li key={item} className="yes"><span aria-hidden="true">✓</span> {friendly(item)}</li>)}
         {wine.not_matched.map(item => <li key={item} className="no"><span aria-hidden="true">✕</span> Not met: {item}</li>)}
       </ul></>}
-    {wine.shared_aromas?.length > 0 && <p className="wine-aromas">
-      <strong>Shares with your choice:</strong> {wine.shared_aromas.join(', ')}</p>}
+    {(wine.shared_grapes?.length > 0 || wine.shared_aromas?.length > 0) && <p className="wine-aromas">
+      <strong>Shares with your choice:</strong> {[...(wine.shared_grapes || []), ...(wine.shared_aromas || [])].join(', ')}</p>}
+    {wine.food_pairings?.length > 0 && <p className="wine-pairs"><strong>Pairs with:</strong> {wine.food_pairings.join(', ')}</p>}
     {wine.aromas_stated.length > 0 && <p className="wine-aromas">
       <strong>The taster wrote:</strong> {wine.aromas_stated.join(', ')}</p>}
     {wine.aromas_style_guess.length > 0 && <p className="wine-aromas guess">
       <strong>Typical for this style (not tasted):</strong> {wine.aromas_style_guess.join(', ')}</p>}
+    {wine.taster_note && <blockquote className="wine-quote">“{wine.taster_note}”<cite>Our taster</cite></blockquote>}
     <p className="wine-ratings"><Stars value={wine.community_rating} />
-      <span>Taster: {wine.taster_rating != null ? `${wine.taster_rating}/5` : 'no rating'}</span></p>
+      <span>Taster: {wine.taster_rating != null ? `${wine.taster_rating}/5` : 'not tasted by us'}</span></p>
     {onAsk && <div className="wine-actions">
       {wine.stock > 1 && <Stepper value={quantity} max={wine.stock} disabled={disabled} onChange={setQuantity}
         label={`Bottles of ${wine.name}`} />}
@@ -78,6 +85,7 @@ export function Recommendations({ data, onAsk, disabled }) {
       {data.wines.map((wine, index) => <WineCard key={wine.wine_id} wine={wine} onAsk={onAsk} disabled={disabled}
         badge={index === 0 ? '#1 · Best fit' : `#${index + 1}`} />)}
     </div>
+    <p className="wine-note">Style profiles and pairings are demo profiles, typical for the grape and style, not tasted per bottle.</p>
   </section>;
 }
 
@@ -90,7 +98,7 @@ export function Comparison({ data, onAsk, disabled }) {
       {data.alternatives.map(wine => <WineCard key={wine.wine_id} wine={wine} plain onAsk={onAsk}
         disabled={disabled} badge={`${euros.format(wine.price_difference_eur)} less`} />)}
     </div>
-    <p className="wine-note">Similar means: same colour, lower price and shared aroma tags. It is not a tasting comparison.</p>
+    <p className="wine-note">Similar means: same colour, lower price and shared grapes or aroma tags. It is not a tasting comparison.</p>
   </section>;
 }
 

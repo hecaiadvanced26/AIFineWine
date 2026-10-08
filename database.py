@@ -13,6 +13,9 @@ CATALOG_COLUMNS = {
     "winery": "TEXT", "country": "TEXT", "region": "TEXT", "regional_style": "TEXT",
     "wine_type": "TEXT", "user_rating": "REAL", "community_avg_rating": "REAL",
     "user_review": "TEXT", "bottle_ml": "INTEGER", "inventory_synthetic": "INTEGER",
+    "appellation": "TEXT", "classification": "TEXT", "sweetness": "INTEGER", "body": "INTEGER",
+    "acidity": "INTEGER", "tannin": "INTEGER", "fruitiness": "INTEGER", "profile_source": "TEXT",
+    "search_text": "TEXT",
 }
 
 
@@ -31,6 +34,8 @@ def apply_catalog(db: sqlite3.Connection, snapshot: dict[str, Any]) -> None:
                        if column not in {"wine_id", "stock"})
     placeholders = ",".join("?" for _ in columns)
     db.execute("DELETE FROM flavours")
+    db.execute("DELETE FROM wine_grapes")
+    db.execute("DELETE FROM wine_pairings")
     db.execute("DELETE FROM flavour_vocabulary")
     db.executemany("INSERT INTO flavour_vocabulary VALUES (?,?,?,?)", [
         (entry["tag"], entry["french"], entry["family"], entry["group"])
@@ -42,6 +47,10 @@ def apply_catalog(db: sqlite3.Connection, snapshot: dict[str, Any]) -> None:
                    f"ON CONFLICT(wine_id) DO UPDATE SET {updates}", values)
         db.executemany("INSERT INTO flavours VALUES (?,?,?)", [
             (row["wine_id"], flavour["tag"], flavour["provenance"]) for flavour in row["flavours"]])
+        db.executemany("INSERT INTO wine_grapes VALUES (?,?,?)", [
+            (row["wine_id"], grape, position) for position, grape in enumerate(row["grapes"], 1)])
+        db.executemany("INSERT INTO wine_pairings VALUES (?,?)", [
+            (row["wine_id"], food) for food in row["pairings"]])
     db.execute(f"DELETE FROM wines WHERE wine_id NOT IN ({','.join('?' for _ in ids)})", ids)
     db.execute("INSERT OR REPLACE INTO catalog_metadata VALUES ('source_commit', ?)",
                (snapshot["source_commit"],))
@@ -83,6 +92,13 @@ def initialize():
                 tag TEXT NOT NULL REFERENCES flavour_vocabulary(tag),
                 provenance TEXT NOT NULL CHECK(provenance IN ('stated','guess')),
                 PRIMARY KEY (wine_id,tag,provenance))""")
+            db.execute("""CREATE TABLE IF NOT EXISTS wine_grapes (
+                wine_id TEXT NOT NULL REFERENCES wines(wine_id) ON DELETE CASCADE,
+                grape TEXT NOT NULL, position INTEGER NOT NULL, PRIMARY KEY (wine_id,grape))""")
+            db.execute("""CREATE TABLE IF NOT EXISTS wine_pairings (
+                wine_id TEXT NOT NULL REFERENCES wines(wine_id) ON DELETE CASCADE,
+                food TEXT NOT NULL, PRIMARY KEY (wine_id,food))""")
+            db.execute("CREATE INDEX IF NOT EXISTS ix_pairing_food ON wine_pairings(food,wine_id)")
             db.execute("CREATE INDEX IF NOT EXISTS ix_flavour_search ON flavours(tag,provenance,wine_id)")
             db.execute("CREATE TABLE IF NOT EXISTS catalog_metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL)")
             if db.execute("SELECT COUNT(*) FROM wines").fetchone()[0] == 0:

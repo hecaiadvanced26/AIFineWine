@@ -1,11 +1,10 @@
 # Wine retail assistant
 
-A small course prototype: React UI, Python/Flask, the OpenAI client and SQLite.
-The catalog now contains 200 wines imported from the teammate's
-[finewine repository](https://github.com/hecaiadvanced26/finewine), replacing the
-original four-wine demo. Flavour notes retain their stated/inferred provenance;
-taster and community ratings remain separate. Prices, stock and bottle sizes
-are simulated. Orders are exported locally and are not sent to a real shop.
+A small course prototype: React UI, Python/Flask, the OpenAI client (pointed at OpenRouter) and SQLite.
+The shop is **fictional**: HEC Cave, assistant Dave. The catalogue holds 250 invented wines.
+Countries, regions, appellations and grape varieties are meant to be real (see "Fictional catalogue" below);
+producers, cuvée names, vintages, prices, stock, ratings and the 75 tasting notes are invented.
+Orders are exported locally and are not sent to a real shop.
 
 Hosted demo: [advanced-ai-systems.vercel.app](https://advanced-ai-systems.vercel.app).
 Its chat and inventory storage are temporary; see the limitations below.
@@ -68,7 +67,8 @@ pending draft so a changed request cannot accidentally confirm the old order.
 | `catalog.py` | Execute model-written SELECT queries; look up order items |
 | `orders.py` | Order drafts, stock/price checks and duplicate prevention |
 | `database.py` | SQLite schema migration and imported catalog loading |
-| `import_finewine.py` | Reproducible snapshot export from teammate SQLite and vocabulary |
+| `make_hec_catalog.py`, `hec_catalog_data.py` | Deterministic generator and validator of the fictional 250-wine catalogue (`data/catalog.json`, `data/catalog_overview.csv`) |
+| `import_finewine.py` | LEGACY: snapshot export from the old teammate SQLite; not used for the current catalogue |
 | `refresh_demo_catalog.py` | Back up SQLite and replace catalog metadata, preserving historical orders |
 | `memory.py` | Last six complete turns and pending order state |
 
@@ -121,95 +121,40 @@ catalog tables; other tables in the same database, including local order history
 are readable. There is no database authorizer or per-customer row access policy.
 These are limits of this course prototype, not guarantees of production isolation.
 
-## Imported teammate catalog
+## Fictional catalogue (250 wines)
 
-Source: [hecaiadvanced26/finewine](https://github.com/hecaiadvanced26/finewine),
-commit `5df3f4d3262a38f189b85cb3696c6e30c2eafd22`. `data/catalog.json` is a
-reproducible snapshot of the source's `wine_shop.sqlite` and `flavour_vocabulary.json`:
-200 wines, 483 flavour records (133 stated, 350 inferred), and 88 vocabulary terms.
-The repository omits the original `wines.json`; import uses its supplied SQLite
-instead. Source code is not executed. Existing source IDs and unknown vintages
-are preserved. Country codes `de` and `fr` normalize to Germany and France;
-original values remain in the JSON attributes.
+Regenerate with `python make_hec_catalog.py` (seed 20261009, output is identical each run). It writes
+`data/catalog.json` and `data/catalog_overview.csv` (open the CSV to spot-check every wine).
+Reading the generator: `hec_catalog_data.py` holds the templates, `data/tasting_notes.json` the 75 notes.
 
-| Table | Imported fields and purpose |
-|---|---|
-| `wines` | Source ID, combined display name, producer, country, region, regional style, type, vintage, separate taster/community scores, review, and synthetic price/stock/bottle size |
-| `flavours` | Wine ID, flavour tag, and `stated` or `guess` provenance for each note |
-| `flavour_vocabulary` | 88 English/French terms with family and group labels for searches |
-| `catalog_metadata` | Imported source commit for traceability |
-| `orders` | Application-owned historical order payloads; teammate orders are not imported |
+- **Mix:** 120 red, 85 white, 28 sparkling, 17 rosé; many countries, regions, appellations and grapes.
+- **Real (intended):** country, region, appellation and the grape blend of each appellation/style. Source: the
+  two PDFs supplied by the team (a restaurant wine list, GuildSomm grape profiles) plus the author's general
+  wine knowledge. **Not independently verified**: have a wine-knowledgeable teammate scan the CSV.
+- **Invented:** producer names, cuvées, vintages, prices, stock (some wines are at 0), community ratings and
+  tasting notes. Producer names may coincide with real estates by accident.
+- **Same producer, three vintages:** 9 cuvées exist in three vintages with different price, rating and stock
+  (test whether the assistant separates them, e.g. "Which Domaine des Grands Champs Les Silex vintage is best?").
+- **Tasting notes:** exactly 75 wines have an invented personal note; its aroma words are the `stated`
+  flavour tags (200 stated tags in total). All other aromas are `guess` (typical for the style).
+- **Profile per wine:** sweetness, body, acidity, tannin (reds only), fruitiness on a 1-5 scale, and food
+  pairings (35 tags). These are *demo profiles typical for the grape and style, not measured per bottle*.
+  Ranges for 12 grapes follow the GuildSomm profiles; ranges for other grapes and all food pairings are the
+  author's estimates.
+- **Not recorded:** organic certification, alcohol level, occasion. The assistant must say so.
 
-The source keeps inventory in a separate table; our import folds it into `wines`
-to retain the existing order flow and converts euro prices to integer cents.
-The snapshot records the source URL, commit, and data caveats. It is not a live
-catalog feed: pulling the teammate's repository alone does not update this app.
-
-`wines` retains integer cents and stock for existing order code and adds explicit
-producer, origin, regional style, type, bottle size, taster rating, community rating
-and review columns. `flavours` stores each note with `stated` or `guess` provenance;
-`flavour_vocabulary` supplies English/French labels, families and groups.
-`prompts.py` describes these tables in both the system prompt and SQL tool.
-Flavour search defaults to stated notes. Style guesses require customer agreement
-and are explicitly labeled. Taster and community scores are separate imported
-ratings, not independently verified reviews. Prices, stock and bottle sizes are
-synthetic, seeded shop inventory, not real retail availability.
-
-Grapes, dryness/sweetness, body, organic certification and food pairings are absent.
-The assistant asks before ignoring these constraints; it must not infer them from
-names, regions or fruit notes. Fruit notes describe aroma, not sweetness.
-
-To import a later teammate revision:
-
-```bash
-git clone https://github.com/hecaiadvanced26/finewine.git /tmp/finewine
-.venv/bin/python import_finewine.py /tmp/finewine
-.venv/bin/python refresh_demo_catalog.py
-```
-
-Fresh databases seed from `data/catalog.json`. Existing databases need the refresh
-command. It saves a SQLite backup before schema migration, replaces the four old
-DEMO IDs with source IDs, updates metadata, and preserves remaining stock for
-retained IDs. Historical order payloads remain unchanged, including references to
-removed wines. Existing pending drafts for removed/changed items must be prepared
-again. Repeated startup does not refill inventory or overwrite catalog metadata.
-`data/demo_wines.json` is an unused legacy fixture.
-
-## Orders and memory
-
-`prepare_order` creates a single-item draft. `/confirm` exports that exact draft.
-Prices, vintage and stock are rechecked; changed data requires a new draft.
-Orders are saved in SQLite and `data/orders/<order_id>.json`. Repeating the same ID
-does not decrement stock twice. This is a local shop-system placeholder: no customer
-details, delivery, payment or real shop integration are included yet.
-
-Recent history keeps whole turns, including tool messages. Older turns are dropped;
-compression and FAQ retrieval remain optional future additions. Search preferences
-are optional: missing preferences mean no filter, and 'any'/'no limit' remove a
-constraint. A complete preference form or Pydantic model is not required. Stock and price
-always come from tools, not chat memory.
-
-There is no separate structured state for preferences, shortlist IDs, selected
-wine, or quantity. The model derives those from the last six complete user turns
-and their associated responses/tool results. `Memory` does retain that history
-and one pending draft, so the app is not completely stateless. A new chat message
-discards the pending draft; reset/reload clears conversation memory. There is no
-long-term customer profile or conversation recovery after a restart.
-
-Browser cookies carry a signed chat ID, not the conversation itself. Flask keeps
-the history and draft in a process-local dictionary, with a lock per conversation.
-That lock does not coordinate different Vercel instances. A stable
-`FLASK_SECRET_KEY` keeps cookies valid across instances but does not share their
-in-memory conversations.
+Tables: `wines` (incl. profile columns, `inventory_synthetic`), `wine_grapes`, `wine_pairings`, `flavours`
+(`stated`/`guess`), `flavour_vocabulary` (88 terms), `catalog_metadata`, `orders`.
+Fresh databases seed from `data/catalog.json` only when `wines` is empty. **An existing local database keeps the
+old wines: delete `data/wines.db` (or run `python refresh_demo_catalog.py`) after pulling this version.**
+On Vercel the database is rebuilt on a cold start.
 
 ## Prototype limitations
 
-- **Data coverage:** sweetness/dryness, body, grapes, pairings and certifications
-  are not recorded. A wine name or inferred flavour is not evidence for these
-  properties. NULL vintages remain "unknown or non-vintage".
-- **Data provenance:** imported reviews and scores are not independently
-  verified. Of 483 flavour records, 350 are style guesses. Vocabulary labels
-  categorize terms; a family named "Faults" does not prove a wine has a defect.
+- **Data coverage:** structure and pairings are typical-for-style estimates, not per-bottle measurements;
+  certifications, alcohol and occasion are not recorded. Only 3 wines are sweet and 10 off-dry.
+- **Data provenance:** everything commercial is invented. Of 1028 flavour records, 828 are style guesses and
+  200 come from the 75 invented notes. Real/invented accuracy of appellations and grapes is unverified.
 - **Model reliability:** prompt rules request grounding, stated-note matching
   and permission before relaxing constraints, but do not mechanically validate
   every SQL filter or sentence in the final reply. Model/tool errors remain possible.
@@ -267,11 +212,11 @@ and [Python SQLite](https://docs.python.org/3/library/sqlite3.html).
 ## Guided advice
 
 `advisor.py` adds three tools next to `run_query` and `prepare_order`: `recommend_wines` (colour and
-budget filter, aromas and country rank, at most 3 wines), `find_cheaper_alternatives` (same colour,
+budget filter; profile, grapes, foods, aromas, country and region rank; at most 3 wines), `find_cheaper_alternatives` (same colour,
 cheaper, shared aroma tags) and `offer_choices` (quick-reply chips with a step counter). The model
 proposes a profile; the code filters, ranks and returns only catalog facts. The page shows the
-results as cards (`frontend/src/Advisor.jsx`). The catalog does not record occasion, food
-pairing, sweetness, body or acidity, so these cannot be matched; the prompt tells the model to say so.
+results as cards (`frontend/src/Advisor.jsx`). The code also matches sweetness, body, acidity, tannin, fruitiness, grapes (incl. synonyms such as
+Shiraz), food pairings and region. Occasion is not recorded; the prompt tells the model to say so.
 Tests: `python -m unittest test_advisor`.
 
 **Scores on the cards.** Stars show the public community rating (`community_avg_rating`, out of 5; partial
@@ -293,6 +238,5 @@ Tests: `python -m unittest test_quantity`.
 
 **Assistant instructions.** `prompts.py` holds the permanent role (`PERSONA`: voice, opening message, how to find wines,
 staying on topic, orders and staff topics, never-discuss list, responsible service, format), then `DATA_RULES` (what the
-catalog does and does not record) and `GUIDED_ADVICE` (tools and chips), then the schema. `STAFF_EMAIL` is a fictional
-address on the reserved `.example` domain; the page's **Customer contact** button (top right, `mailto:`) uses the same
-address (`CONTACT_EMAIL` in `App.jsx`; `test_prompts.py` checks that they match). Tests: `python -m unittest test_prompts`.
+catalog does and does not record) and `GUIDED_ADVICE` (tools and chips), then the schema. `STAFF_EMAIL` is the same address as `CONTACT_EMAIL` in `App.jsx` (`jan.laufing@hec.edu`, a real
+mailbox; `test_prompts.py` checks that they match). Note: the page still calls itself "cave."; only the prompt says Dave/HEC Cave. Tests: `python -m unittest test_prompts`.
