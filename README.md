@@ -288,3 +288,11 @@ label text from the name, winery and vintage (no year if unknown). The server se
 calls `POST /api/order` with `action: "quantity"`; the server rebuilds the draft from the database (price, stock),
 issues a new `order_id` and refuses 0, negatives, non-integers and anything above stock. Stock only changes on Confirm.
 Tests: `python -m unittest test_quantity`.
+
+**Name.** The shop is HEC Cave and the assistant is Dave. Both are fictional demo names.
+
+**Assistant instructions.** `prompts.py` holds the permanent role (`PERSONA`: voice, opening message, how to find wines,
+staying on topic, orders and staff topics, never-discuss list, responsible service, format), then `DATA_RULES` (what the
+catalog does and does not record) and `GUIDED_ADVICE` (tools and chips), then the schema. `STAFF_EMAIL` is a fictional
+address on the reserved `.example` domain; the page's **Customer contact** button (top right, `mailto:`) uses the same
+address (`CONTACT_EMAIL` in `App.jsx`; `test_prompts.py` checks that they match). Tests: `python -m unittest test_prompts`.

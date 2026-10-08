@@ -5,6 +5,7 @@ import OrderCard from './OrderCard.jsx';
 import OrderConfirmation from './OrderConfirmation.jsx';
 import { Comparison, QuickReplies, Recommendations } from './Advisor.jsx';
 
+const CONTACT_EMAIL = 'service@hec-cave.example'; // fictional demo address; keep in sync with prompts.py
 const suggestions = ['Help me choose a wine', 'A red wine under €12', 'Find a cheaper alternative to a wine I like'];
 
 function Glass() {
@@ -101,7 +102,7 @@ export default function App() {
 
   return <div className="app-shell">
     <aside className="sidebar">
-      <a href="/" className="brand" aria-label="Cave home">cave<span>WINE, WITHOUT THE GUESSWORK</span></a>
+      <a href="/" className="brand" aria-label="HEC Cave home">HEC Cave<span>WINE, WITHOUT THE GUESSWORK</span></a>
       <button className="new-chat" onClick={reset} disabled={busy}>＋ New conversation</button>
       <div className="sidebar-note"><span className="eyebrow">A LITTLE GUIDANCE</span>
         <h2>A good bottle.<br />A simple conversation.</h2>
@@ -112,7 +113,10 @@ export default function App() {
     </aside>
     <main className="chat-shell">
       <header className="topbar"><div><span className="eyebrow">YOUR WINE ASSISTANT</span>
-        <p>Let’s find your next bottle.</p></div><span className="tag">Demo catalog</span></header>
+        <p>Let’s find your next bottle.</p></div><div className="topbar-actions">
+          <a className="contact-btn" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Question for the HEC Cave team')}`}>
+            <span aria-hidden="true">✉</span> Customer contact</a>
+          <span className="tag">Demo catalog</span></div></header>
       <div className="conversation">
         {!messages.length && <section className="welcome"><div className="glass"><Glass /></div>
           <span className="eyebrow">PULL UP A CHAIR</span><h1>Your wine, found.</h1>
@@ -123,8 +127,8 @@ export default function App() {
         {messages.map((message, index) => message.confirmation
           ? <OrderConfirmation key={index} order={message.confirmation} />
           : <React.Fragment key={index}><article className={`message ${message.role}`}>
-          <div className="avatar" aria-hidden="true">{message.role === 'user' ? 'Y' : 'c'}</div>
-          <div className="message-body"><span className="speaker">{message.role === 'user' ? 'You' : 'Cave'}</span>
+          <div className="avatar" aria-hidden="true">{message.role === 'user' ? 'Y' : 'D'}</div>
+          <div className="message-body"><span className="speaker">{message.role === 'user' ? 'You' : 'Dave'}</span>
             {message.content ? <Markdown>{message.content}</Markdown> : <p className="waiting">Working on your request…</p>}
           </div></article>
           <Recommendations data={message.recommendations} onAsk={send} disabled={busy} />
