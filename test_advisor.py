@@ -7,6 +7,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import database
+import orders
 import tools
 from advisor import find_cheaper_alternatives, fit_score, offer_choices, recommend_wines
 from memory import Memory
@@ -20,8 +21,9 @@ class DbCase(unittest.TestCase):
         folder = tempfile.TemporaryDirectory()
         self.addCleanup(folder.cleanup)
         data = Path(folder.name) / 'data'
-        for name, value in (('DATA_DIR', data), ('DB_PATH', data / 'wines.db')):
-            patcher = patch.object(database, name, value)
+        for target, name, value in ((database, 'DATA_DIR', data), (database, 'DB_PATH', data / 'wines.db'),
+                                    (orders, 'DATA_DIR', data)):
+            patcher = patch.object(target, name, value)
             patcher.start()
             self.addCleanup(patcher.stop)
         database.initialize()

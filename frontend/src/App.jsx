@@ -77,6 +77,18 @@ export default function App() {
     } finally { running.current = false; setBusy(false); }
   }
 
+  async function changeQuantity(quantity) {
+    if (running.current || !draft) return;
+    running.current = true; setBusy(true); setError(''); setStatus('Checking stock for the new quantity…');
+    try {
+      const result = await post('/api/order', { action: 'quantity', order_id: draft.order_id, quantity });
+      setDraft(result.draft); setStatus('Draft updated');
+    } catch (failure) {
+      setError(failure.message); setStatus('Quantity not changed');
+      if (failure.draft !== undefined) setDraft(failure.draft);
+    } finally { running.current = false; setBusy(false); }
+  }
+
   async function reset() {
     if (running.current) return;
     running.current = true; setBusy(true); setStatus('Starting new conversation…');
@@ -120,7 +132,7 @@ export default function App() {
           {index === messages.length - 1 && !busy &&
             <QuickReplies data={message.choices} onPick={send} disabled={busy} />}
           </React.Fragment>)}
-        <OrderCard draft={draft} busy={busy} onAction={orderAction} /><div ref={end} />
+        <OrderCard draft={draft} busy={busy} onAction={orderAction} onQuantity={changeQuantity} /><div ref={end} />
       </div>
       <div className="composer-area">
         <div className="activity" role="status" aria-live="polite">

@@ -283,3 +283,8 @@ stars are drawn). Wine glasses show the *fit with the customer's wishes*: the sh
 label text from the name, winery and vintage (no year if unknown). The server serves them at
 `/api/wine-image/<wine_id>.svg`, so nothing is stored. They are illustrations, not product photos.
 `python make_wine_images.py` still writes static files if you want them.
+
+**Quantity.** Cards and the order draft have a − / + selector from 1 up to the wine's stock. Changing it on the draft
+calls `POST /api/order` with `action: "quantity"`; the server rebuilds the draft from the database (price, stock),
+issues a new `order_id` and refuses 0, negatives, non-integers and anything above stock. Stock only changes on Confirm.
+Tests: `python -m unittest test_quantity`.

@@ -15,7 +15,7 @@ from database import initialize
 from catalog import get_wine_details
 from make_wine_images import bottle_svg
 from memory import Memory
-from orders import submit_order
+from orders import prepare_order, submit_order
 
 FRONTEND = Path(__file__).parent / "frontend" / "dist"
 app = Flask(__name__, static_folder=str(FRONTEND / "assets"), static_url_path="/assets")
@@ -118,14 +118,23 @@ def chat_route():
 @app.post("/api/order")
 def order_route():
     data = request.get_json()
-    if not isinstance(data, dict) or data.get("action") not in ("confirm", "cancel"):
-        return jsonify(error="Choose confirm or cancel."), 400
+    if not isinstance(data, dict) or data.get("action") not in ("confirm", "cancel", "quantity"):
+        return jsonify(error="Choose confirm, cancel or quantity."), 400
     state = conversation()
     with state["lock"]:
         memory = state["memory"]
         draft = memory.pending_order
         if not draft or data.get("order_id") != draft["order_id"]:
             return jsonify(error="Draft no longer current. Prepare a new order.", draft=None), 409
+        if data["action"] == "quantity":
+            quantity = data.get("quantity")
+            updated = prepare_order(draft["wine_id"], quantity)  # Price and stock come from the database.
+            if "error" in updated:
+                return jsonify(error=updated["error"], draft=draft), 400
+            memory.pending_order = updated
+            memory.start_turn(f"Change the quantity to {quantity}")
+            memory.add_reply(f"Draft updated: {quantity} x {updated['name']}. Awaiting confirmation.")
+            return jsonify(reply=None, draft=updated, confirmation=None)
         if data["action"] == "cancel":
             reply = "Order draft cancelled. Nothing was submitted."
             confirmation = None

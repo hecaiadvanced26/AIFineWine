@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Stepper from './Stepper.jsx';
 
 const euros = new Intl.NumberFormat('en', { style: 'currency', currency: 'EUR' });
 const FAMILY = { 'Red-wine fruit': 'red fruit', 'White-wine fruit': 'citrus & orchard fruit',
@@ -30,6 +31,7 @@ export function Stars({ value }) {
 }
 
 function WineCard({ wine, onAsk, disabled, badge, plain }) {
+  const [quantity, setQuantity] = useState(1);
   const place = [wine.country, wine.region].filter(Boolean).join(' · ');
   return <article className="wine-card">
     {badge && <span className="wine-badge">{badge}</span>}
@@ -58,8 +60,10 @@ function WineCard({ wine, onAsk, disabled, badge, plain }) {
     <p className="wine-ratings"><Stars value={wine.community_rating} />
       <span>Taster: {wine.taster_rating != null ? `${wine.taster_rating}/5` : 'no rating'}</span></p>
     {onAsk && <div className="wine-actions">
+      {wine.stock > 1 && <Stepper value={quantity} max={wine.stock} disabled={disabled} onChange={setQuantity}
+        label={`Bottles of ${wine.name}`} />}
       <button className="primary" disabled={disabled}
-        onClick={() => onAsk(`I'd like one bottle of ${wine.name} (${wine.wine_id}).`)}>Choose this wine</button>
+        onClick={() => onAsk(`I'd like ${quantity} ${quantity === 1 ? 'bottle' : 'bottles'} of ${wine.name} (${wine.wine_id}).`)}>Choose this wine</button>
       <button className="secondary" disabled={disabled}
         onClick={() => onAsk(`Is there a cheaper alternative to ${wine.name} (${wine.wine_id})?`)}>Cheaper alternative</button>
     </div>}

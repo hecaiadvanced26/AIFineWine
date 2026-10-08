@@ -62,3 +62,9 @@ Not yet run against a real model; check each step on the live site and note what
 4. “It's for a barbecue and I like it dry.” Expected: the assistant says occasion, food and sweetness
    are not recorded and continues with colour, budget and aromas.
 5. Click **Choose this wine**. Expected: the usual order draft, then **Confirm order**.
+
+## Quantity (new)
+
+Not yet run against a real model. On a card, set the selector to 3 and click **Choose this wine**: the draft should show
+3 bottles and the total. Change the draft's selector to 2: total updates, stock stays unchanged until **Confirm order**.
+Try to go above the stock: the + button stops at the stock. Typing 99 in the box is clamped to the stock.

@@ -19,7 +19,7 @@ def prepare_order(wine_id, quantity):
             "wine_id": wine_id, "name": wine["name"], "vintage": wine["vintage"],
             "quantity": quantity, "unit_price_cents": round(wine["price_eur"] * 100),
             "total_cents": round(wine["price_eur"] * 100) * quantity,
-            "currency": "EUR"}
+            "currency": "EUR", "max_quantity": wine["stock"]}
 
 
 def submit_order(draft):
