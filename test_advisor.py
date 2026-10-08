@@ -33,6 +33,32 @@ class AdvisorTests(DbCase):
     def rec(self, **kw):
         return recommend_wines(**{**ARGS, **kw})
 
+    def test_country_nobody_has_returns_no_wines_instead_of_other_countries(self):
+        result = self.rec(country='Japan')
+        self.assertEqual((result['status'], result['wines']), ('no_matches', []))
+        self.assertIn('Japan', result['note'])
+        self.assertEqual(self.rec(country='Italy')['status'], 'ok')
+
+    def test_region_nobody_has_returns_no_wines(self):
+        self.assertEqual(self.rec(region='Atlantis')['status'], 'no_matches')
+        self.assertEqual(self.rec(region='Burgundy')['status'], 'ok')
+
+    def test_dessert_is_accepted_and_means_the_dessert_tags(self):
+        result = self.rec(foods=['dessert'], sweetness='sweet')
+        self.assertEqual(result['status'], 'ok')
+        self.assertIn('food: fruit dessert', result['wishes'])
+        self.assertTrue(all('sweetness: sweet' in w['matched'] for w in result['wines'][:3]))
+        with self.assertRaises(ValueError):
+            self.rec(foods=['unicorn'])
+
+    def test_vintage_is_a_ranked_wish_and_is_validated(self):
+        result = self.rec(wine_type='red', grapes=['Cabernet Sauvignon'], vintage=2020)
+        self.assertIn('vintage: 2020', result['wishes'])
+        self.assertEqual(result['wines'][0]['vintage'], 2020)
+        for bad in ('2020', 1500, True):
+            with self.assertRaises(ValueError):
+                self.rec(vintage=bad)
+
     def test_hard_filters_and_limit(self):
         result = self.rec(wine_type='red', budget_max_eur=12)
         self.assertEqual(result['status'], 'ok')

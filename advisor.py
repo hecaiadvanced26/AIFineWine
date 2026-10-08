@@ -39,6 +39,11 @@ COUNTRY_ALIASES = {"usa": "united states", "us": "united states", "america": "un
                    "uk": "england", "united kingdom": "england", "britain": "england", "great britain": "england"}
 
 
+# Words customers use that are not food tags in the catalogue: expanded to the tags that exist.
+FOOD_ALIASES = {"dessert": ["fruit dessert", "pastry"], "desserts": ["fruit dessert", "pastry"],
+                "pudding": ["fruit dessert", "pastry"], "venison": ["game meat"], "game": ["game meat"]}
+
+
 def fold(text):
     """Lower-case ASCII form: 'Châteauneuf' -> 'chateauneuf'."""
     return unicodedata.normalize("NFKD", str(text)).encode("ascii", "ignore").decode().lower().strip()
@@ -137,7 +142,7 @@ def _structure_wishes(args):
 
 def recommend_wines(wine_type, budget_min_eur, budget_max_eur, aroma_families, aromas, country,
                     include_style_guesses, sweetness=None, body=None, acidity=None, tannin=None,
-                    fruitiness=None, grapes=None, foods=None, region=None):
+                    fruitiness=None, grapes=None, foods=None, region=None, vintage=None):
     """Rank in-stock wines against a structured profile. Colour and budget are hard filters."""
     if wine_type not in TYPES:
         raise ValueError("wine_type must be one of " + ", ".join(TYPES))
@@ -152,6 +157,15 @@ def recommend_wines(wine_type, budget_min_eur, budget_max_eur, aroma_families, a
         raise ValueError("grapes and foods must be lists.")
     if not isinstance(include_style_guesses, bool):
         raise ValueError("include_style_guesses must be true or false.")
+    if isinstance(foods, list):
+        expanded = []
+        for food in foods:
+            for tag in FOOD_ALIASES.get(fold(food), [food]) if isinstance(food, str) else [food]:
+                if tag not in expanded:
+                    expanded.append(tag)
+        foods = expanded
+    if vintage is not None and (isinstance(vintage, bool) or not isinstance(vintage, int) or not 1900 <= vintage <= 2100):
+        raise ValueError("vintage must be a year such as 2020, or null.")
     bad = [f for f in aroma_families if f not in FAMILIES]
     if bad:
         raise ValueError("Unknown aroma family: " + ", ".join(map(str, bad)))
@@ -193,6 +207,8 @@ def recommend_wines(wine_type, budget_min_eur, budget_max_eur, aroma_families, a
     wishes += [f"aroma family: {f}" for f in aroma_families] + [f"aroma: {t}" for t in aromas]
     wishes += [f"{key}: {word}" for key, word in structure_wishes]
     wishes += [f"grape: {known_grapes[g]}" for g in wanted_grapes] + [f"food: {f}" for f in foods]
+    if vintage:
+        wishes.append(f"vintage: {vintage}")
     if region:
         wishes.append(f"region: {region}")
     if country:
@@ -200,6 +216,7 @@ def recommend_wines(wine_type, budget_min_eur, budget_max_eur, aroma_families, a
 
     ranked = []
     guess_only_hits = 0
+    place_hits = {"region": 0, "country": 0}
     for row in rows:
         price = row["price_cents"] / 100
         if wine_type != "any" and row["wine_type"] != wine_type:
@@ -240,17 +257,21 @@ def recommend_wines(wine_type, budget_min_eur, budget_max_eur, aroma_families, a
             (matched if key in wine_grapes else missing).append(f"grape: {known_grapes[key]}")
         for food in foods:
             (matched if food in pairings_here else missing).append(f"food: {food}")
+        if vintage:
+            (matched if row["vintage"] == vintage else missing).append(f"vintage: {vintage}")
         if region:
             wanted = fold(region)
             haystack = [fold(row["region"] or ""), fold(row["appellation"] or "")]
             if any(wanted == h or (len(wanted) > 3 and (wanted in h or h in wanted)) for h in haystack if h):
                 matched.append(f"region: {region}")
+                place_hits["region"] += 1
             else:
                 missing.append(f"region: {region}")
         if country:
             wanted = COUNTRY_ALIASES.get(fold(country), fold(country))
             if fold(row["country"] or "") == wanted:
                 matched.append(f"country: {row['country']}")
+                place_hits["country"] += 1
             else:
                 missing.append(f"country: {country}")
         stated_hits = sum("taster-stated" in m for m in matched)
@@ -260,6 +281,13 @@ def recommend_wines(wine_type, budget_min_eur, budget_max_eur, aroma_families, a
                        _wine_dict(row, aromas_here, matched, missing, len(wishes), grapes_here, pairings_here)))
     ranked.sort(key=lambda item: item[:6])
     wines = [item[6] for item in ranked[:MAX_RESULTS]]
+    # A place nobody has is not a soft wish: showing other places' wines would answer a different question.
+    absent = [f"{kind}: {value}" for kind, value in (("region", region), ("country", country))
+              if value and ranked and not place_hits[kind]]
+    if absent:
+        return {"status": "no_matches", "wishes": wishes, "candidates_after_hard_filters": len(ranked), "wines": [],
+                "note": "No in-stock wine matches " + " and ".join(absent) + ". Tell the customer plainly that "
+                        "the shop has none, show no wines, and ask whether to search without that restriction."}
     # Soft wishes that nobody satisfied: tell the model rather than letting it pretend.
     result = {"status": "ok" if wines else "no_matches", "wishes": wishes,
               "candidates_after_hard_filters": len(ranked), "wines": wines}

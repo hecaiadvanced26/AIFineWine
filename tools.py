@@ -28,7 +28,7 @@ TOOLS = [
 TOOLS += [
     tool("recommend_wines",
          "Rank in-stock wines for a customer profile. Colour and budget are strict filters; everything "
-         "else (aromas, sweetness, body, acidity, tannin, fruitiness, grapes, foods, region, country) only "
+         "else (aromas, sweetness, body, acidity, tannin, fruitiness, grapes, foods, region, country, vintage) only "
          "ranks. Returns at most 3 wines with the wishes they meet. Use this for 'help me choose' and "
          "food-pairing requests instead of writing SQL. Pass null or [] for anything the customer did "
          "not ask for.",
@@ -54,7 +54,8 @@ TOOLS += [
           "foods": {"type": "array", "items": {"type": "string"},
                     "description": "Food tags from the catalog list only, e.g. risotto, steak, oysters."},
           "region": {"type": ["string", "null"],
-                     "description": "Region or appellation, e.g. Burgundy, Chablis, Rioja."}}),
+                     "description": "Region or appellation, e.g. Burgundy, Chablis, Rioja."},
+          "vintage": {"type": ["integer", "null"], "description": "A wine year such as 2020; only ranks."}}),
     tool("find_cheaper_alternatives",
          "For one wine ID, find up to 2 cheaper in-stock wines of the same colour that share aroma tags.",
          {"wine_id": {"type": "string"}}),
@@ -77,7 +78,8 @@ def _one_output_per_turn(name, memory):
     if name == "recommend_wines" and memory.choices:
         return "You already asked the customer a question this turn. Wait for the answer; show no wines now."
     if name == "offer_choices" and (memory.recommendations or memory.comparison):
-        return "Results are already shown this turn. Do not ask a guided question; end with the short answer."
+        return ("Results are already shown this turn. Do not ask a guided question; end with the short answer. "
+                "Do not say the catalogue or any tool is unavailable: it is working.")
     if name == "find_cheaper_alternatives" and memory.recommendations:
         return "Recommendations are already shown this turn. Do not add cheaper alternatives unless the customer asks in their next message."
     if name == "recommend_wines" and memory.comparison:
