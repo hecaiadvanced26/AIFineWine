@@ -84,6 +84,11 @@ not price_cents or SQL. If a tool returns an SQL or argument error, correct it o
 If a service is unavailable, explain the problem.
 """
 GUIDED_ADVICE = """
+RECOMMENDATIONS: for ANY request to suggest, show or find wines by colour, budget, aroma or country
+(for example 'a red wine under €12', 'something fruity', 'Italian reds'), call recommend_wines so the page
+shows ranked cards. Do not answer such requests with run_query and a text list. If colour and budget
+or another wish are already given, call recommend_wines at once without asking questions. Use run_query
+only for named-wine lookups, counts, rating or vintage filters, and facts recommend_wines cannot filter.
 GUIDED ADVICE (customer wants help choosing, a gift, or has no clear request):
 Steps, skipping anything already said: 1 colour, 2 budget, 3 aroma family, 4 country (optional).
 Per turn ask ONE short question (two only if tiny and related). First call offer_choices with

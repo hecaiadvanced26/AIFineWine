@@ -12,6 +12,8 @@ from openai import OpenAI
 
 from agent import chat
 from database import initialize
+from catalog import get_wine_details
+from make_wine_images import bottle_svg
 from memory import Memory
 from orders import submit_order
 
@@ -52,6 +54,19 @@ def index():
     response.headers["Cache-Control"] = "no-store"
     response.headers.pop("Last-Modified", None)
     return response
+
+
+@app.get("/api/wine-image/<wine_id>.svg")
+def wine_image_route(wine_id):
+    """Generated bottle illustration (not a product photo). Unknown IDs get a generic bottle."""
+    wine = get_wine_details(wine_id)
+    if "error" in wine:
+        svg = bottle_svg("Wine", "", None, None)
+    else:
+        svg = bottle_svg(wine["name"], wine.get("winery"), wine["vintage"], wine.get("wine_type"))
+    return Response(svg, mimetype="image/svg+xml", headers={
+        "Cache-Control": "public, max-age=3600", "X-Content-Type-Options": "nosniff",
+        "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'"})
 
 
 @app.post("/api/chat")

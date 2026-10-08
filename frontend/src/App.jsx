@@ -138,7 +138,7 @@ export default function App() {
             } }} />
           <button className="send" aria-label="Send message" disabled={busy || !input.trim()}>↑</button>
         </form>
-        <p className="composer-note">Imported wines & ratings. Flavour notes distinguish stated and inferred. Demo prices & inventory; no payments taken.</p>
+        <p className="composer-note">Imported wines & ratings. Flavour notes distinguish stated and inferred. Bottle pictures are illustrations. Demo prices & inventory; no payments taken.</p>
       </div>
     </main>
   </div>;

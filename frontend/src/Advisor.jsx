@@ -33,6 +33,8 @@ function WineCard({ wine, onAsk, disabled, badge, plain }) {
   const place = [wine.country, wine.region].filter(Boolean).join(' · ');
   return <article className="wine-card">
     {badge && <span className="wine-badge">{badge}</span>}
+    <img className="wine-img" src={`/api/wine-image/${encodeURIComponent(wine.wine_id)}.svg`} loading="lazy"
+      alt="Illustration of a bottle, not a product photo" onError={event => { event.currentTarget.style.display = 'none'; }} />
     <h3>{wine.name}</h3>
     <div className="wine-meta">
       {wine.wine_type && <span>{wine.wine_type}</span>}

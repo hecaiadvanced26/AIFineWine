@@ -278,3 +278,8 @@ Tests: `python -m unittest test_advisor`.
 stars are drawn). Wine glasses show the *fit with the customer's wishes*: the share of wishes met, scaled to
 1-5 (`fit_score` in `advisor.py`; 5 = all wishes met). Colour and budget count as wishes. Cards are ranked
 #1-#3 by wishes met, then taster-stated aroma hits, then taster rating, then lower price.
+
+**Bottle images.** `make_wine_images.py` (from the team) draws a bottle per wine as SVG: colour by wine type,
+label text from the name, winery and vintage (no year if unknown). The server serves them at
+`/api/wine-image/<wine_id>.svg`, so nothing is stored. They are illustrations, not product photos.
+`python make_wine_images.py` still writes static files if you want them.

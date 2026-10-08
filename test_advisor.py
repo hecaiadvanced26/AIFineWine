@@ -1,6 +1,7 @@
 """Guided-advice tools against the real 200-wine catalog in a temporary database."""
 import json
 import tempfile
+import xml.etree.ElementTree as ET
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -14,7 +15,7 @@ ARGS = dict(wine_type="any", budget_min_eur=None, budget_max_eur=None, aroma_fam
             aromas=[], country=None, include_style_guesses=False)
 
 
-class AdvisorTests(unittest.TestCase):
+class DbCase(unittest.TestCase):
     def setUp(self):
         folder = tempfile.TemporaryDirectory()
         self.addCleanup(folder.cleanup)
@@ -25,6 +26,8 @@ class AdvisorTests(unittest.TestCase):
             self.addCleanup(patcher.stop)
         database.initialize()
 
+
+class AdvisorTests(DbCase):
     def rec(self, **kw):
         return recommend_wines(**{**ARGS, **kw})
 
@@ -126,6 +129,38 @@ class AdvisorTests(unittest.TestCase):
         memory.reset_cards()
         self.assertIsNone(memory.recommendations)
         self.assertIsNone(memory.choices)
+
+
+class WineImageTests(DbCase):
+    def setUp(self):
+        super().setUp()
+        import server
+        self.client = server.app.test_client()
+
+    def test_every_wine_gets_valid_svg_without_invented_nv(self):
+        db = database.connect()
+        try:
+            ids = [r[0] for r in db.execute('SELECT wine_id FROM wines')]
+            missing_vintage = db.execute('SELECT wine_id FROM wines WHERE vintage IS NULL LIMIT 1').fetchone()[0]
+        finally:
+            db.close()
+        self.assertEqual(len(ids), 200)
+        for wine_id in ids:
+            response = self.client.get(f'/api/wine-image/{wine_id}.svg')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.mimetype, 'image/svg+xml')
+            ET.fromstring(response.data)
+        body = self.client.get(f'/api/wine-image/{missing_vintage}.svg').get_data(as_text=True)
+        self.assertNotIn('>NV<', body)
+
+    def test_unknown_id_gets_placeholder_and_text_is_escaped(self):
+        response = self.client.get('/api/wine-image/does-not-exist.svg')
+        self.assertEqual(response.status_code, 200)
+        ET.fromstring(response.data)
+        from make_wine_images import bottle_svg
+        svg = bottle_svg('<script>alert(1)</script> & "x"', '<b>', 2020, 'red')
+        self.assertNotIn('<script>', svg)
+        ET.fromstring(svg)
 
 
 if __name__ == '__main__':
