@@ -273,3 +273,8 @@ proposes a profile; the code filters, ranks and returns only catalog facts. The 
 results as cards (`frontend/src/Advisor.jsx`). The catalog does not record occasion, food
 pairing, sweetness, body or acidity, so these cannot be matched; the prompt tells the model to say so.
 Tests: `python -m unittest test_advisor`.
+
+**Scores on the cards.** Stars show the public community rating (`community_avg_rating`, out of 5; partial
+stars are drawn). Wine glasses show the *fit with the customer's wishes*: the share of wishes met, scaled to
+1-5 (`fit_score` in `advisor.py`; 5 = all wishes met). Colour and budget count as wishes. Cards are ranked
+#1-#3 by wishes met, then taster-stated aroma hits, then taster rating, then lower price.

@@ -7,6 +7,28 @@ const friendly = text => Object.entries(FAMILY).reduce((out, [key, value]) => ou
   text.replace('aroma family:', 'aroma:').replace('taster-stated', 'the taster wrote it')
     .replace('style guess', 'typical for the style, not tasted'));
 
+function Glass({ filled }) {
+  return <svg viewBox="0 0 80 100" className={`glass-icon ${filled ? 'on' : ''}`} aria-hidden="true">
+    <path d="M24 12h32l4 26c2 15-7 26-20 26S18 53 20 38l4-26ZM40 64v24M26 89h28" />
+    <path className="fill" d="M22 37h36c2 14-5 24-18 24S20 51 22 37Z" />
+  </svg>;
+}
+
+export function FitGlasses({ score }) {
+  if (!score) return null;
+  return <div className="fit-glasses" role="img" aria-label={`Fit with your wishes: ${score} out of 5 glasses`}>
+    {[1, 2, 3, 4, 5].map(n => <Glass key={n} filled={n <= score} />)}
+    <span>{score}/5 fit</span>
+  </div>;
+}
+
+export function Stars({ value }) {
+  if (value == null) return <span className="stars-none">No community rating</span>;
+  return <span className="stars-row" role="img" aria-label={`Community rating ${value} out of 5`}>
+    <span className="stars" style={{ '--pct': `${Math.max(0, Math.min(5, value)) / 5 * 100}%` }} aria-hidden="true">★★★★★</span>
+    <span>{value}/5</span></span>;
+}
+
 function WineCard({ wine, onAsk, disabled, badge, plain }) {
   const place = [wine.country, wine.region].filter(Boolean).join(' · ');
   return <article className="wine-card">
@@ -17,6 +39,7 @@ function WineCard({ wine, onAsk, disabled, badge, plain }) {
       {place && <span>{place}</span>}
       <span>{wine.vintage ? `Vintage ${wine.vintage}` : 'Vintage unknown'}</span>
     </div>
+    {!plain && <FitGlasses score={wine.fit_score} />}
     <div className="wine-price">{euros.format(wine.price_eur)} <small>demo price · {wine.stock} in stock</small></div>
     {!plain && wine.wishes_total > 0 && <>
       <p className="wine-fit">Fits {wine.wishes_met} of {wine.wishes_total} of your wishes</p>
@@ -30,9 +53,8 @@ function WineCard({ wine, onAsk, disabled, badge, plain }) {
       <strong>The taster wrote:</strong> {wine.aromas_stated.join(', ')}</p>}
     {wine.aromas_style_guess.length > 0 && <p className="wine-aromas guess">
       <strong>Typical for this style (not tasted):</strong> {wine.aromas_style_guess.join(', ')}</p>}
-    <p className="wine-ratings">
-      {wine.taster_rating != null ? `Taster ${wine.taster_rating}/5` : 'Taster: no rating'}
-      {' · '}{wine.community_rating != null ? `Community ${wine.community_rating}/5` : 'Community: no rating'}</p>
+    <p className="wine-ratings"><Stars value={wine.community_rating} />
+      <span>Taster: {wine.taster_rating != null ? `${wine.taster_rating}/5` : 'no rating'}</span></p>
     {onAsk && <div className="wine-actions">
       <button className="primary" disabled={disabled}
         onClick={() => onAsk(`I'd like one bottle of ${wine.name} (${wine.wine_id}).`)}>Choose this wine</button>
@@ -47,7 +69,8 @@ export function Recommendations({ data, onAsk, disabled }) {
   return <section className="advisor-block" aria-label="Recommended wines">
     <span className="eyebrow">{data.wines.length === 1 ? 'ONE MATCH' : `${data.wines.length} MATCHES`}</span>
     <div className="wine-grid">
-      {data.wines.map(wine => <WineCard key={wine.wine_id} wine={wine} onAsk={onAsk} disabled={disabled} />)}
+      {data.wines.map((wine, index) => <WineCard key={wine.wine_id} wine={wine} onAsk={onAsk} disabled={disabled}
+        badge={index === 0 ? '#1 · Best fit' : `#${index + 1}`} />)}
     </div>
   </section>;
 }

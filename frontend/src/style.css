@@ -166,3 +166,14 @@ button:focus-visible, a:focus-visible, summary:focus-visible, textarea:focus-vis
 .choice-chips button:hover:not(:disabled) { border-color: var(--wine); background: var(--wine-soft); }
 @media (max-width: 640px) { .advisor-block { padding-left: 0; } .wine-grid, .wine-compare { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .advisor-block { animation: none; } .progress-bar div { transition: none; } }
+
+.fit-glasses { display: flex; align-items: center; gap: 2px; font-size: 12px; color: var(--muted); }
+.fit-glasses span { margin-left: 8px; font-weight: 650; color: var(--wine); }
+.glass-icon { width: 20px; height: 24px; fill: none; stroke: #cfc5bb; stroke-width: 5; }
+.glass-icon .fill { fill: transparent; stroke: none; }
+.glass-icon.on { stroke: var(--wine); }
+.glass-icon.on .fill { fill: #d9a8b3; }
+.wine-ratings { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.stars-row { display: inline-flex; align-items: center; gap: 6px; }
+.stars { font-size: 16px; letter-spacing: 1px; color: transparent; -webkit-background-clip: text; background-clip: text;
+  background-image: linear-gradient(90deg, #c9972b var(--pct), #d9d2c8 var(--pct)); }

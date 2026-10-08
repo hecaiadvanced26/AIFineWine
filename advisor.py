@@ -19,6 +19,13 @@ def _number(value, name):
     return float(value)
 
 
+def fit_score(met, total):
+    """1-5 glasses: the share of the customer's wishes this wine meets. None without wishes."""
+    if total <= 0:
+        return None
+    return max(1, min(5, int(5 * met / total + 0.5)))
+
+
 def _wine_dict(row, aromas, matched, missing, wishes_total):
     return {
         "wine_id": row["wine_id"], "name": row["name"], "price_eur": row["price_cents"] / 100,
@@ -27,7 +34,7 @@ def _wine_dict(row, aromas, matched, missing, wishes_total):
         "taster_rating": row["user_rating"], "community_rating": row["community_avg_rating"],
         "aromas_stated": sorted(t for t, p in aromas if p == "stated"),
         "aromas_style_guess": sorted(t for t, p in aromas if p == "guess"),
-        "wishes_met": len(matched), "wishes_total": wishes_total,
+        "wishes_met": len(matched), "wishes_total": wishes_total, "fit_score": fit_score(len(matched), wishes_total),
         "matched": matched, "not_matched": missing,
     }
 
@@ -160,7 +167,7 @@ def find_cheaper_alternatives(wine_id):
         ranked.append((-len(shared), not same_country, -rating, row["price_cents"], row["wine_id"],
                        _wine_dict(row, here, [f"shared aromas: {', '.join(shared)}"]
                                   + (["same country"] if same_country else []), [], 1)
-                       | {"price_difference_eur": (base["price_cents"] - row["price_cents"]) / 100,
+                       | {"fit_score": None, "price_difference_eur": (base["price_cents"] - row["price_cents"]) / 100,
                           "shared_aromas": shared}))
     ranked.sort(key=lambda item: item[:5])
     base_dict = _wine_dict(base, aroma_map.get(wine_id, []), [], [], 0)

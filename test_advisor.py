@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 import database
 import tools
-from advisor import find_cheaper_alternatives, offer_choices, recommend_wines
+from advisor import find_cheaper_alternatives, fit_score, offer_choices, recommend_wines
 from memory import Memory
 
 ARGS = dict(wine_type="any", budget_min_eur=None, budget_max_eur=None, aroma_families=[],
@@ -64,6 +64,17 @@ class AdvisorTests(unittest.TestCase):
                                                    country='Italy')['wines']]
         self.assertEqual(met, sorted(met, reverse=True))
 
+    def test_fit_score_is_share_of_wishes_met_on_a_1_to_5_scale(self):
+        self.assertEqual([fit_score(m, 3) for m in (0, 1, 2, 3)], [1, 2, 3, 5])
+        self.assertEqual(fit_score(4, 4), 5)
+        self.assertEqual(fit_score(1, 5), 1)
+        self.assertIsNone(fit_score(0, 0))
+        result = self.rec(wine_type='red', budget_max_eur=12, aroma_families=['Red-wine fruit'], country='Italy')
+        for wine in result['wines']:
+            self.assertEqual(wine['fit_score'], fit_score(wine['wishes_met'], wine['wishes_total']))
+            self.assertIn(wine['fit_score'], (1, 2, 3, 4, 5))
+        self.assertIsNone(self.rec()['wines'][0]['fit_score'])
+
     def test_no_match_says_so(self):
         result = self.rec(wine_type='red', budget_max_eur=1)
         self.assertEqual(result['status'], 'no_matches')
@@ -90,6 +101,7 @@ class AdvisorTests(unittest.TestCase):
                 self.assertEqual(alt['wine_type'], result['chosen']['wine_type'])
                 self.assertGreater(alt['stock'], 0)
                 self.assertTrue(alt['shared_aromas'])
+                self.assertIsNone(alt['fit_score'])
                 self.assertAlmostEqual(alt['price_difference_eur'],
                                        result['chosen']['price_eur'] - alt['price_eur'], places=2)
         self.assertGreater(checked, 0)

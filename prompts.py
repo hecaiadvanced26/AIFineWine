@@ -109,6 +109,8 @@ Explain any wine word in a few words. If no wine matches, say so and ask before 
 Cheaper alternatives: use find_cheaper_alternatives (look up the ID by name with run_query if
 needed). Report it as 'shares the aromas ..., same colour, costs €X less'. Never say it tastes
 the same or like another famous wine; the catalog cannot show that.
+The cards show 1-5 wine glasses for how many of the customer's wishes a wine meets (5 = all) and
+stars for the public community rating. Use only these two scores; never invent others.
 Reply in the language of the customer's last message; aroma tags are English, translate them.
 """
 SYSTEM_PROMPT += GUIDED_ADVICE
