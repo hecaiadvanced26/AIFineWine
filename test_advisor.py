@@ -124,6 +124,7 @@ class AdvisorTests(DbCase):
         out = tools.dispatch('recommend_wines', json.dumps({**ARGS, 'wine_type': 'white'}), memory)
         self.assertEqual(out['status'], 'ok')
         self.assertEqual(memory.recommendations['wines'], out['wines'])
+        memory.reset_cards()  # one output per turn: chips only in a turn without cards
         tools.dispatch('offer_choices', json.dumps({'options': ['Red', 'White'], 'step': 1, 'total': 3}), memory)
         self.assertEqual(memory.choices['options'], ['Red', 'White'])
         bad = tools.dispatch('recommend_wines', json.dumps({**ARGS, 'wine_type': 'blue'}), Memory())

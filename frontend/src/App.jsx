@@ -127,7 +127,7 @@ export default function App() {
         {messages.map((message, index) => message.confirmation
           ? <OrderConfirmation key={index} order={message.confirmation} />
           : <React.Fragment key={index}><article className={`message ${message.role}`}>
-          <div className="avatar" aria-hidden="true">{message.role === 'user' ? 'Y' : 'D'}</div>
+          <div className="avatar" aria-hidden="true">{message.role === 'user' ? 'Y' : 'c'}</div>
           <div className="message-body"><span className="speaker">{message.role === 'user' ? 'You' : 'cave.'}</span>
             {message.content ? <Markdown>{message.content}</Markdown> : <p className="waiting">I am working on your request…</p>}
           </div></article>

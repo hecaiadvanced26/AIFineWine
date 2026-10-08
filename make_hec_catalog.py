@@ -1,4 +1,4 @@
-"""Build the fictional HEC Cave catalogue: python make_hec_catalog.py
+"""Build the fictional cave. catalogue: python make_hec_catalog.py
 
 Writes data/catalog.json (250 wines). Deterministic: the same script gives the same file.
 Real: country, region, appellation, grape varieties (see hec_catalog_data.py for sources).
@@ -367,7 +367,7 @@ def finish(wines, vocab):
                                           " ".join(w["grapes"]), w["classification"] or ""]))
         w["attributes"] = {"brand": w["winery"], "type": w["wine_type"], "country": w["country"],
                            "region": w["region"], "appellation": w["appellation"],
-                           "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+                           "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
                            "flavours_stated": stated, "flavours_inferred": guesses}
         w.pop("_tier", None)
         w.pop("_triplet", None)

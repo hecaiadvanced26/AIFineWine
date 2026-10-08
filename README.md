@@ -1,7 +1,7 @@
 # Wine retail assistant
 
 A small course prototype: React UI, Python/Flask, the OpenAI client (pointed at OpenRouter) and SQLite.
-The shop is **fictional**: HEC Cave, assistant Dave. The catalogue holds 250 invented wines.
+The shop is **fictional**: cave. (always written lowercase with the full stop). The catalogue holds 250 invented wines.
 Countries, regions, appellations and grape varieties are meant to be real (see "Fictional catalogue" below);
 producers, cuvée names, vintages, prices, stock, ratings and the 75 tasting notes are invented.
 Orders are exported locally and are not sent to a real shop.
@@ -234,9 +234,9 @@ calls `POST /api/order` with `action: "quantity"`; the server rebuilds the draft
 issues a new `order_id` and refuses 0, negatives, non-integers and anything above stock. Stock only changes on Confirm.
 Tests: `python -m unittest test_quantity`.
 
-**Name.** The shop is HEC Cave and the assistant is Dave. Both are fictional demo names.
+**Name.** The shop is called cave. (with the full stop); the assistant has no personal name. The favicon is `frontend/public/favicon.svg`, linked in `frontend/index.html`.
 
 **Assistant instructions.** `prompts.py` holds the permanent role (`PERSONA`: voice, opening message, how to find wines,
 staying on topic, orders and staff topics, never-discuss list, responsible service, format), then `DATA_RULES` (what the
 catalog does and does not record) and `GUIDED_ADVICE` (tools and chips), then the schema. `STAFF_EMAIL` is the same address as `CONTACT_EMAIL` in `App.jsx` (`jan.laufing@hec.edu`, a real
-mailbox; `test_prompts.py` checks that they match). Note: the page still calls itself "cave."; only the prompt says Dave/HEC Cave. Tests: `python -m unittest test_prompts`.
+mailbox; `test_prompts.py` checks that they match). Tests: `python -m unittest test_prompts`.

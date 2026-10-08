@@ -17,12 +17,16 @@ class PromptTests(unittest.TestCase):
         self.assertNotIn('aifinewine', APP + prompts.SYSTEM_PROMPT)
 
     def test_name_is_dave_from_hec_cave_everywhere(self):
-        self.assertIn("I'm Dave from HEC Cave", prompts.WELCOME)
-        self.assertIn('You are Dave', prompts.SYSTEM_PROMPT)
+        self.assertIn('Welcome to cave.', prompts.WELCOME)
+        self.assertIn('wine guide of cave.', prompts.SYSTEM_PROMPT)
+        for text in (prompts.WELCOME, prompts.SYSTEM_PROMPT.replace('never write "Cave", "HEC Cave"', '')):
+            self.assertNotIn('Dave', text)
+            self.assertNotIn('HEC Cave', text)
         self.assertNotIn('AIFineWine', prompts.SYSTEM_PROMPT)
-        # The page itself still says "cave." (user's App.jsx); only the prompt carries the Dave persona.
         index = (Path(__file__).parent / 'frontend' / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('<title>HEC Cave', index)
+        self.assertIn('<title>cave. ', index)
+        self.assertIn('href="/favicon.svg"', index)
+        self.assertTrue((Path(__file__).parent / 'frontend' / 'public' / 'favicon.svg').exists())
 
     def test_no_unfilled_placeholders(self):
         for text in ('[STAFF_CONTACT]', '{STAFF_EMAIL}', '{WELCOME}', 'TODO'):

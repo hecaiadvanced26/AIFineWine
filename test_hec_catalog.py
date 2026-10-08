@@ -1,4 +1,4 @@
-"""Checks for the fictional 250-wine HEC Cave catalogue and the profile/pairing filters."""
+"""Checks for the fictional 250-wine cave. catalogue and the profile/pairing filters."""
 import collections
 import json
 import re
@@ -92,6 +92,46 @@ class FilterTests(DbCase):
             alt = find_cheaper_alternatives(w['wine_id'])
             self.assertEqual(alt['chosen']['price_eur'], w['price_cents'] / 100)
             self.assertEqual(alt['chosen']['vintage'], w['vintage'])
+
+
+class OneOutputPerTurnTests(DbCase):
+    def call(self, memory, name, **args):
+        import tools
+        return tools.dispatch(name, json.dumps(args), memory)
+
+    def test_cards_then_alternatives_or_question_are_blocked(self):
+        from memory import Memory
+        memory = Memory()
+        shown = self.call(memory, 'recommend_wines', **{**ARGS, 'foods': ['risotto']})
+        self.assertTrue(shown['wines'])
+        wine_id = shown['wines'][0]['wine_id']
+        for name, args in (('find_cheaper_alternatives', {'wine_id': wine_id}),
+                           ('offer_choices', {'options': ['Red', 'White'], 'step': 1, 'total': 3})):
+            self.assertEqual(self.call(memory, name, **args)['status'], 'blocked', name)
+        self.assertIsNone(memory.comparison)
+        self.assertIsNone(memory.choices)
+        self.assertEqual(len(memory.recommendations['wines']), 3)
+
+    def test_question_then_cards_is_blocked(self):
+        from memory import Memory
+        memory = Memory()
+        self.assertEqual(self.call(memory, 'offer_choices', options=['Red', 'White'], step=1, total=3)['status'], 'shown')
+        self.assertEqual(self.call(memory, 'recommend_wines', **ARGS)['status'], 'blocked')
+        self.assertIsNone(memory.recommendations)
+
+    def test_alternatives_alone_still_work_and_block_a_second_set(self):
+        from memory import Memory
+        memory = Memory()
+        wine_id = next(w['wine_id'] for w in WINES if w['stock'] > 0 and w['price_cents'] >= 3000)
+        self.call(memory, 'find_cheaper_alternatives', wine_id=wine_id)
+        self.assertTrue(memory.comparison)
+        self.assertEqual(self.call(memory, 'recommend_wines', **ARGS)['status'], 'blocked')
+
+    def test_game_tag_is_game_meat(self):
+        foods = {f['food'] for f in CATALOG['food_vocabulary']}
+        self.assertIn('game meat', foods)
+        self.assertNotIn('game', foods)
+        self.assertTrue(self.call(__import__('memory').Memory(), 'recommend_wines', **{**ARGS, 'foods': ['game meat']})['wines'])
 
 
 if __name__ == '__main__':

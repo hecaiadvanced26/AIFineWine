@@ -63,7 +63,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Napa Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "butter",
      "lemon",
@@ -133,7 +133,7 @@
     "country": "Australia",
     "region": "South Australia",
     "appellation": "Clare Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -201,7 +201,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Russian River Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "clove",
@@ -273,7 +273,7 @@
     "country": "Australia",
     "region": "Western Australia",
     "appellation": "Margaret River",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "oak",
      "pear",
@@ -340,7 +340,7 @@
     "country": "Italy",
     "region": "Veneto",
     "appellation": "Valpolicella Ripasso",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "almond",
      "cherry"
@@ -409,7 +409,7 @@
     "country": "Italy",
     "region": "Alto Adige",
     "appellation": "Alto Adige Gewürztraminer",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "honeysuckle",
@@ -481,7 +481,7 @@
     "country": "Italy",
     "region": "Tuscany",
     "appellation": "Chianti Classico",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "thyme",
@@ -555,7 +555,7 @@
     "country": "Italy",
     "region": "Tuscany",
     "appellation": "Chianti Classico",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "plum"
@@ -625,7 +625,7 @@
     "country": "Italy",
     "region": "Tuscany",
     "appellation": "Chianti Classico",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "plum",
@@ -696,7 +696,7 @@
     "country": "Italy",
     "region": "Sicily",
     "appellation": "Etna Bianco",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "flint",
      "lemon",
@@ -733,7 +733,7 @@
    "tannin": 4,
    "fruitiness": 4,
    "pairings": [
-    "game",
+    "game meat",
     "hard cheese",
     "mushrooms",
     "roast beef"
@@ -772,7 +772,7 @@
     "country": "Italy",
     "region": "Veneto",
     "appellation": "Amarone della Valpolicella",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "chocolate",
@@ -843,7 +843,7 @@
     "country": "New Zealand",
     "region": "Central Otago",
     "appellation": "Central Otago",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -915,7 +915,7 @@
     "country": "United States",
     "region": "Oregon",
     "appellation": "Willamette Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "rose",
      "strawberry"
@@ -986,7 +986,7 @@
     "country": "South Africa",
     "region": "Swartland",
     "appellation": "Swartland",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -1058,7 +1058,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Sonoma Coast",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "clove",
@@ -1129,7 +1129,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Russian River Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "butter",
@@ -1163,7 +1163,7 @@
    "fruitiness": 3,
    "pairings": [
     "barbecue",
-    "game",
+    "game meat",
     "lamb",
     "roast beef",
     "steak"
@@ -1198,7 +1198,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Napa Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -1232,7 +1232,7 @@
    "fruitiness": 3,
    "pairings": [
     "barbecue",
-    "game",
+    "game meat",
     "lamb",
     "roast beef",
     "steak"
@@ -1271,7 +1271,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Napa Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "blackcurrant",
      "cedar",
@@ -1307,7 +1307,7 @@
    "fruitiness": 3,
    "pairings": [
     "barbecue",
-    "game",
+    "game meat",
     "lamb",
     "roast beef",
     "steak"
@@ -1342,7 +1342,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Napa Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -1411,7 +1411,7 @@
     "country": "Spain",
     "region": "Castilla y León",
     "appellation": "Rueda",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "fennel",
@@ -1482,7 +1482,7 @@
     "country": "Spain",
     "region": "Rioja",
     "appellation": "Rioja",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cedar",
@@ -1550,7 +1550,7 @@
     "country": "Spain",
     "region": "Ribera del Duero",
     "appellation": "Ribera del Duero",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cedar",
@@ -1619,7 +1619,7 @@
     "country": "Spain",
     "region": "Ribera del Duero",
     "appellation": "Ribera del Duero",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -1688,7 +1688,7 @@
     "country": "Argentina",
     "region": "Mendoza",
     "appellation": "Mendoza",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -1757,7 +1757,7 @@
     "country": "Spain",
     "region": "Catalonia",
     "appellation": "Priorat",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "liquorice",
@@ -1825,7 +1825,7 @@
     "country": "Argentina",
     "region": "Salta",
     "appellation": "Salta",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "jasmine",
@@ -1894,7 +1894,7 @@
     "country": "Argentina",
     "region": "Mendoza",
     "appellation": "Valle de Uco",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "chocolate",
@@ -1966,7 +1966,7 @@
     "country": "Argentina",
     "region": "Mendoza",
     "appellation": "Mendoza",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "blackberry",
      "plum",
@@ -2037,7 +2037,7 @@
     "country": "Argentina",
     "region": "Mendoza",
     "appellation": "Mendoza",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -2073,7 +2073,7 @@
     "barbecue",
     "charcuterie",
     "duck",
-    "game",
+    "game meat",
     "steak"
    ],
    "wine_id": "W-030",
@@ -2106,7 +2106,7 @@
     "country": "Uruguay",
     "region": "Canelones",
     "appellation": "Canelones",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -2175,7 +2175,7 @@
     "country": "Spain",
     "region": "Castilla y León",
     "appellation": "Bierzo",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "pepper",
      "raspberry",
@@ -2244,7 +2244,7 @@
     "country": "Spain",
     "region": "Galicia",
     "appellation": "Rías Baixas",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "grapefruit",
@@ -2314,7 +2314,7 @@
     "country": "Spain",
     "region": "Catalonia",
     "appellation": "Cava",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "apple",
      "bread",
@@ -2383,7 +2383,7 @@
     "country": "Spain",
     "region": "Navarra",
     "appellation": "Navarra",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "liquorice",
@@ -2452,7 +2452,7 @@
     "country": "Spain",
     "region": "Ribera del Duero",
     "appellation": "Ribera del Duero",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -2530,7 +2530,7 @@
     "country": "Spain",
     "region": "Rioja",
     "appellation": "Rioja",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cedar",
      "cherry",
@@ -2598,7 +2598,7 @@
     "country": "Italy",
     "region": "Veneto",
     "appellation": "Valpolicella Ripasso",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -2632,7 +2632,7 @@
    "tannin": 5,
    "fruitiness": 5,
    "pairings": [
-    "game",
+    "game meat",
     "hard cheese",
     "roast beef",
     "steak"
@@ -2667,7 +2667,7 @@
     "country": "Italy",
     "region": "Veneto",
     "appellation": "Amarone della Valpolicella",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -2736,7 +2736,7 @@
     "country": "Italy",
     "region": "Veneto",
     "appellation": "Prosecco",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "green apple",
      "pear"
@@ -2806,7 +2806,7 @@
     "country": "Italy",
     "region": "Alto Adige",
     "appellation": "Alto Adige Pinot Grigio",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -2875,7 +2875,7 @@
     "country": "Italy",
     "region": "Alto Adige",
     "appellation": "Alto Adige Pinot Grigio",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -2944,7 +2944,7 @@
     "country": "Italy",
     "region": "Lombardy",
     "appellation": "Franciacorta",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "peach",
      "toast"
@@ -3013,7 +3013,7 @@
     "country": "Italy",
     "region": "Veneto",
     "appellation": "Soave Classico",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -3081,7 +3081,7 @@
     "country": "Italy",
     "region": "Campania",
     "appellation": "Fiano di Avellino",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "hazelnut",
@@ -3150,7 +3150,7 @@
     "country": "Italy",
     "region": "Tuscany",
     "appellation": "Brunello di Montalcino",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -3223,7 +3223,7 @@
     "country": "Italy",
     "region": "Puglia",
     "appellation": "Primitivo di Manduria",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "blackberry",
      "liquorice",
@@ -3296,7 +3296,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -3329,7 +3329,7 @@
    "tannin": 5,
    "fruitiness": 2,
    "pairings": [
-    "game",
+    "game meat",
     "mushrooms",
     "risotto",
     "roast beef",
@@ -3365,7 +3365,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Langhe Nebbiolo",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -3433,7 +3433,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Dolcetto d'Alba",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -3501,7 +3501,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Moscato d'Asti",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "orange blossom",
      "peach"
@@ -3570,7 +3570,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Barbera d'Asti",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -3642,7 +3642,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Barbaresco",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "rose",
@@ -3713,7 +3713,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Roero Arneis",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -3782,7 +3782,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Barbaresco",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -3853,7 +3853,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Pauillac",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cedar",
@@ -3922,7 +3922,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Sauternes",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "dried apricot",
      "orange peel"
@@ -3958,7 +3958,7 @@
    "fruitiness": 4,
    "pairings": [
     "barbecue",
-    "game",
+    "game meat",
     "lamb",
     "mushrooms",
     "pork"
@@ -3993,7 +3993,7 @@
     "country": "France",
     "region": "Provence",
     "appellation": "Bandol",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "blackberry",
      "pepper",
@@ -4063,7 +4063,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Haut-Médoc",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bell pepper",
@@ -4097,7 +4097,7 @@
    "tannin": 5,
    "fruitiness": 4,
    "pairings": [
-    "game",
+    "game meat",
     "lamb",
     "roast beef",
     "steak",
@@ -4137,7 +4137,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Saint-Estèphe",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "blackcurrant",
      "cedar"
@@ -4208,7 +4208,7 @@
     "country": "France",
     "region": "Alsace",
     "appellation": "Alsace Gewurztraminer",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "honeysuckle",
@@ -4276,7 +4276,7 @@
     "country": "France",
     "region": "Alsace",
     "appellation": "Crémant d'Alsace",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -4345,7 +4345,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Saint-Émilion Grand Cru",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "chocolate",
      "plum"
@@ -4416,7 +4416,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Pessac-Léognan",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cut grass",
      "grapefruit",
@@ -4487,7 +4487,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Pessac-Léognan",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bell pepper",
@@ -4556,7 +4556,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Sauternes",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "gooseberry",
@@ -4629,7 +4629,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Margaux",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "blackcurrant",
      "cedar",
@@ -4700,7 +4700,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Pomerol",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -4769,7 +4769,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Saint-Estèphe",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bell pepper",
@@ -4839,7 +4839,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Pomerol",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -4908,7 +4908,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Saint-Émilion Grand Cru",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -4943,7 +4943,7 @@
    "fruitiness": 3,
    "pairings": [
     "barbecue",
-    "game",
+    "game meat",
     "lamb",
     "roast beef",
     "steak"
@@ -4978,7 +4978,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Saint-Julien",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cedar",
@@ -5060,7 +5060,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Pauillac",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "oak",
      "smoke",
@@ -5133,7 +5133,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Côte-Rôtie",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -5202,7 +5202,7 @@
     "country": "France",
     "region": "Alsace",
     "appellation": "Alsace Pinot Gris",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "almond",
      "pear"
@@ -5279,7 +5279,7 @@
     "country": "France",
     "region": "Provence",
     "appellation": "Côtes de Provence",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "strawberry",
      "thyme"
@@ -5351,7 +5351,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Bordeaux Supérieur",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -5421,7 +5421,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Haut-Médoc",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -5499,7 +5499,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Haut-Médoc",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "blackcurrant",
      "cedar"
@@ -5572,7 +5572,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Haut-Médoc",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -5640,7 +5640,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Sancerre",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cut grass",
@@ -5708,7 +5708,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Sancerre",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cut grass",
@@ -5776,7 +5776,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Sancerre",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cut grass",
      "gooseberry"
@@ -5846,7 +5846,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Condrieu",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "dried apricot",
@@ -5880,7 +5880,7 @@
    "fruitiness": 3,
    "pairings": [
     "barbecue",
-    "game",
+    "game meat",
     "lamb",
     "steak"
    ],
@@ -5914,7 +5914,7 @@
     "country": "Australia",
     "region": "South Australia",
     "appellation": "Barossa Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -5982,7 +5982,7 @@
     "country": "New Zealand",
     "region": "Central Otago",
     "appellation": "Central Otago",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -6050,7 +6050,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Chablis",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "butter",
@@ -6118,7 +6118,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Chablis",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "butter",
      "lemon"
@@ -6191,7 +6191,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Chablis",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "green apple",
      "lemon"
@@ -6262,7 +6262,7 @@
     "country": "Greece",
     "region": "Macedonia",
     "appellation": "Naoussa",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "tobacco",
@@ -6336,7 +6336,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Chablis",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "apple",
      "oak",
@@ -6407,7 +6407,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Vouvray",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -6477,7 +6477,7 @@
     "country": "France",
     "region": "Languedoc-Roussillon",
     "appellation": "Minervois",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "pepper",
      "smoke",
@@ -6514,7 +6514,7 @@
    "fruitiness": 4,
    "pairings": [
     "barbecue",
-    "game",
+    "game meat",
     "hard cheese",
     "lamb",
     "tomato pasta"
@@ -6549,7 +6549,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Gigondas",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -6617,7 +6617,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Vouvray",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "apple",
      "honeysuckle"
@@ -6691,7 +6691,7 @@
     "country": "France",
     "region": "Alsace",
     "appellation": "Alsace Riesling",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "flint",
      "green apple",
@@ -6764,7 +6764,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Châteauneuf-du-Pape",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -6833,7 +6833,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Muscadet Sèvre-et-Maine",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -6904,7 +6904,7 @@
     "country": "France",
     "region": "Provence",
     "appellation": "Côtes de Provence",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -6973,7 +6973,7 @@
     "country": "France",
     "region": "Alsace",
     "appellation": "Alsace Gewurztraminer",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "lychee",
@@ -7042,7 +7042,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Vouvray",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -7112,7 +7112,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Côtes du Rhône",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -7180,7 +7180,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Crozes-Hermitage",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -7249,7 +7249,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Bordeaux Supérieur",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -7318,7 +7318,7 @@
     "country": "France",
     "region": "Bordeaux",
     "appellation": "Margaux",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "bell pepper",
      "cedar",
@@ -7391,7 +7391,7 @@
     "country": "France",
     "region": "Provence",
     "appellation": "Côtes de Provence",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "raspberry",
@@ -7461,7 +7461,7 @@
     "country": "France",
     "region": "South-West France",
     "appellation": "Cahors",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -7529,7 +7529,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Sancerre",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "raspberry"
@@ -7598,7 +7598,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Muscadet Sèvre-et-Maine",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -7667,7 +7667,7 @@
     "country": "France",
     "region": "South-West France",
     "appellation": "Cahors",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -7735,7 +7735,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Crozes-Hermitage",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "liquorice",
@@ -7803,7 +7803,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Chinon",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bell pepper",
@@ -7871,7 +7871,7 @@
     "country": "France",
     "region": "Alsace",
     "appellation": "Alsace Riesling",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -7941,7 +7941,7 @@
     "country": "France",
     "region": "Provence",
     "appellation": "Bandol",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "pepper",
@@ -8010,7 +8010,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Chinon",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bell pepper",
@@ -8079,7 +8079,7 @@
     "country": "France",
     "region": "Alsace",
     "appellation": "Alsace Riesling",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -8148,7 +8148,7 @@
     "country": "France",
     "region": "Alsace",
     "appellation": "Crémant d'Alsace",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "almond",
      "apple"
@@ -8220,7 +8220,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Châteauneuf-du-Pape",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "hazelnut",
      "orange blossom",
@@ -8291,7 +8291,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Gigondas",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "pepper",
@@ -8368,7 +8368,7 @@
     "country": "France",
     "region": "Jura",
     "appellation": "Arbois",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "apple",
      "hazelnut"
@@ -8441,7 +8441,7 @@
     "country": "France",
     "region": "Languedoc-Roussillon",
     "appellation": "Minervois",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -8510,7 +8510,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Savennières",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "almond",
      "apple",
@@ -8585,7 +8585,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Châteauneuf-du-Pape",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "liquorice",
      "pepper",
@@ -8661,7 +8661,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Châteauneuf-du-Pape",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "liquorice",
      "plum",
@@ -8733,7 +8733,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Châteauneuf-du-Pape",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "liquorice",
@@ -8803,7 +8803,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Crémant de Loire",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -8872,7 +8872,7 @@
     "country": "France",
     "region": "Beaujolais",
     "appellation": "Morgon",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "banana",
      "strawberry"
@@ -8942,7 +8942,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Pouilly-Fuissé",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "butter",
      "peach",
@@ -9011,7 +9011,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Volnay",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -9079,7 +9079,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Gevrey-Chambertin",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "clove",
      "raspberry",
@@ -9149,7 +9149,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Bourgogne Blanc",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "butter",
@@ -9218,7 +9218,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Gevrey-Chambertin",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "clove"
@@ -9288,7 +9288,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Chablis",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "butter",
@@ -9356,7 +9356,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Mâcon-Villages",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "lemon",
@@ -9424,7 +9424,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Chassagne-Montrachet",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -9493,7 +9493,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Gevrey-Chambertin",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -9562,7 +9562,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Mâcon-Villages",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "apple",
      "lemon",
@@ -9631,7 +9631,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Pommard",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -9700,7 +9700,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Puligny-Montrachet",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -9773,7 +9773,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Gevrey-Chambertin",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "raspberry",
@@ -9844,7 +9844,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Bourgogne Rouge",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -9913,7 +9913,7 @@
     "country": "Greece",
     "region": "Cyclades",
     "appellation": "Santorini",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -9982,7 +9982,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Crémant de Bourgogne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "lemon",
@@ -10051,7 +10051,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Chambolle-Musigny",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "clove",
@@ -10119,7 +10119,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Chambolle-Musigny",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -10187,7 +10187,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Bourgogne Rouge",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -10256,7 +10256,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Bourgogne Blanc",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -10325,7 +10325,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Pommard",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -10393,7 +10393,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Saint-Aubin",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "butter",
@@ -10462,7 +10462,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Puligny-Montrachet",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -10530,7 +10530,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Meursault",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "butter",
@@ -10598,7 +10598,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Pouilly-Fuissé",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "lemon",
@@ -10666,7 +10666,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Meursault",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "butter",
@@ -10735,7 +10735,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Nuits-Saint-Georges",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -10804,7 +10804,7 @@
     "country": "France",
     "region": "Burgundy",
     "appellation": "Nuits-Saint-Georges",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -10873,7 +10873,7 @@
     "country": "Italy",
     "region": "Lombardy",
     "appellation": "Franciacorta",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "apple",
      "pear",
@@ -10943,7 +10943,7 @@
     "country": "Italy",
     "region": "Tuscany",
     "appellation": "Brunello di Montalcino",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -11008,7 +11008,7 @@
     "country": "Italy",
     "region": "Veneto",
     "appellation": "Bardolino Chiaretto",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "almond",
      "cherry"
@@ -11078,7 +11078,7 @@
     "country": "Spain",
     "region": "Rioja",
     "appellation": "Rioja",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "pepper",
@@ -11148,7 +11148,7 @@
     "country": "Spain",
     "region": "Rioja",
     "appellation": "Rioja",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "pepper",
      "raspberry",
@@ -11218,7 +11218,7 @@
     "country": "Spain",
     "region": "Rioja",
     "appellation": "Rioja",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "pepper",
@@ -11287,7 +11287,7 @@
     "country": "Spain",
     "region": "Rioja",
     "appellation": "Rioja Rosado",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cedar",
@@ -11355,7 +11355,7 @@
     "country": "Spain",
     "region": "Castilla y León",
     "appellation": "Rueda",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "fennel",
@@ -11425,7 +11425,7 @@
     "country": "Spain",
     "region": "Catalonia",
     "appellation": "Cava",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -11494,7 +11494,7 @@
     "country": "Spain",
     "region": "Galicia",
     "appellation": "Rías Baixas",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "grapefruit",
@@ -11564,7 +11564,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -11634,7 +11634,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bread",
@@ -11703,7 +11703,7 @@
     "country": "Australia",
     "region": "Victoria",
     "appellation": "Yarra Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -11771,7 +11771,7 @@
     "country": "Australia",
     "region": "South Australia",
     "appellation": "Adelaide Hills",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "lemon",
@@ -11839,7 +11839,7 @@
     "country": "United States",
     "region": "Oregon",
     "appellation": "Willamette Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "clove",
@@ -11909,7 +11909,7 @@
     "country": "New Zealand",
     "region": "Marlborough",
     "appellation": "Marlborough",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cut grass",
@@ -11978,7 +11978,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Sonoma Coast",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -12011,7 +12011,7 @@
    "tannin": 4,
    "fruitiness": 4,
    "pairings": [
-    "game",
+    "game meat",
     "lamb",
     "roast beef",
     "steak"
@@ -12046,7 +12046,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Napa Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "bell pepper",
      "cedar",
@@ -12116,7 +12116,7 @@
     "country": "South Africa",
     "region": "Swartland",
     "appellation": "Swartland",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -12184,7 +12184,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Napa Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -12253,7 +12253,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Paso Robles",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -12321,7 +12321,7 @@
     "country": "South Africa",
     "region": "Stellenbosch",
     "appellation": "Stellenbosch",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bell pepper",
@@ -12391,7 +12391,7 @@
     "country": "England",
     "region": "Sussex",
     "appellation": "English Sparkling Wine",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "peach",
      "raspberry"
@@ -12460,7 +12460,7 @@
     "country": "South Africa",
     "region": "Coastal Region",
     "appellation": "Paarl",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "blackberry",
      "plum",
@@ -12532,7 +12532,7 @@
     "country": "France",
     "region": "Provence",
     "appellation": "Côtes de Provence",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "lemon",
@@ -12600,7 +12600,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Pouilly-Fumé",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cut grass",
@@ -12668,7 +12668,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Hermitage",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "blackberry",
      "pepper",
@@ -12739,7 +12739,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -12808,7 +12808,7 @@
     "country": "France",
     "region": "Beaujolais",
     "appellation": "Morgon",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "raspberry",
@@ -12879,7 +12879,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Côtes du Rhône",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "pepper",
@@ -12948,7 +12948,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "apple",
      "butter",
@@ -13020,7 +13020,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bread",
@@ -13090,7 +13090,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -13158,7 +13158,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "butter",
      "peach",
@@ -13229,7 +13229,7 @@
     "country": "France",
     "region": "Provence",
     "appellation": "Coteaux d'Aix-en-Provence",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "liquorice",
@@ -13298,7 +13298,7 @@
     "country": "France",
     "region": "Alsace",
     "appellation": "Crémant d'Alsace",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -13367,7 +13367,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Sancerre",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -13403,7 +13403,7 @@
    "fruitiness": 5,
    "pairings": [
     "barbecue",
-    "game",
+    "game meat",
     "lamb",
     "mushrooms",
     "tomato pasta"
@@ -13438,7 +13438,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Côtes du Rhône",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "liquorice",
@@ -13507,7 +13507,7 @@
     "country": "France",
     "region": "Loire Valley",
     "appellation": "Pouilly-Fumé",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cut grass",
@@ -13577,7 +13577,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "apple",
      "raspberry"
@@ -13647,7 +13647,7 @@
     "country": "France",
     "region": "Rhône Valley",
     "appellation": "Tavel",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "pepper",
@@ -13722,7 +13722,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "peach",
      "pear",
@@ -13795,7 +13795,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bread",
@@ -13830,7 +13830,7 @@
    "pairings": [
     "barbecue",
     "charcuterie",
-    "game",
+    "game meat",
     "lamb",
     "steak"
    ],
@@ -13864,7 +13864,7 @@
     "country": "Australia",
     "region": "South Australia",
     "appellation": "Barossa Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "blackberry",
      "liquorice",
@@ -13933,7 +13933,7 @@
     "country": "United States",
     "region": "Oregon",
     "appellation": "Willamette Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -14002,7 +14002,7 @@
     "country": "Italy",
     "region": "Abruzzo",
     "appellation": "Montepulciano d'Abruzzo",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "pepper",
@@ -14071,7 +14071,7 @@
     "country": "Italy",
     "region": "Sicily",
     "appellation": "Etna Rosso",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -14140,7 +14140,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Gavi",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -14209,7 +14209,7 @@
     "country": "Italy",
     "region": "Abruzzo",
     "appellation": "Montepulciano d'Abruzzo",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -14279,7 +14279,7 @@
     "country": "Italy",
     "region": "Tuscany",
     "appellation": "Bolgheri Superiore",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cedar",
      "pepper",
@@ -14348,7 +14348,7 @@
     "country": "Italy",
     "region": "Abruzzo",
     "appellation": "Cerasuolo d'Abruzzo",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -14417,7 +14417,7 @@
     "country": "Italy",
     "region": "Veneto",
     "appellation": "Prosecco",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "green apple",
@@ -14485,7 +14485,7 @@
     "country": "Italy",
     "region": "Marche",
     "appellation": "Verdicchio dei Castelli di Jesi",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "almond",
      "fennel",
@@ -14556,7 +14556,7 @@
     "country": "Portugal",
     "region": "Minho",
     "appellation": "Vinho Verde",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "green apple",
      "lime"
@@ -14627,7 +14627,7 @@
     "country": "Portugal",
     "region": "Minho",
     "appellation": "Vinho Verde",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "lemon",
@@ -14698,7 +14698,7 @@
     "country": "Portugal",
     "region": "Douro",
     "appellation": "Douro",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cedar",
@@ -14768,7 +14768,7 @@
     "country": "Portugal",
     "region": "Douro",
     "appellation": "Douro",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cedar",
@@ -14839,7 +14839,7 @@
     "country": "Portugal",
     "region": "Douro",
     "appellation": "Douro",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -14907,7 +14907,7 @@
     "country": "New Zealand",
     "region": "Marlborough",
     "appellation": "Marlborough",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -14975,7 +14975,7 @@
     "country": "New Zealand",
     "region": "Marlborough",
     "appellation": "Marlborough",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cut grass",
@@ -15045,7 +15045,7 @@
     "country": "England",
     "region": "Sussex",
     "appellation": "English Sparkling Wine",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -15116,7 +15116,7 @@
     "country": "Australia",
     "region": "South Australia",
     "appellation": "McLaren Vale",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "liquorice",
@@ -15185,7 +15185,7 @@
     "country": "South Africa",
     "region": "Swartland",
     "appellation": "Swartland",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -15253,7 +15253,7 @@
     "country": "Italy",
     "region": "Tuscany",
     "appellation": "Maremma Toscana",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -15286,7 +15286,7 @@
    "tannin": 5,
    "fruitiness": 3,
    "pairings": [
-    "game",
+    "game meat",
     "hard cheese",
     "mushrooms",
     "risotto",
@@ -15322,7 +15322,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Barolo",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -15355,7 +15355,7 @@
    "tannin": 5,
    "fruitiness": 3,
    "pairings": [
-    "game",
+    "game meat",
     "hard cheese",
     "mushrooms",
     "risotto",
@@ -15391,7 +15391,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Barolo",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "cherry",
      "rose",
@@ -15425,7 +15425,7 @@
    "tannin": 5,
    "fruitiness": 3,
    "pairings": [
-    "game",
+    "game meat",
     "hard cheese",
     "mushrooms",
     "risotto",
@@ -15461,7 +15461,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Barolo",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -15530,7 +15530,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Gavi",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "almond",
      "green apple",
@@ -15599,7 +15599,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Barbera d'Asti",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -15667,7 +15667,7 @@
     "country": "Italy",
     "region": "Sardinia",
     "appellation": "Vermentino di Gallura",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "fennel",
      "grapefruit",
@@ -15701,7 +15701,7 @@
    "tannin": 5,
    "fruitiness": 2,
    "pairings": [
-    "game",
+    "game meat",
     "mushrooms",
     "risotto",
     "roast beef"
@@ -15736,7 +15736,7 @@
     "country": "Italy",
     "region": "Piedmont",
     "appellation": "Barolo",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "liquorice",
@@ -15770,7 +15770,7 @@
    "fruitiness": 3,
    "pairings": [
     "barbecue",
-    "game",
+    "game meat",
     "lamb",
     "steak"
    ],
@@ -15804,7 +15804,7 @@
     "country": "Italy",
     "region": "Campania",
     "appellation": "Taurasi",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -15873,7 +15873,7 @@
     "country": "Italy",
     "region": "Tuscany",
     "appellation": "Chianti Classico",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -15941,7 +15941,7 @@
     "country": "Italy",
     "region": "Veneto",
     "appellation": "Soave Classico",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "almond",
@@ -15975,7 +15975,7 @@
    "tannin": 4,
    "fruitiness": 3,
    "pairings": [
-    "game",
+    "game meat",
     "lamb",
     "roast beef",
     "steak",
@@ -16011,7 +16011,7 @@
     "country": "United States",
     "region": "Washington",
     "appellation": "Columbia Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bell pepper",
@@ -16045,7 +16045,7 @@
    "fruitiness": 4,
    "pairings": [
     "barbecue",
-    "game",
+    "game meat",
     "hard cheese",
     "lamb",
     "steak"
@@ -16080,7 +16080,7 @@
     "country": "South Africa",
     "region": "Swartland",
     "appellation": "Swartland",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -16150,7 +16150,7 @@
     "country": "France",
     "region": "Champagne",
     "appellation": "Champagne",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -16218,7 +16218,7 @@
     "country": "Chile",
     "region": "Colchagua Valley",
     "appellation": "Colchagua Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bell pepper",
@@ -16287,7 +16287,7 @@
     "country": "Chile",
     "region": "Casablanca Valley",
     "appellation": "Casablanca Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -16355,7 +16355,7 @@
     "country": "Spain",
     "region": "Galicia",
     "appellation": "Rías Baixas",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "grapefruit",
@@ -16425,7 +16425,7 @@
     "country": "Spain",
     "region": "Catalonia",
     "appellation": "Cava",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "apple",
@@ -16494,7 +16494,7 @@
     "country": "Chile",
     "region": "Colchagua Valley",
     "appellation": "Colchagua Valley",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "bell pepper",
@@ -16563,7 +16563,7 @@
     "country": "Austria",
     "region": "Kamptal",
     "appellation": "Kamptal",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "grapefruit",
@@ -16631,7 +16631,7 @@
     "country": "Austria",
     "region": "Lower Austria",
     "appellation": "Niederösterreich",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "cherry",
@@ -16699,7 +16699,7 @@
     "country": "Germany",
     "region": "Mosel",
     "appellation": "Mosel Riesling",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -16768,7 +16768,7 @@
     "country": "Germany",
     "region": "Mosel",
     "appellation": "Mosel Riesling",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "green apple",
      "peach"
@@ -16837,7 +16837,7 @@
     "country": "Germany",
     "region": "Rheinhessen",
     "appellation": "Sekt",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "flint",
@@ -16906,7 +16906,7 @@
     "country": "Germany",
     "region": "Mosel",
     "appellation": "Mosel Riesling",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "green apple",
@@ -16979,7 +16979,7 @@
     "country": "Germany",
     "region": "Mosel",
     "appellation": "Mosel Riesling",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "flint",
      "lemon",
@@ -17050,7 +17050,7 @@
     "country": "Germany",
     "region": "Mosel",
     "appellation": "Mosel Riesling",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "green apple",
@@ -17119,7 +17119,7 @@
     "country": "Germany",
     "region": "Rheingau",
     "appellation": "Rheingau Riesling",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "green apple",
@@ -17187,7 +17187,7 @@
     "country": "Germany",
     "region": "Baden",
     "appellation": "Baden",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "clove",
@@ -17256,7 +17256,7 @@
     "country": "Germany",
     "region": "Pfalz",
     "appellation": "Pfalz Riesling",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "green apple",
@@ -17324,7 +17324,7 @@
     "country": "Austria",
     "region": "Burgenland",
     "appellation": "Burgenland",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "blackberry",
@@ -17392,7 +17392,7 @@
     "country": "Austria",
     "region": "Kamptal",
     "appellation": "Kamptal",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [
      "grapefruit",
      "pepper"
@@ -17462,7 +17462,7 @@
     "country": "United States",
     "region": "California",
     "appellation": "Santa Barbara County",
-    "source": "fictional HEC Cave demo catalogue (make_hec_catalog.py)",
+    "source": "fictional cave. demo catalogue (make_hec_catalog.py)",
     "flavours_stated": [],
     "flavours_inferred": [
      "butter",
@@ -18093,7 +18093,7 @@
    "group": "meat"
   },
   {
-   "food": "game",
+   "food": "game meat",
    "group": "meat"
   },
   {

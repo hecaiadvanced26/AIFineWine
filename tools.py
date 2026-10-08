@@ -72,9 +72,25 @@ def reject_constant(value):
     raise ValueError(f"Invalid JSON number: {value}")
 
 
+def _one_output_per_turn(name, memory):
+    """A turn shows EITHER a question with chips OR one set of results, never a mix."""
+    if name == "recommend_wines" and memory.choices:
+        return "You already asked the customer a question this turn. Wait for the answer; show no wines now."
+    if name == "offer_choices" and (memory.recommendations or memory.comparison):
+        return "Results are already shown this turn. Do not ask a guided question; end with the short answer."
+    if name == "find_cheaper_alternatives" and memory.recommendations:
+        return "Recommendations are already shown this turn. Do not add cheaper alternatives unless the customer asks in their next message."
+    if name == "recommend_wines" and memory.comparison:
+        return "A comparison is already shown this turn. Do not add a second set of wines."
+    return None
+
+
 def dispatch(name, arguments, memory):
     if name not in FUNCTIONS:
         return {"status": "error", "error": "Unknown tool."}
+    blocked = _one_output_per_turn(name, memory)
+    if blocked:
+        return {"status": "blocked", "error": blocked}
     try:
         args = json.loads(arguments, parse_constant=reject_constant)
         result = FUNCTIONS[name](**args)

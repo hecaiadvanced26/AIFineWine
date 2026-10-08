@@ -1,4 +1,4 @@
-"""Reference tables for the fictional HEC Cave catalogue (used by make_hec_catalog.py).
+"""Reference tables for the fictional cave. catalogue (used by make_hec_catalog.py).
 
 What is real and what is invented
 - Real: country / region / appellation / grape pairings (taken from the Patroon wine list and the
@@ -19,7 +19,7 @@ FOODS = [
     ("salad", "vegetarian"), ("vegetables", "vegetarian"), ("mushrooms", "vegetarian"),
     ("goat cheese", "cheese"), ("soft cheese", "cheese"), ("hard cheese", "cheese"), ("blue cheese", "cheese"),
     ("charcuterie", "meat"), ("roast chicken", "meat"), ("pork", "meat"), ("duck", "meat"),
-    ("lamb", "meat"), ("steak", "meat"), ("roast beef", "meat"), ("game", "meat"),
+    ("lamb", "meat"), ("steak", "meat"), ("roast beef", "meat"), ("game meat", "meat"),
     ("barbecue", "meat"), ("foie gras", "meat"),
     ("risotto", "italian"), ("tomato pasta", "italian"), ("cream pasta", "italian"), ("pizza", "italian"),
     ("spicy asian", "spicy"), ("curry", "spicy"), ("tapas", "spanish"),
@@ -168,7 +168,7 @@ grape("Gamay", (1, 3), (3, 5), (1, 3), (4, 5),
       ["charcuterie", "roast chicken", "pork", "soft cheese", "pizza", "tomato pasta"])
 grape("Cabernet Sauvignon", (3, 5), (3, 4), (4, 5), (3, 4),   # [GS]
       ["blackcurrant", "cedar", "tobacco", "blackberry", "bell pepper", "vanilla"],
-      ["steak", "lamb", "roast beef", "hard cheese", "game", "barbecue"])
+      ["steak", "lamb", "roast beef", "hard cheese", "game meat", "barbecue"])
 grape("Merlot", (3, 5), (2, 4), (3, 4), (3, 5),   # [GS]
       ["plum", "blackberry", "chocolate", "cherry", "cedar"],
       ["roast beef", "pork", "duck", "mushrooms", "tomato pasta", "hard cheese"])
@@ -177,13 +177,13 @@ grape("Cabernet Franc", (2, 4), (3, 5), (3, 4), (3, 4),
       ["pork", "roast chicken", "duck", "charcuterie", "goat cheese", "lamb"])
 grape("Syrah", (3, 5), (3, 4), (3, 5), (3, 4),   # [GS]
       ["blackberry", "pepper", "smoke", "violet", "liquorice", "plum"],
-      ["barbecue", "lamb", "steak", "game", "charcuterie", "hard cheese"])
+      ["barbecue", "lamb", "steak", "game meat", "charcuterie", "hard cheese"])
 grape("Grenache", (4, 5), (2, 4), (2, 4), (3, 5),   # [GS]
       ["strawberry", "raspberry", "pepper", "liquorice", "plum", "thyme"],
       ["barbecue", "lamb", "tomato pasta", "pork", "tapas", "charcuterie"])
 grape("Mourvedre", (4, 5), (3, 4), (4, 5), (2, 4),
       ["blackberry", "pepper", "liquorice", "thyme", "smoke", "plum"],
-      ["lamb", "game", "barbecue", "hard cheese", "mushrooms"])
+      ["lamb", "game meat", "barbecue", "hard cheese", "mushrooms"])
 grape("Carignan", (3, 4), (3, 5), (3, 4), (3, 4),
       ["blackberry", "thyme", "plum", "pepper"],
       ["barbecue", "charcuterie", "lamb", "tomato pasta", "pizza"])
@@ -191,7 +191,7 @@ grape("Cinsault", (1, 3), (3, 4), (1, 2), (4, 5),
       ["strawberry", "raspberry", "cherry", "rose"], ["grilled fish", "salad", "tapas", "aperitif"])
 grape("Nebbiolo", (3, 4), (4, 5), (5, 5), (2, 3),   # [GS]
       ["cherry", "rose", "tar", "liquorice", "violet"],
-      ["risotto", "mushrooms", "roast beef", "game", "hard cheese", "steak"])
+      ["risotto", "mushrooms", "roast beef", "game meat", "hard cheese", "steak"])
 grape("Sangiovese", (3, 5), (4, 5), (4, 5), (3, 4),   # [GS]
       ["cherry", "plum", "tomato", "tobacco", "thyme"],
       ["tomato pasta", "pizza", "steak", "pork", "hard cheese", "charcuterie"])
@@ -205,7 +205,7 @@ grape("Mencia", (2, 3), (3, 5), (2, 3), (4, 5),
       ["pork", "charcuterie", "roast chicken", "tapas", "duck"])
 grape("Touriga Nacional", (4, 5), (3, 4), (4, 5), (3, 4),
       ["blackberry", "violet", "plum", "cedar"],
-      ["steak", "lamb", "hard cheese", "barbecue", "game"])
+      ["steak", "lamb", "hard cheese", "barbecue", "game meat"])
 grape("Touriga Franca", (3, 4), (3, 4), (3, 4), (3, 4),
       ["blackberry", "violet", "plum", "pepper"], ["steak", "lamb", "barbecue", "hard cheese"])
 grape("Alicante Bouschet", (4, 5), (2, 3), (4, 5), (3, 4),
@@ -217,7 +217,7 @@ grape("Malbec", (4, 5), (3, 4), (3, 5), (4, 5),
       ["steak", "barbecue", "lamb", "roast beef", "hard cheese"])
 grape("Tannat", (4, 5), (4, 5), (5, 5), (3, 4),
       ["blackberry", "plum", "smoke", "chocolate", "tar"],
-      ["duck", "steak", "charcuterie", "barbecue", "hard cheese", "game"])
+      ["duck", "steak", "charcuterie", "barbecue", "hard cheese", "game meat"])
 grape("Zinfandel", (4, 5), (3, 4), (3, 4), (4, 5),
       ["blackberry", "prune", "pepper", "raspberry", "liquorice", "clove"],
       ["barbecue", "pizza", "pork", "tomato pasta", "charcuterie", "steak"])
@@ -258,7 +258,7 @@ grape("Nero d'Avola", (3, 5), (3, 4), (3, 4), (4, 5),
       ["barbecue", "tomato pasta", "pizza", "lamb", "pork"])
 grape("Aglianico", (4, 5), (4, 5), (4, 5), (3, 4),
       ["blackberry", "plum", "tar", "liquorice", "tobacco"],
-      ["lamb", "game", "steak", "hard cheese", "barbecue"])
+      ["lamb", "game meat", "steak", "hard cheese", "barbecue"])
 grape("Xinomavro", (3, 4), (4, 5), (4, 5), (3, 4),
       ["cherry", "tomato", "tobacco", "plum", "thyme"],
       ["lamb", "tomato pasta", "pork", "hard cheese", "mushrooms"])
@@ -330,7 +330,7 @@ TEMPLATES = [
     T("Italy", "Tuscany", "Bolgheri Superiore", "red", ["Cabernet Sauvignon", "Merlot", "Cabernet Franc"], 5, 1, (2017, 2020)),
     T("Italy", "Veneto", "Amarone della Valpolicella", "red", ["Corvina", "Corvinone", "Rondinella"], 4, 2, (2015, 2018),
       body=(5, 5), tannin=(4, 5), acid=(3, 4), sweet=(2, 2), fruit=(4, 5),
-      foods=["roast beef", "game", "hard cheese", "steak", "mushrooms"]),
+      foods=["roast beef", "game meat", "hard cheese", "steak", "mushrooms"]),
     T("Italy", "Veneto", "Valpolicella Ripasso", "red", ["Corvina", "Rondinella"], 2, 2, (2019, 2021),
       body=(3, 4), sweet=(1, 2)),
     T("Italy", "Abruzzo", "Montepulciano d'Abruzzo", "red", ["Montepulciano"], 1, 2, (2020, 2022)),
