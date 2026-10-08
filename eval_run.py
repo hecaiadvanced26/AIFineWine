@@ -1,6 +1,6 @@
 """Measured-results runner: asks the real assistant a list of questions several times and scores what comes back.
 
-    python eval_run.py                                   # eval_questions.json, 3 runs each, label = model name
+    python eval_run.py                                   # eval_questions.csv, 3 runs each, label = model name
     python eval_run.py --check                           # no model calls: validate the questions against the catalogue
     python eval_run.py --runs 5 --label modelA --out results_modelA.jsonl
     python eval_run.py --summarize results_modelA.jsonl results_modelB.jsonl   # side-by-side comparison
@@ -259,6 +259,9 @@ def run_one(question, client, model):
     outcome["draft"] = memory.pending_order
     calls = usage_log.entries[before:]
     outcome["tools"] = [t for e in calls for t in e.get("tools", [])]
+    failed_call = next((e for e in calls if e.get("error")), None)
+    if failed_call and "error" not in outcome:  # chat() hides model errors in a polite reply: a failed call is never a pass
+        outcome["error"] = f"model call failed: {failed_call['error']}"
     outcome["wall_s"] = round(time.perf_counter() - started, 2)
     outcome["calls"] = len([e for e in calls if not e.get("error")])
     outcome["prompt_tokens"] = sum(e.get("prompt_tokens", 0) for e in calls)
@@ -341,8 +344,8 @@ def summarize(rows):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--questions", nargs="+", default=[str(p) for p in (HERE / "eval_questions.json", HERE / "eval_questions.csv") if p.exists()],
-                        help="question files (.json or .csv); default: eval_questions.json and eval_questions.csv")
+    parser.add_argument("--questions", nargs="+", default=[str(next(p for p in (HERE / "eval_questions.csv", HERE / "eval_questions.json") if p.exists()))],
+                        help="question files (.csv or .json); default: eval_questions.csv (or the old eval_questions.json)")
     parser.add_argument("--runs", type=int, default=3)
     parser.add_argument("--label", default=None, help="name of this configuration, e.g. the model")
     parser.add_argument("--out", default=None)

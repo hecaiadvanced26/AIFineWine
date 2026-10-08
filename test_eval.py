@@ -18,7 +18,7 @@ def q(**kw):
 
 class QuestionFileTests(unittest.TestCase):
     def test_shipped_seed_questions_are_valid_against_the_catalogue(self):
-        questions = json.loads((ev.HERE / "eval_questions.json").read_text(encoding="utf-8"))
+        questions = ev.load_questions([ev.HERE / "eval_questions.csv"])
         self.assertEqual(ev.validate_questions(questions), [])
         self.assertGreaterEqual(len(questions), 10)
 
@@ -78,8 +78,9 @@ class CsvTests(unittest.TestCase):
         self.assertTrue(any("NO in-stock wine" in p for p in problems))
 
     def test_shipped_template_has_the_right_header_and_loads(self):
-        questions = ev.load_questions([ev.HERE / "eval_questions.json", ev.HERE / "eval_questions.csv"])
+        questions = ev.load_questions([ev.HERE / "eval_questions.csv"])
         self.assertGreaterEqual(len(questions), 16)
+        self.assertEqual(ev.validate_questions(questions), [])
         header = (ev.HERE / "eval_questions.csv").read_text(encoding="utf-8-sig").splitlines()[0]
         self.assertEqual(header.split(","), ev.CSV_COLUMNS)
 
@@ -165,6 +166,18 @@ class RunTests(unittest.TestCase):
         self.assertTrue(blocked["blocked"])
         with patch("agent.chat", side_effect=RuntimeError("down")):
             self.assertIn("RuntimeError", ev.run_one({"question": "a red wine"}, None, "m")["error"])
+
+    def test_hidden_model_error_counts_as_failure_even_for_no_cards_questions(self):
+        import usage_log
+
+        def fake_chat(client, model, memory, text):  # like agent.chat: the model call fails, a polite reply comes back
+            usage_log.record(memory.conversation_id, 1, 1, model, {}, 0.03, [], error="BadRequestError")
+            return "Sorry, something went wrong."
+        with patch("agent.chat", fake_chat):
+            outcome = ev.run_one({"question": "a Japanese wine"}, None, "m")
+        passed, failures, _ = ev.score(q(behaviour="no_cards"), outcome)
+        self.assertFalse(passed)
+        self.assertIn("BadRequestError", " ".join(failures))
 
 
 class SummaryTests(unittest.TestCase):
