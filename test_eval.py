@@ -179,6 +179,25 @@ class RunTests(unittest.TestCase):
         self.assertFalse(passed)
         self.assertIn("BadRequestError", " ".join(failures))
 
+    def test_run_one_records_what_the_model_asked_the_tools(self):
+        import agent
+
+        def fake_chat(client, model, memory, text):
+            agent.dispatch("recommend_wines", '{"wine_type": "any", "budget_min_eur": null, "budget_max_eur": null, '
+                           '"aroma_families": [], "aromas": [], "country": "Japan", "include_style_guesses": false}', memory)
+            return "None."
+        with patch("agent.chat", fake_chat):
+            outcome = ev.run_one({"question": "a Japanese wine"}, None, "m")
+        call = outcome["tool_calls"][0]
+        self.assertEqual((call["tool"], call["status"], call["wines"]), ("recommend_wines", "no_matches", 0))
+        self.assertIn("Japan", call["arguments"])
+
+    def test_only_runs_the_named_questions(self):
+        with patch.object(ev, "run_all", return_value=[]) as run_all, patch.object(ev, "summarize", return_value=""):
+            self.assertEqual(ev.main(["--only", "seed-csv06,seed-csv16", "--runs", "1", "--out", "x.jsonl"]), 0)
+        self.assertEqual([q["id"] for q in run_all.call_args[0][0]], ["seed-csv06", "seed-csv16"])
+        self.assertEqual(ev.main(["--only", "nope", "--check"]), 1)
+
 
 class SummaryTests(unittest.TestCase):
     def test_summary_compares_configurations_and_counts_stability(self):

@@ -238,21 +238,34 @@ def score(question, outcome):
 def run_one(question, client, model):
     import guard
     import usage_log
+    import agent
     from agent import chat
+    from unittest.mock import patch
     from memory import Memory
     from prompts import STAFF_EMAIL
     started, before = time.perf_counter(), len(usage_log.entries)
     memory = Memory()
     canned = guard.screen_input(question["question"])
     outcome = {"blocked": bool(canned), "tools": []}
+    tool_calls = []
+    real_dispatch = agent.dispatch
+
+    def recording_dispatch(name, arguments, mem):  # what the model asked for, so failures can be diagnosed
+        result = real_dispatch(name, arguments, mem)
+        info = result if isinstance(result, dict) else {}
+        tool_calls.append({"tool": name, "arguments": str(arguments)[:400], "status": info.get("status"),
+                           "wines": len(info.get("wines") or []), "error": str(info.get("error") or "")[:150] or None})
+        return result
     try:
         if canned:
             outcome["reply"] = canned
         else:
-            outcome["reply"] = chat(client, model, memory, question["question"])
+            with patch.object(agent, "dispatch", recording_dispatch):
+                outcome["reply"] = chat(client, model, memory, question["question"])
             outcome["problem"] = guard.reply_problem(outcome["reply"], (STAFF_EMAIL,))
     except Exception as error:  # a crashed run is a result, not a reason to stop the whole evaluation
         outcome["error"] = f"{type(error).__name__}: {str(error)[:100]}"
+    outcome["tool_calls"] = tool_calls
     outcome["cards"] = (memory.recommendations or {}).get("wines", [])
     outcome["comparison"] = memory.comparison
     outcome["choices"] = memory.choices
@@ -287,7 +300,8 @@ def run_all(questions, runs, label, out_path, pause):
                        "reply": outcome.get("reply"), "wall_s": outcome["wall_s"], "calls": outcome["calls"],
                        "prompt_tokens": outcome["prompt_tokens"], "completion_tokens": outcome["completion_tokens"],
                        "cost": outcome["cost"], "usage_missing": outcome["usage_missing"],
-                       "cards": [c.get("wine_id") for c in outcome.get("cards", [])]}
+                       "cards": [c.get("wine_id") for c in outcome.get("cards", [])],
+                       "tool_calls": outcome.get("tool_calls", [])}
                 handle.write(json.dumps(row, ensure_ascii=False) + "\n")
                 handle.flush()
                 rows.append(row)
@@ -350,6 +364,7 @@ def main(argv=None):
     parser.add_argument("--label", default=None, help="name of this configuration, e.g. the model")
     parser.add_argument("--out", default=None)
     parser.add_argument("--pause", type=float, default=1.0, help="seconds between runs")
+    parser.add_argument("--only", default=None, help="run only these question ids, comma separated, e.g. seed-csv06,seed-csv16")
     parser.add_argument("--check", action="store_true", help="validate questions only, no model calls")
     parser.add_argument("--summarize", nargs="+", metavar="RESULTS", help="summarise result files, no model calls")
     args = parser.parse_args(argv)
@@ -361,6 +376,17 @@ def main(argv=None):
         questions = load_questions(args.questions)
     except (ValueError, KeyError, OSError) as error:
         print(f"Could not read the questions file: {error}. Check that numbers are plain numbers and the file is saved as CSV UTF-8.")
+        return 1
+    if args.only:
+        wanted = {part.strip() for part in args.only.split(",") if part.strip()}
+        missing = wanted - {q["id"] for q in questions}
+        if missing:
+            print("Unknown question id(s): " + ", ".join(sorted(missing)))
+            return 1
+        questions = [q for q in questions if q["id"] in wanted]
+    if not questions:
+        print("No questions found in " + ", ".join(args.questions) + ". The file probably has only the header row: "
+              "use the eval_questions.csv from the latest upload (it contains 16 seed questions).")
         return 1
     problems = validate_questions(questions)
     if problems:
