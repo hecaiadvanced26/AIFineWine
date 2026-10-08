@@ -1,13 +1,14 @@
-"""Import the bundled catalog with a backup, keeping stock for retained IDs and orders."""
+"""Update catalog rows (and add missing ones), keeping remaining stock and all existing orders."""
+import json
 import sqlite3
 from datetime import datetime, timezone
 
-from database import DATA_DIR, apply_catalog, connect, initialize, load_catalog
+from database import DATA_DIR, connect, initialize
 
 
 def refresh_catalog():
-    snapshot = load_catalog()
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    initialize()
+    rows = json.loads((DATA_DIR / "demo_wines.json").read_text())
     backup_path = DATA_DIR / ("wines-before-refresh-" +
                              datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%f") + ".db")
     db = connect()
@@ -17,13 +18,15 @@ def refresh_catalog():
             db.backup(backup)
         finally:
             backup.close()
-    finally:
-        db.close()
-    initialize()
-    db = connect()
-    try:
         with db:
-            apply_catalog(db, snapshot)
+            for row in rows:
+                db.execute("""UPDATE wines SET name=?, price_cents=?, vintage=?, attributes=?
+                    WHERE wine_id=?""", (row["name"], row["price_cents"], row["vintage"],
+                    json.dumps(row["attributes"]), row["wine_id"]))
+                # New wines get the stock from the file; existing rows keep their stock.
+                db.execute("INSERT OR IGNORE INTO wines VALUES (?, ?, ?, ?, ?, ?)", (
+                    row["wine_id"], row["name"], row["price_cents"], row["vintage"],
+                    row["stock"], json.dumps(row["attributes"])))
     finally:
         db.close()
     return backup_path
