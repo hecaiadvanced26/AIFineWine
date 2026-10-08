@@ -51,6 +51,10 @@ class AdvisorTests(DbCase):
         with self.assertRaises(ValueError):
             self.rec(foods=['unicorn'])
 
+    def test_dessert_is_not_a_colour(self):
+        with self.assertRaises(ValueError):
+            self.rec(wine_type='dessert', sweetness='sweet')
+
     def test_vintage_is_a_ranked_wish_and_is_validated(self):
         result = self.rec(wine_type='red', grapes=['Cabernet Sauvignon'], vintage=2020)
         self.assertIn('vintage: 2020', result['wishes'])

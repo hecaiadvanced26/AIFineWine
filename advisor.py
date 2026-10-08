@@ -10,7 +10,7 @@ import unicodedata
 
 from database import connect
 
-TYPES = ("red", "white", "rose", "sparkling", "dessert", "any")
+TYPES = ("red", "white", "rose", "sparkling", "any")  # no "dessert" colour: sweet wines are white or sparkling here
 FAMILIES = ("Red-wine fruit", "White-wine fruit", "Floral", "Oak ageing", "Vegetal", "Mineral")
 MAX_RESULTS = 3
 
