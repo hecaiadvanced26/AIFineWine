@@ -11,6 +11,23 @@ from catalog import run_query
 
 
 class CatalogTests(unittest.TestCase):
+    def test_runtime_directory_seeds_from_bundled_catalog(self):
+        with tempfile.TemporaryDirectory() as folder:
+            data = Path(folder) / 'runtime' / 'data'
+            with patch.object(database, 'DATA_DIR', data), \
+                    patch.object(database, 'DB_PATH', data / 'wines.db'):
+                database.initialize()
+                db = database.connect()
+                try:
+                    self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 4)
+                    with db:
+                        db.execute("UPDATE wines SET stock=1 WHERE wine_id='DEMO-001'")
+                    database.initialize()
+                    self.assertEqual(db.execute(
+                        "SELECT stock FROM wines WHERE wine_id='DEMO-001'").fetchone()[0], 1)
+                finally:
+                    db.close()
+
     def test_refresh_preserves_stock_orders_and_backs_up(self):
         with tempfile.TemporaryDirectory() as folder:
             data = Path(folder)

@@ -1,9 +1,11 @@
 """Create a small SQLite database and load illustrative demo shop rows."""
 import json
+import os
 import sqlite3
 from pathlib import Path
 
-DATA_DIR = Path(__file__).parent / "data"
+SOURCE_DATA_DIR = Path(__file__).parent / "data"
+DATA_DIR = Path(os.environ.get("WINE_DATA_DIR", str(SOURCE_DATA_DIR)))
 DB_PATH = DATA_DIR / "wines.db"
 
 
@@ -17,7 +19,7 @@ def connect(read_only=False):
 
 
 def initialize():
-    DATA_DIR.mkdir(exist_ok=True)
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
     db = connect()
     try:
         with db:
@@ -31,7 +33,10 @@ def initialize():
                 order_id TEXT PRIMARY KEY, payload TEXT NOT NULL
             )""")
             if db.execute("SELECT COUNT(*) FROM wines").fetchone()[0] == 0:
-                rows = json.loads((DATA_DIR / "demo_wines.json").read_text())
+                catalog_path = DATA_DIR / "demo_wines.json"
+                if not catalog_path.exists():
+                    catalog_path = SOURCE_DATA_DIR / "demo_wines.json"
+                rows = json.loads(catalog_path.read_text())
                 for row in rows:
                     db.execute("INSERT INTO wines VALUES (?, ?, ?, ?, ?, ?)", (
                         row["wine_id"], row["name"], row["price_cents"],

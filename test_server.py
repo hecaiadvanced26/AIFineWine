@@ -83,6 +83,12 @@ class ServerTests(unittest.TestCase):
         response = self.client.post('/api/reset', json={}, headers={'Origin': 'https://evil.example'})
         self.assertEqual(response.status_code, 403)
 
+    def test_health_does_not_require_provider_settings(self):
+        with patch.dict(os.environ, {}, clear=True):
+            response = self.client.get('/api/health')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json, {'ok': True, 'storage': 'local'})
+
     def test_busy_session_rejected(self):
         state = self.state()
         state['lock'].acquire()

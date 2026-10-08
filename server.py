@@ -17,9 +17,18 @@ from orders import submit_order
 
 FRONTEND = Path(__file__).parent / "frontend" / "dist"
 app = Flask(__name__, static_folder=str(FRONTEND / "assets"), static_url_path="/assets")
-app.secret_key = secrets.token_hex(32)
-app.config.update(MAX_CONTENT_LENGTH=16_384, SESSION_COOKIE_SAMESITE="Strict")
+app.secret_key = os.environ.get("FLASK_SECRET_KEY") or secrets.token_hex(32)
+app.config.update(MAX_CONTENT_LENGTH=16_384, SESSION_COOKIE_SAMESITE="Strict",
+                  SESSION_COOKIE_SECURE=bool(os.getenv("VERCEL")))
 conversations = {}  # Local demo only: memory is cleared when the server restarts.
+
+if os.getenv("VERCEL"):
+    initialize()
+
+
+@app.get("/api/health")
+def health_route():
+    return jsonify(ok=True, storage="temporary" if os.getenv("VERCEL") else "local")
 
 
 def conversation():

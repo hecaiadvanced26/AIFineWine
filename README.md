@@ -120,6 +120,23 @@ are optional: missing preferences mean no filter, and 'any'/'no limit' remove a
 constraint. A complete preference form or Pydantic model is not required. Stock and price
 always come from tools, not chat memory.
 
+## Vercel demo deployment
+
+The linked Vercel project builds the React frontend into `public/` and runs
+`server:app` as a Flask function. Set `OPENAI_API_KEY`, `OPENAI_MODEL`,
+`OPENAI_BASE_URL`, and a random `FLASK_SECRET_KEY` in Vercel environment settings.
+Set `WINE_DATA_DIR=/tmp/wine-retail-assistant` for writable demo storage.
+The source catalog seeds each new runtime's database. `/api/health` checks the runtime.
+
+This hosted version is a temporary demo: conversations live in process memory,
+and stock changes and order exports live in temporary SQLite storage. They may
+reset on restarts or differ between runtime instances. Order drafts can expire
+between requests. Use a shared durable database and session store before treating
+the deployment as a multi-user shop. No payment or real shop integration exists.
+
+Deploy with `vercel --prod`. To roll back, promote a previous working deployment
+from the Vercel project dashboard. Environment secrets remain outside Git.
+
 ## Manual checks
 
 Offline UI and status tests (no API calls or database writes):

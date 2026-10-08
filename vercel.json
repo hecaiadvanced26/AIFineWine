@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "flask",
+  "buildCommand": "npm --prefix frontend ci && npm --prefix frontend run build && mkdir -p public && cp -R frontend/dist/. public/",
+  "functions": {
+    "server.py": {
+      "maxDuration": 300,
+      "includeFiles": "data/demo_wines.json"
+    }
+  }
+}
