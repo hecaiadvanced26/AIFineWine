@@ -202,3 +202,5 @@ button:focus-visible, a:focus-visible, summary:focus-visible, textarea:focus-vis
 .wine-quote { margin: 0; padding: 8px 12px; border-left: 3px solid var(--wine); background: var(--wine-soft);
   font: italic 13px/1.5 Georgia, serif; border-radius: 0 8px 8px 0; }
 .wine-quote cite { display: block; margin-top: 4px; font: normal 11px/1.4 system-ui, sans-serif; color: var(--muted); }
+
+.logo { display: block; height: 34px; width: auto; border-radius: 6px; }
