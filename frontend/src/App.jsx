@@ -4,7 +4,7 @@ import { post, streamChat } from './api.js';
 import OrderCard from './OrderCard.jsx';
 import OrderConfirmation from './OrderConfirmation.jsx';
 
-const suggestions = ['An Italian red with cherry aromas', 'Best-rated white wines in stock', 'Show wines under €20'];
+const suggestions = ['A red wine from Spain', 'White wines with stated citrus notes', 'Show wines under €20'];
 
 function Glass() {
   return <svg viewBox="0 0 80 100" fill="none" aria-hidden="true">
@@ -90,7 +90,7 @@ export default function App() {
       <button className="new-chat" onClick={reset} disabled={busy}>＋ New conversation</button>
       <div className="sidebar-note"><span className="eyebrow">A LITTLE GUIDANCE</span>
         <h2>A good bottle.<br />A simple conversation.</h2>
-        <p>Tell us your taste, food pairing or budget. We’ll find a match in the shop’s catalog.</p>
+        <p>Tell us your taste, preferred origin or budget. We’ll find a match in the shop’s catalog.</p>
         <ul><li>Catalog-backed answers</li><li>Live availability checks</li><li>You confirm every order</li></ul>
       </div>
       <p className="demo-note">COURSE DEMO<br />Real wine names · Illustrative shop data</p>
@@ -124,13 +124,13 @@ export default function App() {
         <form className="composer" onSubmit={event => { event.preventDefault(); send(input); }}>
           <label className="sr-only" htmlFor="message">Your message</label>
           <textarea id="message" rows="2" value={input} disabled={busy} maxLength={4000}
-            placeholder="Tell us what you like, or what’s for dinner…" onChange={event => setInput(event.target.value)}
+            placeholder="Tell us your taste, preferred origin or budget…" onChange={event => setInput(event.target.value)}
             onKeyDown={event => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
               event.preventDefault(); send(input);
             } }} />
           <button className="send" aria-label="Send message" disabled={busy || !input.trim()}>↑</button>
         </form>
-        <p className="composer-note">Real wine names. Demo prices, ratings & inventory. Local orders only; no payments taken.</p>
+        <p className="composer-note">Imported wines & ratings. Flavour notes distinguish stated and inferred. Demo prices & inventory; no payments taken.</p>
       </div>
     </main>
   </div>;

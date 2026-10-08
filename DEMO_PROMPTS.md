@@ -1,46 +1,48 @@
 # Demo prompts
 
-Run `./start.sh` and open http://localhost:8000. The catalog is 200 real wines from the
-taster's own Vivino tasting log. **Price, stock and bottle size are invented demo data.**
-No real payment, email or shop delivery integration.
-
-Expectations below were computed from a freshly seeded database (`data/demo_wines.json`),
-not from a model run. They change if stock was already modified in your local `data/wines.db`.
+Run `./start.sh` locally or open the Vercel demo. Catalog: 200 imported wines;
+prices, inventory and bottle sizes are fictional. No real payment or delivery.
+For an existing local database, first run `python refresh_demo_catalog.py`.
 
 ## Main flow
 
-1. “I'm looking for an Italian red wine with cherry aromas.”
-   Expected (aroma written by the taster, in stock): W-149 Ponte Lungo Curioso Grand
-   Edizione (€15.00), W-155 San Marzano Il Pumo Primitivo (€15.00), W-178 Hoffmann's
-   Wein:Bar Montepulciano (€14.00), W-184 Tegut Bio Montepulciano Abruzzen Trocken (€12.00).
-   Check that the answer says these aroma tags come from the taster's notes (the free-text reviews themselves are not in the catalog).
-2. “Which is the cheapest one, and do you have five bottles?”
-   Expected: W-184 (€12.00, 9 in stock).
-3. “Prepare two bottles of W-001.”
-   Expected: draft totaling €17.00 (2 × €8.50). No stock change until confirmation.
-4. Click **Confirm order**.
-   Expected: “Order confirmed” banner; local export only; W-001 stock goes 18 → 16.
+1. “Show red wines from Spain under €15. I need two bottles.”
+   Expected: tool-backed available wines. Initial seed includes Barceliño Tinto
+   (2019, €11.50, two bottles) and Félix Solís Los Molinos Gran Reserva (€7.50).
+2. “Tell me about barcelino-tinto-2019-159331692, including flavour provenance.”
+   Expected: imported metadata; any style guesses labeled inferred.
+3. “Prepare two bottles of barcelino-tinto-2019-159331692.”
+   Expected: €23.00 draft; stock unchanged before confirmation.
+4. Click **Confirm order** or use `/confirm` in the terminal.
+   Expected: local demo export; stock decreases once. Repeating the same order ID
+   does not deduct stock again. Use **Cancel** for rehearsals.
 
-Use **Cancel** for rehearsals without changing stock. Terminal equivalents:
-`./start.sh --cli`, `/confirm`, `/cancel`.
+## Provenance and missing-field checks
 
-## Other prompts
+- “Red wines with stated blackberry notes under €20.” — Match stated notes only;
+  initial seed includes 8 Bagatella Zinfandel.
+- “Include style-based flavour guesses too.” — May include inferred notes,
+  clearly labeled as guesses.
+- “Fruity, dry wine for chicken.” — Explain dryness and pairings are not recorded;
+  ask before ignoring unsupported constraints. Fruitiness is aroma, not sweetness.
+- “Compare taster ratings with community ratings.” — Separate score columns;
+  missing values remain unknown. Never call these verified shop ratings.
+- “What vintage is a wine whose vintage is NULL?” — Unknown/non-vintage;
+  never infer a year from its ID or name.
+- “Show wines under €5.” — Query first; no invented match.
+- “Prepare 99 bottles of barcelino-tinto-2019-159331692.” — Stock guard.
+- “Prepare one bottle of 20er-schulz-zweigelt-hagelsberg-nv-142492088.” —
+  Out-of-stock guard in fresh seed.
+- “Certified organic wines?” — Certification not recorded, even if a name says Bio.
 
-- “Best-rated white wines in stock.” — Top by taster_rating: W-152 Roche Mazet Cuvée
-  Signature Chardonnay (4.8), then 4.7: W-048, W-125, W-143, W-145. It must say this is one
-  person's rating.
-- “How many Austrian wines are in stock?” — 9 (count query).
-- “Show wines under €5.” — No matches (cheapest is €6.00); never invent a wine.
-- “What is the price and stock of W-001?” — €8.50, 18 bottles.
-- “A dry white for fish.” — Sweetness and food pairings are not recorded; the assistant
-  must say so rather than guess.
-- “Which wine is 13% alcohol?” — Alcohol is not recorded.
-- “Prepare 99 bottles of W-001.” — Insufficient-stock guard.
-- “Prepare one bottle of W-003.” — Out-of-stock guard (stock 0).
+## Explain to the teacher
 
-## Catalog facts
+The model writes a SELECT from the schema shared by system prompt and SQL tool.
+Explicit wine columns support origin/type/budget/rating filters; `EXISTS` against
+`flavours` checks notes without duplicate wines. Vocabulary families group fruit
+aromas and citrus notes. `provenance='stated'` separates tasting notes from guesses.
 
-200 wines: 114 red, 68 white, 9 rosé, 4 dessert, 4 sparkling, 1 without a type.
-37 are out of stock. 73 have no vintage. 68 have aroma tags the taster wrote; the rest have
-only `taste_style_guess` (typical for the style, not tasted). 4 wines have no country.
-Nine names appear twice (different vintages or listings); use the wine ID.
+Source revision and inventory caveats are bundled in `data/catalog.json`.
+SQLite migrations back up old data and preserve order history and retained stock.
+Confirmation is application-side, not a model tool. Orders recheck price, vintage
+and stock. Vercel storage remains temporary; drafts may expire between instances.

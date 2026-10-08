@@ -1,0 +1,14 @@
+[
+  {"wine_id": "DEMO-001", "name": "Torres Sangre de Toro Original", "price_cents": 995, "vintage": 2023, "stock": 8,
+   "attributes": {"brand": "Familia Torres", "type": "red", "country": "Spain", "region": "Catalunya", "grapes": ["Garnacha", "Carinena"], "sweetness": "dry", "fruity": true, "body": "medium", "taste": ["red fruit", "strawberry", "spice"], "pairings": ["chicken", "pasta", "pork"], "rating": 4.0, "rating_source": "illustrative demo shop rating", "bottle_ml": 750,
+   "source_url": "https://www.torres.es/en/wines/torres-essentials/sangre-de-toro-original"}},
+  {"wine_id": "DEMO-002", "name": "Marques de Riscal Verdejo", "price_cents": 1295, "vintage": 2024, "stock": 5,
+   "attributes": {"brand": "Marques de Riscal", "type": "white", "country": "Spain", "region": "Rueda", "grapes": ["Verdejo"], "sweetness": "dry", "fruity": true, "body": "light", "taste": ["citrus", "herbs", "tropical fruit"], "pairings": ["chicken", "fish", "seafood", "salad"], "rating": 4.2, "rating_source": "illustrative demo shop rating", "bottle_ml": 750,
+   "source_url": "https://www.marquesderiscal.com/marques-de-riscal-verdejo"}},
+  {"wine_id": "DEMO-003", "name": "Marques de Riscal Reserva", "price_cents": 2295, "vintage": 2021, "stock": 3,
+   "attributes": {"brand": "Marques de Riscal", "type": "red", "country": "Spain", "region": "Rioja", "grapes": ["Tempranillo", "Graciano"], "sweetness": "dry", "fruity": true, "body": "full", "taste": ["dark fruit", "vanilla", "spice"], "pairings": ["beef", "lamb", "cheese"], "rating": 4.4, "rating_source": "illustrative demo shop rating", "bottle_ml": 750,
+   "source_url": "https://www.marquesderiscal.com/marques-de-riscal-reserva"}},
+  {"wine_id": "DEMO-004", "name": "Torres Vina Sol Original", "price_cents": 895, "vintage": 2024, "stock": 0,
+   "attributes": {"brand": "Familia Torres", "type": "white", "country": "Spain", "region": "Catalunya", "grapes": ["Parellada", "Garnacha Blanca"], "sweetness": "dry", "fruity": true, "body": "light", "taste": ["apple", "citrus"], "pairings": ["fish", "seafood", "salad"], "rating": 3.9, "rating_source": "illustrative demo shop rating", "bottle_ml": 750,
+   "source_url": "https://www.torres.es/en/wines/torres-essentials/vina-sol-original"}}
+]

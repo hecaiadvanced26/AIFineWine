@@ -1,108 +1,124 @@
-"""Test catalog migration and rich preference SQL using a temporary database."""
+"""Catalog import, migration, provenance search and order regression checks."""
 import json
-import re
-import shutil
+import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
 import database
+import orders
 import refresh_demo_catalog
-from catalog import run_query
+from catalog import get_wine_details, run_query
+
+WINE_ID = 'barcelino-tinto-2019-159331692'
 
 
 class CatalogTests(unittest.TestCase):
-    def test_runtime_directory_seeds_from_bundled_catalog(self):
-        with tempfile.TemporaryDirectory() as folder:
-            data = Path(folder) / 'runtime' / 'data'
-            with patch.object(database, 'DATA_DIR', data), \
-                    patch.object(database, 'DB_PATH', data / 'wines.db'):
-                database.initialize()
-                db = database.connect()
-                try:
-                    self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 200)
-                    with db:
-                        db.execute("UPDATE wines SET stock=1 WHERE wine_id='W-001'")
-                    database.initialize()
-                    self.assertEqual(db.execute(
-                        "SELECT stock FROM wines WHERE wine_id='W-001'").fetchone()[0], 1)
-                finally:
-                    db.close()
+    def setUp(self):
+        self.folder = tempfile.TemporaryDirectory()
+        self.addCleanup(self.folder.cleanup)
+        self.data = Path(self.folder.name) / 'runtime' / 'data'
+        for target, name, value in [(database, 'DATA_DIR', self.data),
+                                    (database, 'DB_PATH', self.data / 'wines.db'),
+                                    (orders, 'DATA_DIR', self.data),
+                                    (refresh_demo_catalog, 'DATA_DIR', self.data)]:
+            patcher = patch.object(target, name, value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
 
-    def test_refresh_preserves_stock_orders_and_backs_up(self):
-        with tempfile.TemporaryDirectory() as folder:
-            data = Path(folder)
-            shutil.copy(database.DATA_DIR / 'demo_wines.json', data / 'demo_wines.json')
-            with patch.object(database, 'DATA_DIR', data), patch.object(database, 'DB_PATH', data / 'wines.db'), \
-                    patch.object(refresh_demo_catalog, 'DATA_DIR', data):
-                database.initialize()
-                db = database.connect()
-                with db:
-                    db.execute("UPDATE wines SET name='Demo wine A', stock=4 WHERE wine_id='W-001'")
-                    db.execute("INSERT INTO orders VALUES ('old-order', '{}')")
-                db.close()
-                backup = refresh_demo_catalog.refresh_catalog()
-                self.assertTrue(backup.exists())
-                db = database.connect()
-                self.assertEqual(db.execute("SELECT stock FROM wines WHERE wine_id='W-001'").fetchone()[0], 4)
-                self.assertEqual(db.execute('SELECT COUNT(*) FROM orders').fetchone()[0], 1)
-                db.close()
-                result = run_query("""SELECT wine_id FROM wines WHERE stock > 0
-                    AND json_extract(attributes, '$.type') = 'red'
-                    AND json_extract(attributes, '$.country') = 'Italy'
-                    AND EXISTS (SELECT 1 FROM json_each(wines.attributes, '$.taste')
-                    WHERE value = 'cherry') ORDER BY wine_id""")
-                self.assertEqual(result['status'], 'ok')
-                self.assertTrue(result['rows'])
+    def test_seed_counts_provenance_and_idempotent_startup(self):
+        database.initialize()
+        db = database.connect()
+        self.addCleanup(db.close)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 200)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM flavours').fetchone()[0], 483)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM flavour_vocabulary').fetchone()[0], 88)
+        counts = {row[0]: row[1] for row in db.execute(
+            'SELECT provenance,COUNT(*) FROM flavours GROUP BY provenance')}
+        self.assertEqual(counts, {'guess': 350, 'stated': 133})
+        with db:
+            db.execute('UPDATE wines SET stock=1 WHERE wine_id=?', (WINE_ID,))
+        database.initialize()
+        self.assertEqual(db.execute('SELECT stock FROM wines WHERE wine_id=?', (WINE_ID,)).fetchone()[0], 1)
 
-    def test_refresh_adds_missing_wines_without_touching_existing_stock(self):
-        with tempfile.TemporaryDirectory() as folder:
-            data = Path(folder)
-            shutil.copy(database.DATA_DIR / 'demo_wines.json', data / 'demo_wines.json')
-            with patch.object(database, 'DATA_DIR', data), patch.object(database, 'DB_PATH', data / 'wines.db'), \
-                    patch.object(refresh_demo_catalog, 'DATA_DIR', data):
-                database.initialize()
-                db = database.connect()
-                with db:
-                    db.execute("DELETE FROM wines WHERE wine_id='W-002'")
-                    db.execute("UPDATE wines SET stock=3 WHERE wine_id='W-001'")
-                db.close()
+    def test_legacy_migration_backup_and_order_history(self):
+        self.data.mkdir(parents=True)
+        db = sqlite3.connect(database.DB_PATH)
+        db.executescript("""CREATE TABLE wines (wine_id TEXT PRIMARY KEY, name TEXT NOT NULL,
+            price_cents INTEGER NOT NULL, vintage INTEGER, stock INTEGER NOT NULL, attributes TEXT NOT NULL);
+            CREATE TABLE orders (order_id TEXT PRIMARY KEY, payload TEXT NOT NULL);
+            INSERT INTO wines VALUES ('DEMO-001','Old demo',995,2023,4,'{}');
+            INSERT INTO orders VALUES ('old-order','{"wine_id":"DEMO-001"}');""")
+        db.close()
+        backup = refresh_demo_catalog.refresh_catalog()
+        self.assertTrue(backup.exists())
+        with sqlite3.connect(backup) as old:
+            self.assertEqual(old.execute('SELECT wine_id FROM wines').fetchone()[0], 'DEMO-001')
+        db = database.connect()
+        self.addCleanup(db.close)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 200)
+        self.assertEqual(json.loads(db.execute('SELECT payload FROM orders').fetchone()[0])['wine_id'], 'DEMO-001')
+
+    def test_refresh_preserves_existing_stock(self):
+        database.initialize()
+        db = database.connect()
+        self.addCleanup(db.close)
+        with db:
+            db.execute('UPDATE wines SET name=?, stock=1 WHERE wine_id=?', ('Old metadata', WINE_ID))
+        refresh_demo_catalog.refresh_catalog()
+        row = db.execute('SELECT name,stock FROM wines WHERE wine_id=?', (WINE_ID,)).fetchone()
+        self.assertEqual(row['stock'], 1)
+        self.assertEqual(row['name'], 'Barceliño Tinto')
+
+    def test_stated_flavour_search_excludes_style_guesses(self):
+        database.initialize()
+        result = run_query("""SELECT wine_id FROM wines w WHERE stock>0 AND EXISTS
+            (SELECT 1 FROM flavours f WHERE f.wine_id=w.wine_id
+             AND f.tag='blackberry' AND f.provenance='stated') ORDER BY wine_id LIMIT 5""")
+        self.assertEqual(result['status'], 'ok')
+        self.assertIn({'wine_id': '8-bagatella-zinfandel-2020-167550000'}, result['rows'])
+        details = get_wine_details('20er-schulz-junger-2022-173717954')
+        self.assertTrue(details['flavours'])
+        self.assertTrue(all(flavour['provenance'] == 'guess' for flavour in details['flavours']))
+        self.assertNotIn('sweetness', details['attributes'])
+        self.assertEqual(details['inventory_synthetic'], 1)
+
+    def test_order_price_stock_and_duplicate_confirmation(self):
+        database.initialize()
+        draft = orders.prepare_order(WINE_ID, 2)
+        self.assertEqual(draft['total_cents'], 2300)
+        self.assertEqual(draft['vintage'], 2019)
+        first = orders.submit_order(draft)
+        self.assertNotIn('error', first)
+        self.assertEqual(orders.submit_order(draft)['order_id'], first['order_id'])
+        self.assertEqual(get_wine_details(WINE_ID)['stock'], 0)
+        self.assertIn('error', orders.prepare_order(WINE_ID, 1))
+        self.assertTrue(Path(first['file']).exists())
+
+    def test_failed_import_rolls_back_entire_catalog(self):
+        database.initialize()
+        snapshot = database.load_catalog()
+        snapshot['wines'][0]['flavours'].append({'tag': 'not-in-vocabulary', 'provenance': 'stated'})
+        with patch.object(refresh_demo_catalog, 'load_catalog', return_value=snapshot):
+            with self.assertRaises(sqlite3.IntegrityError):
                 refresh_demo_catalog.refresh_catalog()
-                db = database.connect()
-                self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 200)
-                self.assertEqual(db.execute("SELECT stock FROM wines WHERE wine_id='W-001'").fetchone()[0], 3)
-                db.close()
+        db = database.connect()
+        self.addCleanup(db.close)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM wines').fetchone()[0], 200)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM flavours').fetchone()[0], 483)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM flavour_vocabulary').fetchone()[0], 88)
 
-
-class CatalogDataTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.rows = json.loads((database.DATA_DIR / 'demo_wines.json').read_text(encoding='utf-8'))
-        from prompts import ATTRIBUTE_DESCRIPTIONS
-        m = re.search(r'closed list of 88\): (.+?)\.\n', ATTRIBUTE_DESCRIPTIONS)
-        cls.prompt_tags = set(m.group(1).split(', ')) if m else set()
-
-    def test_ids_unique_and_count(self):
-        ids = [r['wine_id'] for r in self.rows]
-        self.assertEqual(len(ids), 200)
-        self.assertEqual(len(set(ids)), 200)
-
-    def test_prompt_lists_88_tags_and_data_uses_only_those(self):
-        self.assertEqual(len(self.prompt_tags), 88)
-        for r in self.rows:
-            for key in ('taste', 'taste_style_guess'):
-                self.assertLessEqual(set(r['attributes'][key]), self.prompt_tags, r['wine_id'])
-
-    def test_no_contact_data_in_catalog(self):
-        text = json.dumps(self.rows, ensure_ascii=False)
-        self.assertNotRegex(text, r'[\w.+-]+@[\w-]+\.[\w.]+|https?://|www\.')
-
-    def test_no_missing_name_prefix_and_valid_numbers(self):
-        for r in self.rows:
-            self.assertFalse(r['name'].startswith('None'), r['wine_id'])
-            self.assertIsInstance(r['price_cents'], int)
-            self.assertGreaterEqual(r['stock'], 0)
+    def test_changed_price_requires_new_draft(self):
+        database.initialize()
+        draft = orders.prepare_order(WINE_ID, 1)
+        db = database.connect()
+        self.addCleanup(db.close)
+        with db:
+            db.execute('UPDATE wines SET price_cents=1200 WHERE wine_id=?', (WINE_ID,))
+        self.assertIn('error', orders.submit_order(draft))
+        self.assertEqual(get_wine_details(WINE_ID)['stock'], 2)
+        self.assertEqual(db.execute('SELECT COUNT(*) FROM orders').fetchone()[0], 0)
 
 
 if __name__ == '__main__':
