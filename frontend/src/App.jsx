@@ -5,7 +5,7 @@ import OrderCard from './OrderCard.jsx';
 import OrderConfirmation from './OrderConfirmation.jsx';
 import { Comparison, QuickReplies, Recommendations } from './Advisor.jsx';
 
-const CONTACT_EMAIL = 'service@hec-cave.example'; // fictional demo address; keep in sync with prompts.py
+const CONTACT_EMAIL = 'cave@hec.edu'; // fictional demo address; keep in sync with prompts.py
 const suggestions = ['Help me choose a wine', 'A red wine under €12', 'Find a cheaper alternative to a wine I like'];
 
 function Glass() {
@@ -26,7 +26,7 @@ export default function App() {
   const end = useRef(null);
   const running = useRef(true);
   useEffect(() => {
-    post('/api/reset').then(() => setStatus('Ready when you are'))
+    post('/api/reset').then(() => setStatus('You are connected to Dave from HEC Cave. Please let me know how to help you'))
       .catch(failure => { setError(failure.message); setStatus('Connection failed'); })
       .finally(() => { running.current = false; setBusy(false); });
   }, []);
@@ -109,18 +109,18 @@ export default function App() {
         <p>Tell us your taste, preferred origin or budget. We’ll find a match in the shop’s catalog.</p>
         <ul><li>Catalog-backed answers</li><li>Live availability checks</li><li>You confirm every order</li></ul>
       </div>
-      <p className="demo-note">COURSE DEMO<br />Real wine names · Illustrative shop data</p>
+      <p className="demo-note">COURSE DEMO by Group 3<br />Real wine names · Illustrative shop data<br />Rayen Gallas<br />Jan Laufing<br />Mariia Tsaturyan<br />Selin Zafer</p>
     </aside>
     <main className="chat-shell">
-      <header className="topbar"><div><span className="eyebrow">YOUR WINE ASSISTANT</span>
+      <header className="topbar"><div><span className="eyebrow">YOUR WINE ASSISTANT DAVE FROM HEC CAVE</span>
         <p>Let’s find your next bottle.</p></div><div className="topbar-actions">
           <a className="contact-btn" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Question for the HEC Cave team')}`}>
             <span aria-hidden="true">✉</span> Customer contact</a>
           <span className="tag">Demo catalog</span></div></header>
       <div className="conversation">
         {!messages.length && <section className="welcome"><div className="glass"><Glass /></div>
-          <span className="eyebrow">PULL UP A CHAIR</span><h1>Your wine, found.</h1>
-          <p>A bottle for tonight, a vintage you love, or something within budget.<br />Start with what matters to you.</p>
+          <span className="eyebrow"></span><h1>Your wine, found.</h1>
+          <p>A bottle for tonight, a vintage you love, or something within budget.<br />Start with what matters to you.<br />I am here to help you find exaclty what you are looking for. White wine for Risotto?<br />Red wine for your grandpa? We've got you covered.</p>
           <div className="suggestions">{suggestions.map(text => <button key={text}
             disabled={busy} onClick={() => send(text)}>{text} <span>↗</span></button>)}</div>
         </section>}
